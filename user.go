@@ -40,7 +40,7 @@ type UserObject struct {
 	Surname       string `json:"surname,omitempty"`
 	Theme         string `json:"theme,omitempty"` // has defined consts, see above
 	Type          string `json:"type,omitempty"`  // has defined consts, see above
-	Url           string `json:"url,omitempty"`
+	URL           string `json:"url,omitempty"`
 
 	Medias     []MediaObject     `json:"medias,omitempty"`
 	Mediatypes []MediatypeObject `json:"mediatypes,omitempty"`
