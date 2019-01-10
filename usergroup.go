@@ -71,6 +71,11 @@ type usergroupCreateResult struct {
 	UsrgrpIDs []string `json:"usrgrpids"`
 }
 
+// Structure to store updation result
+type usergroupUpdateResult struct {
+	UsrgrpIDs []string `json:"usrgrpids"`
+}
+
 // Structure to store deletion result
 type usergroupDeleteResult struct {
 	UsrgrpIDs []string `json:"usrgrpids"`
@@ -95,6 +100,19 @@ func (z *Zabbix) UsergroupCreate(params []UsergroupObject) ([]string, int, error
 	var result usergroupCreateResult
 
 	status, err := z.request("usergroup.create", params, &result)
+	if err != nil {
+		return nil, status, err
+	}
+
+	return result.UsrgrpIDs, status, nil
+}
+
+// UsergroupUpdate updates usergroups
+func (z *Zabbix) UsergroupUpdate(params []UsergroupObject) ([]string, int, error) {
+
+	var result usergroupUpdateResult
+
+	status, err := z.request("usergroup.update", params, &result)
 	if err != nil {
 		return nil, status, err
 	}

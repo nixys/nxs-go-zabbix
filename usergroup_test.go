@@ -7,6 +7,7 @@ import (
 
 const (
 	testUsergroupName = "testUsergroupName"
+	testUserAdminID   = "1"
 )
 
 func TestUsergroupCRUD(t *testing.T) {
@@ -20,6 +21,9 @@ func TestUsergroupCRUD(t *testing.T) {
 	// Create and delete
 	ugCreatedIDs := testUsergroupCreate(t, z)
 	defer testUsergroupDelete(t, z, ugCreatedIDs)
+
+	// Update
+	testUsergroupUpdate(t, z, ugCreatedIDs)
 
 	// Get
 	testUsergroupGet(t, z, ugCreatedIDs)
@@ -43,6 +47,36 @@ func testUsergroupCreate(t *testing.T, z Zabbix) []string {
 	t.Logf("Usergroup create: success")
 
 	return ugCreatedIDs
+}
+
+func testUsergroupUpdate(t *testing.T, z Zabbix, ugCreatedIDs []string) []string {
+
+	var ugObjects []UsergroupObject
+
+	// Preparing usergroup objects array to update
+	for _, i := range ugCreatedIDs {
+		ugObjects = append(ugObjects, UsergroupObject{
+			UsrgrpID: i,
+			UserIDs:  []string{testUserAdminID},
+		})
+	}
+
+	ugUpdatedIDs, _, err := z.UsergroupUpdate(ugObjects)
+	if err != nil {
+		t.Fatal("Usergroup update error:", err)
+	}
+
+	if len(ugUpdatedIDs) == 0 {
+		t.Fatal("Usergroup update error: empty IDs array")
+	}
+
+	if reflect.DeepEqual(ugUpdatedIDs, ugCreatedIDs) == false {
+		t.Fatal("Usergroup update error: IDs arrays for created and updated usergroup are mismatch")
+	}
+
+	t.Logf("Usergroup update: success")
+
+	return ugUpdatedIDs
 }
 
 func testUsergroupDelete(t *testing.T, z Zabbix, ugCreatedIDs []string) []string {
