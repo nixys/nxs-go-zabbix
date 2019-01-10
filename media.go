@@ -1,16 +1,17 @@
 package zabbix
 
-import ()
-
-/* For `MediaObject` field: `Active` */
+// For `MediaObject` field: `Active`
 const (
 	MediaActiveEnabled  = "0"
 	MediaActiveDisabled = "1"
 )
 
+// MediaObject struct is used to store media operations results
+//
+// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/usermedia/object
 type MediaObject struct {
 	MediaID     string `json:"mediaid,omitempty"`
-	Active      string `json:"active,omitempty"` /* has defined consts, see above */
+	Active      string `json:"active,omitempty"` // has defined consts, see above
 	MediaTypeID string `json:"mediatypeid,omitempty"`
 	Period      string `json:"period,omitempty"`
 	SendTo      string `json:"sendto,omitempty"`
@@ -18,7 +19,9 @@ type MediaObject struct {
 	UserID      string `json:"userid,omitempty"`
 }
 
-/* see: https://www.zabbix.com/documentation/2.4/manual/api/reference/usermedia/get#parameters */
+// UsermediaGetParams struct is used for media get requests
+//
+// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/usermedia/get#parameters
 type UsermediaGetParams struct {
 	GetParameters
 
@@ -28,6 +31,7 @@ type UsermediaGetParams struct {
 	MediatypeIDs []string `json:"mediatypeids,omitempty"`
 }
 
+// UsermediaGet gets medias
 func (z *Zabbix) UsermediaGet(params UsermediaGetParams) ([]MediaObject, int, error) {
 
 	var result []MediaObject

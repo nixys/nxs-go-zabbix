@@ -17,19 +17,19 @@ func TestActionCRUD(t *testing.T) {
 
 	var z Zabbix
 
-	/* Login */
+	// Login
 	loginTest(&z, t)
 	defer logoutTest(&z, t)
 
-	/* Preparing auxiliary data */
+	// Preparing auxiliary data
 	hgCreatedIDs := testHostgroupCreate(t, z)
 	defer testHostgroupDelete(t, z, hgCreatedIDs)
 
-	/* Create and delete */
+	// Create and delete
 	aCreatedIDs := testActionCreate(t, z, hgCreatedIDs[0], "258")
 	defer testActionDelete(t, z, aCreatedIDs)
 
-	/* Get */
+	// Get
 	testActionGet(t, z, aCreatedIDs)
 }
 

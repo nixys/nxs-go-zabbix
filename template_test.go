@@ -13,19 +13,19 @@ func TestTemplateCRUD(t *testing.T) {
 
 	var z Zabbix
 
-	/* Login */
+	// Login
 	loginTest(&z, t)
 	defer logoutTest(&z, t)
 
-	/* Preparing auxiliary data */
+	// Preparing auxiliary data
 	hgCreatedIDs := testHostgroupCreate(t, z)
 	defer testHostgroupDelete(t, z, hgCreatedIDs)
 
-	/* Create and delete */
+	// Create and delete
 	tCreatedIDs := testTemplateCreate(t, z, hgCreatedIDs)
 	defer testTemplateDelete(t, z, tCreatedIDs)
 
-	/* Get */
+	// Get
 	testTemplateGet(t, z, tCreatedIDs, hgCreatedIDs)
 }
 
@@ -33,7 +33,7 @@ func testTemplateCreate(t *testing.T, z Zabbix, hgCreatedIDs []string) []string 
 
 	var groups []HostgroupObject
 
-	/* Add groups to template */
+	// Add groups to template
 	for _, e := range hgCreatedIDs {
 		groups = append(groups, HostgroupObject{
 			GroupID: e,

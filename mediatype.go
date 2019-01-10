@@ -1,8 +1,6 @@
 package zabbix
 
-import ()
-
-/* For `MediatypeObject` field: `Type` */
+// For `MediatypeObject` field: `Type`
 const (
 	MediatypeEmail     = "0"
 	MediatypeScript    = "1"
@@ -11,30 +9,34 @@ const (
 	MediatypeEzTexting = "100"
 )
 
-/* For `MediatypeObject` field: `Status` */
+// For `MediatypeObject` field: `Status`
 const (
 	MediatypeStatusEnabled  = "0"
 	MediatypeScriptDisabled = "1"
 )
 
-/* see: https://www.zabbix.com/documentation/2.4/manual/api/reference/mediatype/object */
+// MediatypeObject struct is used to store mediatype operations results
+//
+// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/mediatype/object
 type MediatypeObject struct {
 	MediatypeID string `json:"mediatypeid,omitempty"`
 	Description string `json:"description,omitempty"`
-	Type        string `json:"type,omitempty"` /* has defined consts, see above */
+	Type        string `json:"type,omitempty"` // has defined consts, see above
 	ExecPath    string `json:"exec_path,omitempty"`
 	GsmModem    string `json:"gsm_modem,omitempty"`
 	Passwd      string `json:"passwd,omitempty"`
 	SmtpEmail   string `json:"smtp_email,omitempty"`
 	SmtpHelo    string `json:"smtp_helo,omitempty"`
 	SmtpServer  string `json:"smtp_server,omitempty"`
-	Status      string `json:"status,omitempty"` /* has defined consts, see above */
+	Status      string `json:"status,omitempty"` // has defined consts, see above
 	Username    string `json:"username,omitempty"`
 
 	Users []UserObject `json:"users,omitempty"`
 }
 
-/* see: https://www.zabbix.com/documentation/2.4/manual/api/reference/mediatype/get#parameters */
+// MediatypeGetParams struct is used for mediatype get requests
+//
+// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/mediatype/get#parameters
 type MediatypeGetParams struct {
 	GetParameters
 
@@ -45,16 +47,17 @@ type MediatypeGetParams struct {
 	SelectUsers SelectQuery `json:"selectUsers,omitempty"`
 }
 
-/* Structure to store creation result */
+// Structure to store creation result
 type mediatypeCreateResult struct {
 	MediatypeIDs []string `json:"mediatypeids"`
 }
 
-/* Structure to store deletion result */
+// Structure to store deletion result
 type mediatypeDeleteResult struct {
 	MediatypeIDs []string `json:"mediatypeids"`
 }
 
+// MediatypeGet gets mediatypes
 func (z *Zabbix) MediatypeGet(params MediatypeGetParams) ([]MediatypeObject, int, error) {
 
 	var result []MediatypeObject
@@ -67,6 +70,7 @@ func (z *Zabbix) MediatypeGet(params MediatypeGetParams) ([]MediatypeObject, int
 	return result, status, nil
 }
 
+// MediatypeCreate creates mediatypes
 func (z *Zabbix) MediatypeCreate(params []MediatypeObject) ([]string, int, error) {
 
 	var result mediatypeCreateResult
@@ -79,6 +83,7 @@ func (z *Zabbix) MediatypeCreate(params []MediatypeObject) ([]string, int, error
 	return result.MediatypeIDs, status, nil
 }
 
+// MediatypeDelete deletes mediatypes
 func (z *Zabbix) MediatypeDelete(mediatypeIDs []string) ([]string, int, error) {
 
 	var result mediatypeDeleteResult

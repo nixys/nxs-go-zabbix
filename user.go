@@ -1,14 +1,12 @@
 package zabbix
 
-import ()
-
-/* For `UserObject` field: `AutoLogin` */
+// For `UserObject` field: `AutoLogin`
 const (
 	UserAutoLoginDisabled = "0"
 	UserAutoLoginEnabled  = "1"
 )
 
-/* For `UserObject` field: `Theme` */
+// For `UserObject` field: `Theme`
 const (
 	UserThemeDefault      = "default"
 	UserThemeClassic      = "classic"
@@ -17,47 +15,53 @@ const (
 	UserThemeDarkOrange   = "darkorange"
 )
 
-/* For `UserObject` field: `Type` */
+// For `UserObject` field: `Type`
 const (
 	UserTypeUser       = "1"
 	UserTypeAdmin      = "2"
 	UserTypeSuperAdmin = "3"
 )
 
-/* see: https://www.zabbix.com/documentation/2.4/manual/api/reference/user/object */
+// UserObject struct is used to store user operations results
+//
+// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/user/object
 type UserObject struct {
 	UserID        string `json:"userid,omitempty"`
 	Alias         string `json:"alias,omitempty"`
 	AttemptClock  string `json:"attempt_clock,omitempty"`
 	AttemptFailed string `json:"attempt_failed,omitempty"`
 	AttemptIP     string `json:"attempt_ip,omitempty"`
-	AutoLogin     string `json:"autologin,omitempty"` /* has defined consts, see above */
+	AutoLogin     string `json:"autologin,omitempty"` // has defined consts, see above
 	AutoLogout    string `json:"autologout,omitempty"`
 	Lang          string `json:"lang,omitempty"`
 	Name          string `json:"name,omitempty"`
 	Refresh       string `json:"refresh,omitempty"`
 	RowsPerPage   string `json:"rows_per_page,omitempty"`
 	Surname       string `json:"surname,omitempty"`
-	Theme         string `json:"theme,omitempty"` /* has defined consts, see above */
-	Type          string `json:"type,omitempty"`  /* has defined consts, see above */
+	Theme         string `json:"theme,omitempty"` // has defined consts, see above
+	Type          string `json:"type,omitempty"`  // has defined consts, see above
 	Url           string `json:"url,omitempty"`
 
 	Medias     []MediaObject     `json:"medias,omitempty"`
 	Mediatypes []MediatypeObject `json:"mediatypes,omitempty"`
 	Usrgrps    []UsergroupObject `json:"usrgrps,omitempty"`
 
-	/* used when new user created  */
+	// used when new user created
 	UserMedias []MediaObject `json:"user_medias,omitempty"`
 	Passwd     string        `json:"passwd"`
 }
 
-/* see: https://www.zabbix.com/documentation/2.4/manual/api/reference/user/login#parameters */
+// UserLoginParams struct is used for login requests
+//
+// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/user/login#parameters
 type UserLoginParams struct {
 	User     string `json:"user"`
 	Password string `json:"password"`
 }
 
-/* see: https://www.zabbix.com/documentation/2.4/manual/api/reference/user/get#parameters */
+// UserGetParams struct is used for user get requests
+//
+// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/user/get#parameters
 type UserGetParams struct {
 	GetParameters
 
@@ -72,16 +76,17 @@ type UserGetParams struct {
 	SelectUsrgrps    SelectQuery `json:"selectUsrgrps,omitempty"`
 }
 
-/* Structure to store creation result */
+// Structure to store creation result
 type userCreateResult struct {
 	UserIDs []string `json:"userids"`
 }
 
-/* Structure to store deletion result */
+// Structure to store deletion result
 type userDeleteResult struct {
 	UserIDs []string `json:"userids"`
 }
 
+// UserGet gets users
 func (z *Zabbix) UserGet(params UserGetParams) ([]UserObject, int, error) {
 
 	var result []UserObject
@@ -94,6 +99,7 @@ func (z *Zabbix) UserGet(params UserGetParams) ([]UserObject, int, error) {
 	return result, status, nil
 }
 
+// UserCreate creates users
 func (z *Zabbix) UserCreate(params []UserObject) ([]string, int, error) {
 
 	var result userCreateResult
@@ -106,6 +112,7 @@ func (z *Zabbix) UserCreate(params []UserObject) ([]string, int, error) {
 	return result.UserIDs, status, nil
 }
 
+// UserDelete deletes users
 func (z *Zabbix) UserDelete(userIDs []string) ([]string, int, error) {
 
 	var result userDeleteResult

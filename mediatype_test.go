@@ -14,15 +14,15 @@ func TestMediatypeCRUD(t *testing.T) {
 
 	var z Zabbix
 
-	/* Login */
+	// Login
 	loginTest(&z, t)
 	defer logoutTest(&z, t)
 
-	/* Create and delete */
+	// Create and delete
 	mtCreatedIDs := testMediatypeCreate(t, z)
 	defer testMediatypeDelete(t, z, mtCreatedIDs)
 
-	/* Get */
+	// Get
 	testMediatypeGet(t, z, mtCreatedIDs)
 }
 

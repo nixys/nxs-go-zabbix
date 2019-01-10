@@ -1,15 +1,17 @@
 package zabbix
 
-import ()
-
-/* see: https://www.zabbix.com/documentation/2.4/manual/api/reference/usermacro/object#global_macro */
+// GlobalmacroObject struct is used to store globalmacro get operations results (not implemented yet)
+//
+// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/usermacro/object#global_macro
 type GlobalmacroObject struct {
 	GlobalmacroID string `json:"globalmacroid,omitempty"`
 	Macro         string `json:"macro ,omitempty"`
 	Value         string `json:"value ,omitempty"`
 }
 
-/* see: https://www.zabbix.com/documentation/2.4/manual/api/reference/usermacro/object#host_macro */
+// HostmacroObject struct is used to store hostmacro operations results
+//
+// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/usermacro/object#host_macro
 type HostmacroObject struct {
 	HostmacroID string `json:"hostmacroid,omitempty"`
 	HostID      string `json:"hostid,omitempty"`
@@ -21,7 +23,9 @@ type HostmacroObject struct {
 	Templates []TemplateObject  `json:"templates,omitempty"`
 }
 
-/* see: https://www.zabbix.com/documentation/2.4/manual/api/reference/usermacro/get#parameters */
+// HostmacroGetParams struct is used for hostmacro get requests
+//
+// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/usermacro/get#parameters
 type HostmacroGetParams struct {
 	GetParameters
 
@@ -35,16 +39,17 @@ type HostmacroGetParams struct {
 	SelectTemplates SelectQuery `json:"selectTemplates,omitempty"`
 }
 
-/* Structure to store creation result */
+// Structure to store creation result
 type hostmacroCreateResult struct {
 	HostmacroIDs []string `json:"hostmacroids"`
 }
 
-/* Structure to store deletion result */
+// Structure to store deletion result
 type hostmacroDeleteResult struct {
 	HostmacroIDs []string `json:"hostmacroids"`
 }
 
+// HostmacroGet gets hostmacros
 func (z *Zabbix) HostmacroGet(params HostmacroGetParams) ([]HostmacroObject, int, error) {
 
 	var result []HostmacroObject
@@ -57,6 +62,7 @@ func (z *Zabbix) HostmacroGet(params HostmacroGetParams) ([]HostmacroObject, int
 	return result, status, nil
 }
 
+// HostmacroCreate creates new hostmacros
 func (z *Zabbix) HostmacroCreate(params []HostmacroObject) ([]string, int, error) {
 
 	var result hostmacroCreateResult
@@ -69,6 +75,7 @@ func (z *Zabbix) HostmacroCreate(params []HostmacroObject) ([]string, int, error
 	return result.HostmacroIDs, status, nil
 }
 
+// HostmacroDelete deletes hostmacros
 func (z *Zabbix) HostmacroDelete(hostmacroIDs []string) ([]string, int, error) {
 
 	var result hostmacroDeleteResult

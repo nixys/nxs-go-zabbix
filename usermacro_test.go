@@ -14,11 +14,11 @@ func TestHostmacroCRUD(t *testing.T) {
 
 	var z Zabbix
 
-	/* Login */
+	// Login
 	loginTest(&z, t)
 	defer logoutTest(&z, t)
 
-	/* Preparing auxiliary data */
+	// Preparing auxiliary data
 	hgCreatedIDs := testHostgroupCreate(t, z)
 	defer testHostgroupDelete(t, z, hgCreatedIDs)
 
@@ -28,11 +28,11 @@ func TestHostmacroCRUD(t *testing.T) {
 	hCreatedIDs := testHostCreate(t, z, hgCreatedIDs, tCreatedIDs)
 	defer testHostDelete(t, z, hCreatedIDs)
 
-	/* Create and delete */
+	// Create and delete
 	hmCreatedIDs := testHostmacroCreate(t, z, hCreatedIDs[0])
 	defer testHostmacroDelete(t, z, hmCreatedIDs)
 
-	/* Get */
+	// Get
 	testHostmacroGet(t, z, hmCreatedIDs)
 }
 

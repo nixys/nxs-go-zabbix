@@ -1,20 +1,18 @@
 package zabbix
 
-import ()
-
-/* For `ActionObject` field: `RecoveryMsg` */
+// For `ActionObject` field: `RecoveryMsg`
 const (
 	ActionRecoveryMsgDisabled = "0"
 	ActionRecoveryMsgEnabled  = "1"
 )
 
-/* For `ActionObject` field: `Status` */
+// For `ActionObject` field: `Status`
 const (
 	ActionStatusEnabled  = "0"
 	ActionStatusDisabled = "1"
 )
 
-/* For `ActionOperationObject` field: `OperationType` */
+// For `ActionOperationObject` field: `OperationType`
 const (
 	ActionOperationTypeSendMsg         = "0"
 	ActionOperationTypeRemoteCmd       = "1"
@@ -28,14 +26,14 @@ const (
 	ActionOperationTypeDisableHost     = "9"
 )
 
-/* For `ActionOperationObject` field: `EvalType` */
+// For `ActionOperationObject` field: `EvalType`
 const (
 	ActionOperationEvalTypeAndOR = "0"
 	ActionOperationEvalTypeAnd   = "1"
 	ActionOperationEvalTypeOr    = "2"
 )
 
-/* For `ActionOperationCommandObject` field: `Type` */
+// For `ActionOperationCommandObject` field: `Type`
 const (
 	ActionOperationCommandTypeCustomScript = "0"
 	ActionOperationCommandTypeIPMI         = "1"
@@ -44,35 +42,35 @@ const (
 	ActionOperationCommandTypeGlobalScript = "4"
 )
 
-/* For `ActionOperationCommandObject` field: `AuthType` */
+// For `ActionOperationCommandObject` field: `AuthType`
 const (
 	ActionOperationCommandAuthTypePassword = "0"
 	ActionOperationCommandAuthTypePubKey   = "1"
 )
 
-/* For `ActionOperationCommandObject` field: `ExecuteOn` */
+// For `ActionOperationCommandObject` field: `ExecuteOn`
 const (
 	ActionOperationCommandExecuteOnAgent  = "0"
 	ActionOperationCommandExecuteOnServer = "1"
 )
 
-/* For `ActionOperationMessageObject` field: `DefaultMsg` */
+// For `ActionOperationMessageObject` field: `DefaultMsg`
 const (
 	ActionOperationMessageDefaultMsgFromOperation = "0"
 	ActionOperationMessageDefaultMsgFromAction    = "1"
 )
 
-/* For `ActionOperationConditionObject` field: `ConditionType` */
+// For `ActionOperationConditionObject` field: `ConditionType`
 const (
 	ActionOperationConditionTypeEventAcknowledged = "14"
 )
 
-/* For `ActionOperationConditionObject` field: `Operator` */
+// For `ActionOperationConditionObject` field: `Operator`
 const (
 	ActionOperationConditionOperatorEq = "0"
 )
 
-/* For `ActionFilterObject` field: `EvalType` */
+// For `ActionFilterObject` field: `EvalType`
 const (
 	ActionFilterEvalTypeAndOr  = "0"
 	ActionFilterEvalTypeAnd    = "1"
@@ -80,7 +78,7 @@ const (
 	ActionFilterEvalTypeCustom = "3"
 )
 
-/* For `ActionFilterConditionObject` field: `ConditionType` */
+// For `ActionFilterConditionObject` field: `ConditionType`
 const (
 	ActionFilterConditionTypeHostroup             = "0"
 	ActionFilterConditionTypeHost                 = "1"
@@ -107,7 +105,7 @@ const (
 	ActionFilterConditionTypeHostMetadata         = "24"
 )
 
-/* For `ActionFilterConditionObject` field: `Operator` */
+// For `ActionFilterConditionObject` field: `Operator`
 const (
 	ActionFilterConditionOperatorEQ      = "0" // =
 	ActionFilterConditionOperatorNE      = "1" // <>
@@ -119,7 +117,9 @@ const (
 	ActionFilterConditionOperatorNotIn   = "7" // not in
 )
 
-/* see: https://www.zabbix.com/documentation/2.4/manual/api/reference/action/object#action */
+// ActionObject struct is used to store action operations results
+//
+// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/action/object#action
 type ActionObject struct {
 	ActionID     string `json:"actionid,omitempty"`
 	EscPeriod    string `json:"esc_period"`
@@ -129,22 +129,24 @@ type ActionObject struct {
 	DefShortdata string `json:"def_shortdata,omitempty"`
 	RlongData    string `json:"r_longdata,omitempty"`
 	RshortData   string `json:"r_shortdata,omitempty"`
-	RecoveryMsg  string `json:"recovery_msg,omitempty"` /* has defined consts, see above */
-	Status       string `json:"status,omitempty"`       /* has defined consts, see above */
+	RecoveryMsg  string `json:"recovery_msg,omitempty"` // has defined consts, see above
+	Status       string `json:"status,omitempty"`       // has defined consts, see above
 
 	Operations []ActionOperationObject `json:"operations,omitempty"`
 	Filter     ActionFilterObject      `json:"filter,omitempty"`
 }
 
-/* see: https://www.zabbix.com/documentation/2.4/manual/api/reference/action/object#action_operation */
+// ActionOperationObject struct is used to store action operations
+//
+// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/action/object#action_operation
 type ActionOperationObject struct {
 	OperationID   string                           `json:"operationid,omitempty"`
-	OperationType string                           `json:"operationtype"` /* has defined consts, see above */
+	OperationType string                           `json:"operationtype"` // has defined consts, see above
 	ActionID      string                           `json:"actionid,omitempty"`
 	EscPeriod     string                           `json:"esc_period,omitempty"`
 	EscStepFrom   string                           `json:"esc_step_from,omitempty"`
 	EscStepTo     string                           `json:"esc_step_to,omitempty"`
-	EvalType      string                           `json:"evaltype,omitempty"` /* has defined consts, see above */
+	EvalType      string                           `json:"evaltype,omitempty"` // has defined consts, see above
 	Opcommand     ActionOperationCommandObject     `json:"opcommand,omitempty"`
 	OpcommandGrp  []ActionOpcommandGrpObject       `json:"opcommand_grp,omitempty"`
 	OpcommandHst  []ActionOpcommandHstObject       `json:"opcommand_hst,omitempty"`
@@ -156,13 +158,15 @@ type ActionOperationObject struct {
 	Optemplate    []ActionOptemplateObject         `json:"optemplate,omitempty"`
 }
 
-/* see: https://www.zabbix.com/documentation/2.4/manual/api/reference/action/object#action_operation_command */
+// ActionOperationCommandObject struct is used to store action operation commands
+//
+// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/action/object#action_operation_command
 type ActionOperationCommandObject struct {
 	OperationID string `json:"operationid,omitempty"`
 	Command     string `json:"command"`
-	Type        string `json:"type"`                 /* has defined consts, see above */
-	AuthType    string `json:"authtype,omitempty"`   /* has defined consts, see above */
-	ExecuteOn   string `json:"execute_on,omitempty"` /* has defined consts, see above */
+	Type        string `json:"type"`                 // has defined consts, see above
+	AuthType    string `json:"authtype,omitempty"`   // has defined consts, see above
+	ExecuteOn   string `json:"execute_on,omitempty"` // has defined consts, see above
 	Password    string `json:"password,omitempty"`
 	Port        string `json:"port,omitempty"`
 	PrivateKey  string `json:"privatekey,omitempty"`
@@ -171,77 +175,93 @@ type ActionOperationCommandObject struct {
 	UserName    string `json:"username,omitempty"`
 }
 
-/* see: https://www.zabbix.com/documentation/2.4/manual/api/reference/action/object#action_operation_message */
+// ActionOperationMessageObject struct is used to store action operation messages
+//
+// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/action/object#action_operation_message
 type ActionOperationMessageObject struct {
 	OperationID string `json:"operationid,omitempty"`
-	DefaultMsg  string `json:"default_msg,omitempty"` /* has defined consts, see above */
+	DefaultMsg  string `json:"default_msg,omitempty"` // has defined consts, see above
 	MediatypeID string `json:"mediatypeid,omitempty"`
 	Message     string `json:"message,omitempty"`
 	Subject     string `json:"subject,omitempty"`
 }
 
-/* see: https://www.zabbix.com/documentation/2.4/manual/api/reference/action/object#action_operation_condition */
+// ActionOperationConditionObject struct is used to store action operation conditions
+//
+// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/action/object#action_operation_condition
 type ActionOperationConditionObject struct {
 	OpconditionID string `json:"opconditionid,omitempty"`
-	ConditionType string `json:"conditiontype"` /* has defined consts, see above */
+	ConditionType string `json:"conditiontype"` // has defined consts, see above
 	Value         string `json:"value"`
 	OperationID   string `json:"operationid,omitempty"`
 	Operator      string `json:"operator,omitempty"`
 }
 
-/* see: https://www.zabbix.com/documentation/2.4/manual/api/reference/action/object#action_filter */
+// ActionFilterObject struct is used to store action filters
+//
+// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/action/object#action_filter
 type ActionFilterObject struct {
 	Conditions  []ActionFilterConditionObject `json:"conditions"`
-	EvalType    string                        `json:"evaltype"` /* has defined consts, see above */
+	EvalType    string                        `json:"evaltype"` // has defined consts, see above
 	EvalFormula string                        `json:"eval_formula,omitempty"`
 	Formula     string                        `json:"formula,omitempty"`
 }
 
-/* see: https://www.zabbix.com/documentation/2.4/manual/api/reference/action/object#action_filter_condition */
+// ActionFilterConditionObject struct is used to store action filter conditions
+//
+// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/action/object#action_filter_condition
 type ActionFilterConditionObject struct {
 	ConditionID   string `json:"conditionid,omitempty"`
-	ConditionType string `json:"conditiontype"` /* has defined consts, see above */
+	ConditionType string `json:"conditiontype"` // has defined consts, see above
 	Value         string `json:"value"`
 	ActionID      string `json:"actionid,omitempty"`
 	FormulaID     string `json:"formulaid,omitempty"`
-	Operator      string `json:"operator,omitempty"` /* has defined consts, see above */
+	Operator      string `json:"operator,omitempty"` // has defined consts, see above
 }
 
-/* Additional types for `ActionOperationObject` */
+// Additional types for `ActionOperationObject`
 
+// ActionOpcommandGrpObject struct is used to store action opcommand groups
 type ActionOpcommandGrpObject struct {
 	OpcommandGrpID string `json:"opcommand_grpid,omitempty"`
 	OperationID    string `json:"operationid,omitempty"`
 	GroupID        string `json:"groupid,omitempty"`
 }
 
+// ActionOpcommandHstObject struct is used to store action opcommand hosts
 type ActionOpcommandHstObject struct {
 	OpcommandHstID string `json:"opcommand_hstid,omitempty"`
 	OperationID    string `json:"operationid,omitempty"`
 	HostID         string `json:"hostid,omitempty"`
 }
 
+// ActionOpgroupObject struct is used to store action opgroups
 type ActionOpgroupObject struct {
 	OperationID string `json:"operationid,omitempty"`
 	GroupID     string `json:"groupid,omitempty"`
 }
 
+// ActionOpmessageGrpObject struct is used to store action opmessage groups
 type ActionOpmessageGrpObject struct {
 	OperationID string `json:"operationid,omitempty"`
 	UsrgrpID    string `json:"usrgrpid,omitempty"`
 }
 
+// ActionOpmessageUsrObject struct is used to store action opmessage users
 type ActionOpmessageUsrObject struct {
 	OperationID string `json:"operationid,omitempty"`
 	UserID      string `json:"userid,omitempty"`
 }
 
+// ActionOptemplateObject struct is used to store action optemplates
 type ActionOptemplateObject struct {
 	OperationID string `json:"operationid,omitempty"`
 	TemplateID  string `json:"templateid,omitempty"`
 }
 
-/* see: https://www.zabbix.com/documentation/2.4/manual/api/reference/action/get#parameters */
+// ActionGetParams struct is used for action get requests
+//
+// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/action/get#parameters
 type ActionGetParams struct {
 	GetParameters
 
@@ -258,16 +278,17 @@ type ActionGetParams struct {
 	SelectOperations SelectQuery `json:"selectOperations,omitempty"`
 }
 
-/* Structure to store creation result */
+// Structure to store creation result
 type actionCreateResult struct {
 	ActionIDs []int `json:"actionids"`
 }
 
-/* Structure to store deletion result */
+// Structure to store deletion result
 type actionDeleteResult struct {
 	ActionIDs []int `json:"actionids"`
 }
 
+// ActionGet gets actions
 func (z *Zabbix) ActionGet(params ActionGetParams) ([]ActionObject, int, error) {
 
 	var result []ActionObject
@@ -280,6 +301,7 @@ func (z *Zabbix) ActionGet(params ActionGetParams) ([]ActionObject, int, error) 
 	return result, status, nil
 }
 
+// ActionCreate creates actions
 func (z *Zabbix) ActionCreate(params []ActionObject) ([]int, int, error) {
 
 	var result actionCreateResult
@@ -292,6 +314,7 @@ func (z *Zabbix) ActionCreate(params []ActionObject) ([]int, int, error) {
 	return result.ActionIDs, status, nil
 }
 
+// ActionDelete deletes actions
 func (z *Zabbix) ActionDelete(actionIDs []int) ([]int, int, error) {
 
 	var result actionDeleteResult

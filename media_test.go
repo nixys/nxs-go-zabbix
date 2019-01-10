@@ -8,11 +8,11 @@ func TestUsermediaCRUD(t *testing.T) {
 
 	var z Zabbix
 
-	/* Login */
+	// Login
 	loginTest(&z, t)
 	defer logoutTest(&z, t)
 
-	/* Get */
+	// Get
 	testUsermediaGet(t, z)
 }
 

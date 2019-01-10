@@ -20,19 +20,19 @@ func TestUserCRUD(t *testing.T) {
 
 	var z Zabbix
 
-	/* Login */
+	// Login
 	loginTest(&z, t)
 	defer logoutTest(&z, t)
 
-	/* Preparing auxiliary data */
+	// Preparing auxiliary data
 	ugCreatedIDs := testUsergroupCreate(t, z)
 	defer testUsergroupDelete(t, z, ugCreatedIDs)
 
-	/* Create and delete */
+	// Create and delete
 	uCreatedIDs := testUserCreate(t, z, ugCreatedIDs)
 	defer testUserDelete(t, z, uCreatedIDs)
 
-	/* Get */
+	// Get
 	testUserGet(t, z, uCreatedIDs)
 }
 
@@ -40,7 +40,7 @@ func testUserCreate(t *testing.T, z Zabbix, ugCreatedIDs []string) []string {
 
 	var usergroups []UsergroupObject
 
-	/* Add usergroups to user */
+	// Add usergroups to user
 	for _, e := range ugCreatedIDs {
 		usergroups = append(usergroups, UsergroupObject{
 			UsrgrpID: e,

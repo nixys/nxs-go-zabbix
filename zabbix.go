@@ -8,31 +8,21 @@ import (
 	"strings"
 )
 
+// Zabbix select constants
+const (
+	SelectExtendedOutput = "extend"
+	SelectCount          = "count"
+)
+
+// Zabbix struct is used for store settings to communicate with Zabbix API
 type Zabbix struct {
 	sessionKey string
 	host       string
 }
 
-type requestData struct {
-	JsonRPC string      `json:"jsonrpc"`
-	Method  string      `json:"method"`
-	Params  interface{} `json:"params,omitempty"`
-	Auth    string      `json:"auth,omitempty"`
-	ID      int         `json:"id"`
-}
-
-type responseData struct {
-	JsonRPC string          `json:"jsonrpc"`
-	Result  json.RawMessage `json:"result"`
-	Error   struct {
-		Code    int    `json:"code"`
-		Message string `json:"message"`
-		Data    string `json:"data"`
-	} `json:"error"`
-	ID int `json:"id"`
-}
-
-/* see for details: https://www.zabbix.com/documentation/2.4/manual/api/reference_commentary#data_types */
+// GetParameters struct is used as embedded struct for some other structs within package
+//
+// see for details: https://www.zabbix.com/documentation/2.4/manual/api/reference_commentary#data_types
 type GetParameters struct {
 	Editable               bool                   `json:"editable,omitempty"`
 	ExcludeSearch          bool                   `json:"excludeSearch,omitempty"`
@@ -49,24 +39,37 @@ type GetParameters struct {
 	StartSearch            bool                   `json:"startSearch,omitempty"`
 }
 
+// SelectQuery is used as field type in some structs
 type SelectQuery interface{}
 
+// SelectFields is used as field type in some structs
 type SelectFields []string
 
-const (
-	SelectExtendedOutput = "extend"
-	SelectCount          = "count"
-)
+type requestData struct {
+	JSONRPC string      `json:"jsonrpc"`
+	Method  string      `json:"method"`
+	Params  interface{} `json:"params,omitempty"`
+	Auth    string      `json:"auth,omitempty"`
+	ID      int         `json:"id"`
+}
+
+type responseData struct {
+	JSONRPC string          `json:"jsonrpc"`
+	Result  json.RawMessage `json:"result"`
+	Error   struct {
+		Code    int    `json:"code"`
+		Message string `json:"message"`
+		Data    string `json:"data"`
+	} `json:"error"`
+	ID int `json:"id"`
+}
 
 func (r *responseData) getResult(result interface{}) error {
 
-	if err := json.Unmarshal(r.Result, result); err != nil {
-		return err
-	}
-
-	return nil
+	return json.Unmarshal(r.Result, result)
 }
 
+// Login gets the Zabbix session
 func (z *Zabbix) Login(host, user, password string) error {
 
 	var err error
@@ -85,6 +88,7 @@ func (z *Zabbix) Login(host, user, password string) error {
 	return nil
 }
 
+// Logout destroys the Zabbix session
 func (z *Zabbix) Logout() error {
 
 	_, _, err := z.userLogout()
@@ -103,7 +107,7 @@ func (z *Zabbix) request(method string, params interface{}, result interface{}) 
 	resp := responseData{}
 
 	r := requestData{
-		JsonRPC: "2.0",
+		JSONRPC: "2.0",
 		Method:  method,
 		Params:  params,
 		Auth:    z.sessionKey,
@@ -140,10 +144,10 @@ func (z *Zabbix) httpPost(in interface{}, out interface{}) (int, error) {
 		return 0, err
 	}
 
-	/* Set headers */
+	// Set headers
 	req.Header.Add("Content-Type", "application/json-rpc")
 
-	/* Make request */
+	// Make request
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {
 		return 0, err

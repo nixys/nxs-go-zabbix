@@ -17,22 +17,22 @@ func TestHostCRUD(t *testing.T) {
 
 	var z Zabbix
 
-	/* Login */
+	// Login
 	loginTest(&z, t)
 	defer logoutTest(&z, t)
 
-	/* Preparing auxiliary data */
+	// Preparing auxiliary data
 	hgCreatedIDs := testHostgroupCreate(t, z)
 	defer testHostgroupDelete(t, z, hgCreatedIDs)
 
 	tCreatedIDs := testTemplateCreate(t, z, hgCreatedIDs)
 	defer testTemplateDelete(t, z, tCreatedIDs)
 
-	/* Create and delete */
+	// Create and delete
 	hCreatedIDs := testHostCreate(t, z, hgCreatedIDs, tCreatedIDs)
 	defer testHostDelete(t, z, hCreatedIDs)
 
-	/* Get */
+	// Get
 	testHostGet(t, z, hCreatedIDs, tCreatedIDs, hgCreatedIDs)
 }
 
@@ -41,14 +41,14 @@ func testHostCreate(t *testing.T, z Zabbix, hgCreatedIDs, tCreatedIDs []string) 
 	var groups []HostgroupObject
 	var templates []TemplateObject
 
-	/* Add groups to host */
+	// Add groups to host
 	for _, e := range hgCreatedIDs {
 		groups = append(groups, HostgroupObject{
 			GroupID: e,
 		})
 	}
 
-	/* Add templates to host */
+	// Add templates to host
 	for _, e := range tCreatedIDs {
 		templates = append(templates, TemplateObject{
 			TemplateID: e,
@@ -134,7 +134,7 @@ func testHostGet(t *testing.T, z Zabbix, hCreatedIDs, tCreatedIDs, hgCreatedIDs 
 			t.Error("Host get error: unable to find created host")
 		} else {
 
-			/* Check macro in each created host */
+			// Check macro in each created host
 			for _, h := range hObjects {
 
 				foundMacro := false

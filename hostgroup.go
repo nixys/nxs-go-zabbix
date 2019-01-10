@@ -1,31 +1,33 @@
 package zabbix
 
-import ()
-
-/* For `HostgroupObject` field: `Status` */
+// For `HostgroupObject` field: `Status`
 const (
 	HostgroupFlagsPlain       = "0"
 	HostgroupFlagsDiscrovered = "4"
 )
 
-/* For `HostgroupObject` field: `Internal` */
+// For `HostgroupObject` field: `Internal`
 const (
 	HostgroupInternalFalse = "0"
 	HostgroupInternalTrue  = "1"
 )
 
-/* see: https://www.zabbix.com/documentation/2.4/manual/api/reference/hostgroup/object */
+// HostgroupObject struct is used to store hostgroup operations results
+//
+// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/hostgroup/object
 type HostgroupObject struct {
 	GroupID  string `json:"groupid,omitempty"`
 	Name     string `json:"name,omitempty"`
-	Flags    string `json:"flags,omitempty"`    /* has defined consts, see above */
-	Internal string `json:"internal,omitempty"` /* has defined consts, see above */
+	Flags    string `json:"flags,omitempty"`    // has defined consts, see above
+	Internal string `json:"internal,omitempty"` // has defined consts, see above
 
 	Hosts     []HostObject     `json:"hosts,omitempty"`
 	Templates []TemplateObject `json:"templates,omitempty"`
 }
 
-/* see: https://www.zabbix.com/documentation/2.4/manual/api/reference/hostgroup/get#parameters */
+// HostgroupGetParams struct is used for hostgroup get requests
+//
+// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/hostgroup/get#parameters
 type HostgroupGetParams struct {
 	GetParameters
 
@@ -50,22 +52,23 @@ type HostgroupGetParams struct {
 	WithSimpleGraphItems   bool `json:"with_simple_graph_items,omitempty"`
 	WithTriggers           bool `json:"with_triggers,omitempty"`
 
-	/* SelectDiscoveryRule  SelectQuery `json:"selectDiscoveryRule,omitempty"` /* not implemented yet */
-	/* SelectGroupDiscovery SelectQuery `json:"selectGroupDiscovery,omitempty"` /* not implemented yet */
+	// SelectDiscoveryRule  SelectQuery `json:"selectDiscoveryRule,omitempty"` // not implemented yet
+	// SelectGroupDiscovery SelectQuery `json:"selectGroupDiscovery,omitempty"` / not implemented yet
 	SelectHosts     SelectQuery `json:"selectHosts,omitempty"`
 	SelectTemplates SelectQuery `json:"selectTemplates,omitempty"`
 }
 
-/* Structure to store creation result */
+// Structure to store creation result
 type hostgroupCreateResult struct {
 	GroupIDs []string `json:"groupids"`
 }
 
-/* Structure to store deletion result */
+// Structure to store deletion result
 type hostgroupDeleteResult struct {
 	GroupIDs []string `json:"groupids"`
 }
 
+// HostgroupGet gets hostgroups
 func (z *Zabbix) HostgroupGet(params HostgroupGetParams) ([]HostgroupObject, int, error) {
 
 	var result []HostgroupObject
@@ -78,6 +81,7 @@ func (z *Zabbix) HostgroupGet(params HostgroupGetParams) ([]HostgroupObject, int
 	return result, status, nil
 }
 
+// HostgroupCreate creates hostgroups
 func (z *Zabbix) HostgroupCreate(params []HostgroupObject) ([]string, int, error) {
 
 	var result hostgroupCreateResult
@@ -90,6 +94,7 @@ func (z *Zabbix) HostgroupCreate(params []HostgroupObject) ([]string, int, error
 	return result.GroupIDs, status, nil
 }
 
+// HostgroupDelete deletes hostgroups
 func (z *Zabbix) HostgroupDelete(groupIDs []string) ([]string, int, error) {
 
 	var result hostgroupDeleteResult

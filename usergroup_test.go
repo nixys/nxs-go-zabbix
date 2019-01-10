@@ -13,15 +13,15 @@ func TestUsergroupCRUD(t *testing.T) {
 
 	var z Zabbix
 
-	/* Login */
+	// Login
 	loginTest(&z, t)
 	defer logoutTest(&z, t)
 
-	/* Create and delete */
+	// Create and delete
 	ugCreatedIDs := testUsergroupCreate(t, z)
 	defer testUsergroupDelete(t, z, ugCreatedIDs)
 
-	/* Get */
+	// Get
 	testUsergroupGet(t, z, ugCreatedIDs)
 }
 

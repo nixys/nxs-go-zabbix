@@ -1,28 +1,26 @@
 package zabbix
 
-import ()
-
-/* For `HostObject` field: `Available` */
+// For `HostObject` field: `Available`
 const (
 	HostAvailableUnknown     = "0"
 	HostAvailableAvailable   = "1"
 	HostAvailableUnavailable = "2"
 )
 
-/* For `HostObject` field: `Flags` */
+// For `HostObject` field: `Flags`
 const (
 	HostFlagsPlain      = "0"
 	HostFlagsDiscovered = "4"
 )
 
-/* For `HostObject` field: `Flags` */
+// For `HostObject` field: `Flags`
 const (
 	HostInventoryModeDisabled  = "-1"
 	HostInventoryModeManual    = "0"
 	HostInventoryModeAutomatic = "1"
 )
 
-/* For `HostObject` field: `IpmiAuthtype` */
+// For `HostObject` field: `IpmiAuthtype`
 const (
 	HostIpmiAuthtypeDefault  = "-1"
 	HostIpmiAuthtypeNone     = "0"
@@ -33,14 +31,14 @@ const (
 	HostIpmiAuthtypeRMCP     = "6"
 )
 
-/* For `HostObject` field: `IpmiAvailable` */
+// For `HostObject` field: `IpmiAvailable`
 const (
 	HostIpmiAvailableUnknown     = "0"
 	HostIpmiAvailableAvailable   = "1"
 	HostIpmiAvailableUnavailable = "2"
 )
 
-/* For `HostObject` field: `IpmiPrivilege` */
+// For `HostObject` field: `IpmiPrivilege`
 const (
 	HostIpmiPrivilegeCallback = "1"
 	HostIpmiPrivilegeUser     = "2"
@@ -49,82 +47,86 @@ const (
 	HostIpmiPrivilegeOEM      = "5"
 )
 
-/* For `HostObject` field: `JmxAvailable` */
+// For `HostObject` field: `JmxAvailable`
 const (
 	HostJmxAvailableUnknown     = "0"
 	HostJmxAvailableAvailable   = "1"
 	HostJmxAvailableUnavailable = "2"
 )
 
-/* For `HostObject` field: `MaintenanceStatus` */
+// For `HostObject` field: `MaintenanceStatus`
 const (
 	HostMaintenanceStatusDisable = "0"
 	HostMaintenanceStatusEnable  = "1"
 )
 
-/* For `HostObject` field: `MaintenanceType` */
+// For `HostObject` field: `MaintenanceType`
 const (
 	HostMaintenanceTypeDataCollectionEnabled  = "0"
 	HostMaintenanceTypeDataCollectionDisabled = "1"
 )
 
-/* For `HostObject` field: `SnmpAvailable` */
+// For `HostObject` field: `SnmpAvailable`
 const (
 	HostSnmpAvailableUnknown     = "0"
 	HostSnmpAvailableAvailable   = "1"
 	HostSnmpAvailableUnavailable = "2"
 )
 
-/* For `HostObject` field: `Status` */
+// For `HostObject` field: `Status`
 const (
 	HostStatusMonitored   = "0"
 	HostStatusUnmonitored = "1"
 )
 
-/* see: https://www.zabbix.com/documentation/2.4/manual/api/reference/host/object#host */
+// HostObject struct is used to store host operations results
+//
+// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/host/object#host
 type HostObject struct {
 	HostID            string `json:"hostid,omitempty"`
 	Host              string `json:"host,omitempty"`
-	Available         string `json:"available,omitempty"` /* has defined consts, see above */
+	Available         string `json:"available,omitempty"` // has defined consts, see above
 	Description       string `json:"description,omitempty"`
 	DisableUntil      string `json:"disable_until,omitempty"`
 	Error             string `json:"error,omitempty"`
 	ErrorsFrom        string `json:"errors_from,omitempty"`
-	Flags             string `json:"flags,omitempty"`          /* has defined consts, see above */
-	InventoryMode     string `json:"inventory_mode,omitempty"` /* has defined consts, see above */
-	IpmiAuthtype      string `json:"ipmi_authtype,omitempty"`  /* has defined consts, see above */
-	IpmiAvailable     string `json:"ipmi_available,omitempty"` /* has defined consts, see above */
+	Flags             string `json:"flags,omitempty"`          // has defined consts, see above
+	InventoryMode     string `json:"inventory_mode,omitempty"` // has defined consts, see above
+	IpmiAuthtype      string `json:"ipmi_authtype,omitempty"`  // has defined consts, see above
+	IpmiAvailable     string `json:"ipmi_available,omitempty"` // has defined consts, see above
 	IpmiDisableUntil  string `json:"ipmi_disable_until,omitempty"`
 	IpmiError         string `json:"ipmi_error,omitempty"`
 	IpmiErrorsFrom    string `json:"ipmi_errors_from,omitempty"`
 	IpmiPassword      string `json:"ipmi_password,omitempty"`
-	IpmiPrivilege     string `json:"ipmi_privilege,omitempty"` /* has defined consts, see above */
+	IpmiPrivilege     string `json:"ipmi_privilege,omitempty"` // has defined consts, see above
 	IpmiUsername      string `json:"ipmi_username,omitempty"`
-	JmxAvailable      string `json:"jmx_available,omitempty"` /* has defined consts, see above */
+	JmxAvailable      string `json:"jmx_available,omitempty"` // has defined consts, see above
 	JmxDisableUntil   string `json:"jmx_disable_until,omitempty"`
 	JmxError          string `json:"jmx_error,omitempty"`
 	JmxErrorsFrom     string `json:"jmx_errors_from,omitempty"`
 	MaintenanceFrom   string `json:"maintenance_from,omitempty"`
-	MaintenanceStatus string `json:"maintenance_status,omitempty"` /* has defined consts, see above */
-	MaintenanceType   string `json:"maintenance_type,omitempty"`   /* has defined consts, see above */
+	MaintenanceStatus string `json:"maintenance_status,omitempty"` // has defined consts, see above
+	MaintenanceType   string `json:"maintenance_type,omitempty"`   // has defined consts, see above
 	MaintenanceID     string `json:"maintenanceid,omitempty"`
 	Name              string `json:"name,omitempty"`
 	ProxyHostID       string `json:"proxy_hostid,omitempty"`
-	SnmpAvailable     string `json:"snmp_available,omitempty"` /* has defined consts, see above */
+	SnmpAvailable     string `json:"snmp_available,omitempty"` // has defined consts, see above
 	SnmpDisableUntil  string `json:"snmp_disable_until,omitempty"`
 	SnmpError         string `json:"snmp_error,omitempty"`
 	SnmpErrorsFrom    string `json:"snmp_errors_from,omitempty"`
-	Status            string `json:"status,omitempty"` /* has defined consts, see above */
+	Status            string `json:"status,omitempty"` // has defined consts, see above
 
 	Groups     []HostgroupObject     `json:"groups,omitempty"`
 	Interfaces []HostinterfaceObject `json:"interfaces,omitempty"`
 	Macros     []HostmacroObject     `json:"macros,omitempty"`
 
-	ParentTemplates []TemplateObject `json:"parentTemplates,omitempty"` /* Used to store result for `get` operations */
-	Templates       []TemplateObject `json:"templates,omitempty"`       /* Used for `create` operations */
+	ParentTemplates []TemplateObject `json:"parentTemplates,omitempty"` // Used to store result for `get` operations
+	Templates       []TemplateObject `json:"templates,omitempty"`       // Used for `create` operations
 }
 
-/* see: https://www.zabbix.com/documentation/2.4/manual/api/reference/host/get#parameters */
+// HostGetParams struct is used for host get requests
+//
+// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/host/get#parameters
 type HostGetParams struct {
 	GetParameters
 
@@ -171,16 +173,17 @@ type HostGetParams struct {
 	SelectTriggers        SelectQuery `json:"selectTriggers,omitempty"`
 }
 
-/* Structure to store creation result */
+// Structure to store creation result
 type hostCreateResult struct {
 	HostIDs []string `json:"hostids"`
 }
 
-/* Structure to store deletion result */
+// Structure to store deletion result
 type hostDeleteResult struct {
 	HostIDs []string `json:"hostids"`
 }
 
+// HostGet gets hosts
 func (z *Zabbix) HostGet(params HostGetParams) ([]HostObject, int, error) {
 
 	var result []HostObject
@@ -193,6 +196,7 @@ func (z *Zabbix) HostGet(params HostGetParams) ([]HostObject, int, error) {
 	return result, status, nil
 }
 
+// HostCreate creates hosts
 func (z *Zabbix) HostCreate(params []HostObject) ([]string, int, error) {
 
 	var result hostCreateResult
@@ -205,6 +209,7 @@ func (z *Zabbix) HostCreate(params []HostObject) ([]string, int, error) {
 	return result.HostIDs, status, nil
 }
 
+// HostDelete deletes hosts
 func (z *Zabbix) HostDelete(hostIDs []string) ([]string, int, error) {
 
 	var result hostDeleteResult
