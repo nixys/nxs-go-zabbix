@@ -25,9 +25,9 @@ type MediatypeObject struct {
 	ExecPath    string `json:"exec_path,omitempty"`
 	GsmModem    string `json:"gsm_modem,omitempty"`
 	Passwd      string `json:"passwd,omitempty"`
-	SmtpEmail   string `json:"smtp_email,omitempty"`
-	SmtpHelo    string `json:"smtp_helo,omitempty"`
-	SmtpServer  string `json:"smtp_server,omitempty"`
+	SMTPEmail   string `json:"smtp_email,omitempty"`
+	SMTPHelo    string `json:"smtp_helo,omitempty"`
+	SMTPServer  string `json:"smtp_server,omitempty"`
 	Status      string `json:"status,omitempty"` // has defined consts, see above
 	Username    string `json:"username,omitempty"`
 
