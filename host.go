@@ -163,7 +163,7 @@ type HostGetParams struct {
 	SelectDiscoveryRule   SelectQuery `json:"selectDiscoveryRule ,omitempty"`
 	SelectGraphs          SelectQuery `json:"selectGraphs,omitempty"`
 	SelectHostDiscovery   SelectQuery `json:"selectHostDiscovery ,omitempty"`
-	SelectHttpTests       SelectQuery `json:"selectHttpTests,omitempty"`
+	SelectHTTPTests       SelectQuery `json:"selectHttpTests,omitempty"`
 	SelectInterfaces      SelectQuery `json:"selectInterfaces,omitempty"`
 	SelectInventory       SelectQuery `json:"selectInventory,omitempty"`
 	SelectItems           SelectQuery `json:"selectItems,omitempty"`
