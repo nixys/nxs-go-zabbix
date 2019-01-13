@@ -50,7 +50,7 @@ type hostmacroDeleteResult struct {
 }
 
 // HostmacroGet gets hostmacros
-func (z *Zabbix) HostmacroGet(params HostmacroGetParams) ([]HostmacroObject, int, error) {
+func (z *Context) HostmacroGet(params HostmacroGetParams) ([]HostmacroObject, int, error) {
 
 	var result []HostmacroObject
 
@@ -63,7 +63,7 @@ func (z *Zabbix) HostmacroGet(params HostmacroGetParams) ([]HostmacroObject, int
 }
 
 // HostmacroCreate creates new hostmacros
-func (z *Zabbix) HostmacroCreate(params []HostmacroObject) ([]string, int, error) {
+func (z *Context) HostmacroCreate(params []HostmacroObject) ([]string, int, error) {
 
 	var result hostmacroCreateResult
 
@@ -76,7 +76,7 @@ func (z *Zabbix) HostmacroCreate(params []HostmacroObject) ([]string, int, error
 }
 
 // HostmacroDelete deletes hostmacros
-func (z *Zabbix) HostmacroDelete(hostmacroIDs []string) ([]string, int, error) {
+func (z *Context) HostmacroDelete(hostmacroIDs []string) ([]string, int, error) {
 
 	var result hostmacroDeleteResult
 

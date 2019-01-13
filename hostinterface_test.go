@@ -12,7 +12,7 @@ const (
 
 func TestHostinterfaceCRUD(t *testing.T) {
 
-	var z Zabbix
+	var z Context
 
 	// Login
 	loginTest(&z, t)
@@ -36,7 +36,7 @@ func TestHostinterfaceCRUD(t *testing.T) {
 	testHostinterfaceGet(t, z, hCreatedIDs)
 }
 
-func testHostinterfaceCreate(t *testing.T, z Zabbix, hCreatedID string) []string {
+func testHostinterfaceCreate(t *testing.T, z Context, hCreatedID string) []string {
 
 	hiCreatedIDs, _, err := z.HostinterfaceCreate([]HostinterfaceObject{
 		{
@@ -62,7 +62,7 @@ func testHostinterfaceCreate(t *testing.T, z Zabbix, hCreatedID string) []string
 	return hiCreatedIDs
 }
 
-func testHostinterfaceDelete(t *testing.T, z Zabbix, hiCreatedIDs []string) []string {
+func testHostinterfaceDelete(t *testing.T, z Context, hiCreatedIDs []string) []string {
 
 	hiDeletedIDs, _, err := z.HostinterfaceDelete(hiCreatedIDs)
 	if err != nil {
@@ -82,7 +82,7 @@ func testHostinterfaceDelete(t *testing.T, z Zabbix, hiCreatedIDs []string) []st
 	return hiDeletedIDs
 }
 
-func testHostinterfaceGet(t *testing.T, z Zabbix, hCreatedIDs []string) []HostinterfaceObject {
+func testHostinterfaceGet(t *testing.T, z Context, hCreatedIDs []string) []HostinterfaceObject {
 
 	hiObjects, _, err := z.HostinterfaceGet(HostinterfaceGetParams{
 		SelectHosts: SelectExtendedOutput,

@@ -69,7 +69,7 @@ type hostgroupDeleteResult struct {
 }
 
 // HostgroupGet gets hostgroups
-func (z *Zabbix) HostgroupGet(params HostgroupGetParams) ([]HostgroupObject, int, error) {
+func (z *Context) HostgroupGet(params HostgroupGetParams) ([]HostgroupObject, int, error) {
 
 	var result []HostgroupObject
 
@@ -82,7 +82,7 @@ func (z *Zabbix) HostgroupGet(params HostgroupGetParams) ([]HostgroupObject, int
 }
 
 // HostgroupCreate creates hostgroups
-func (z *Zabbix) HostgroupCreate(params []HostgroupObject) ([]string, int, error) {
+func (z *Context) HostgroupCreate(params []HostgroupObject) ([]string, int, error) {
 
 	var result hostgroupCreateResult
 
@@ -95,7 +95,7 @@ func (z *Zabbix) HostgroupCreate(params []HostgroupObject) ([]string, int, error
 }
 
 // HostgroupDelete deletes hostgroups
-func (z *Zabbix) HostgroupDelete(groupIDs []string) ([]string, int, error) {
+func (z *Context) HostgroupDelete(groupIDs []string) ([]string, int, error) {
 
 	var result hostgroupDeleteResult
 

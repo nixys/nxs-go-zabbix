@@ -12,7 +12,7 @@ const (
 
 func TestHostmacroCRUD(t *testing.T) {
 
-	var z Zabbix
+	var z Context
 
 	// Login
 	loginTest(&z, t)
@@ -36,7 +36,7 @@ func TestHostmacroCRUD(t *testing.T) {
 	testHostmacroGet(t, z, hmCreatedIDs)
 }
 
-func testHostmacroCreate(t *testing.T, z Zabbix, hCreatedID string) []string {
+func testHostmacroCreate(t *testing.T, z Context, hCreatedID string) []string {
 
 	hmCreatedIDs, _, err := z.HostmacroCreate([]HostmacroObject{
 		{
@@ -58,7 +58,7 @@ func testHostmacroCreate(t *testing.T, z Zabbix, hCreatedID string) []string {
 	return hmCreatedIDs
 }
 
-func testHostmacroDelete(t *testing.T, z Zabbix, hmCreatedIDs []string) []string {
+func testHostmacroDelete(t *testing.T, z Context, hmCreatedIDs []string) []string {
 
 	hmDeletedIDs, _, err := z.HostmacroDelete(hmCreatedIDs)
 	if err != nil {
@@ -78,7 +78,7 @@ func testHostmacroDelete(t *testing.T, z Zabbix, hmCreatedIDs []string) []string
 	return hmDeletedIDs
 }
 
-func testHostmacroGet(t *testing.T, z Zabbix, hmCreatedIDs []string) []HostmacroObject {
+func testHostmacroGet(t *testing.T, z Context, hmCreatedIDs []string) []HostmacroObject {
 
 	hmObjects, _, err := z.HostmacroGet(HostmacroGetParams{
 		HostmacroIDs:    hmCreatedIDs,

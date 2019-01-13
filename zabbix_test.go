@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func loginTest(z *Zabbix, t *testing.T) {
+func loginTest(z *Context, t *testing.T) {
 
 	zbxHost := os.Getenv("ZABBIX_HOST")
 	if zbxHost == "" {
@@ -29,7 +29,7 @@ func loginTest(z *Zabbix, t *testing.T) {
 	}
 }
 
-func logoutTest(z *Zabbix, t *testing.T) {
+func logoutTest(z *Context, t *testing.T) {
 
 	if err := z.Logout(); err != nil {
 		t.Fatal("Logout error: ", err)

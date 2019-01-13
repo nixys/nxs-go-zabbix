@@ -12,7 +12,7 @@ const (
 
 func TestUsergroupCRUD(t *testing.T) {
 
-	var z Zabbix
+	var z Context
 
 	// Login
 	loginTest(&z, t)
@@ -29,7 +29,7 @@ func TestUsergroupCRUD(t *testing.T) {
 	testUsergroupGet(t, z, ugCreatedIDs)
 }
 
-func testUsergroupCreate(t *testing.T, z Zabbix) []string {
+func testUsergroupCreate(t *testing.T, z Context) []string {
 
 	ugCreatedIDs, _, err := z.UsergroupCreate([]UsergroupObject{
 		{
@@ -49,7 +49,7 @@ func testUsergroupCreate(t *testing.T, z Zabbix) []string {
 	return ugCreatedIDs
 }
 
-func testUsergroupUpdate(t *testing.T, z Zabbix, ugCreatedIDs []string) []string {
+func testUsergroupUpdate(t *testing.T, z Context, ugCreatedIDs []string) []string {
 
 	var ugObjects []UsergroupObject
 
@@ -79,7 +79,7 @@ func testUsergroupUpdate(t *testing.T, z Zabbix, ugCreatedIDs []string) []string
 	return ugUpdatedIDs
 }
 
-func testUsergroupDelete(t *testing.T, z Zabbix, ugCreatedIDs []string) []string {
+func testUsergroupDelete(t *testing.T, z Context, ugCreatedIDs []string) []string {
 
 	ugDeletedIDs, _, err := z.UsergroupDelete(ugCreatedIDs)
 	if err != nil {
@@ -99,7 +99,7 @@ func testUsergroupDelete(t *testing.T, z Zabbix, ugCreatedIDs []string) []string
 	return ugDeletedIDs
 }
 
-func testUsergroupGet(t *testing.T, z Zabbix, ugCreatedIDs []string) []UsergroupObject {
+func testUsergroupGet(t *testing.T, z Context, ugCreatedIDs []string) []UsergroupObject {
 
 	ugObjects, _, err := z.UsergroupGet(UsergroupGetParams{
 		UsrgrpIDs:    ugCreatedIDs,

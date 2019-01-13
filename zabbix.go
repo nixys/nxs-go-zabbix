@@ -14,8 +14,8 @@ const (
 	SelectCount          = "count"
 )
 
-// Zabbix struct is used for store settings to communicate with Zabbix API
-type Zabbix struct {
+// Context struct is used for store settings to communicate with Zabbix API
+type Context struct {
 	sessionKey string
 	host       string
 }
@@ -70,7 +70,7 @@ func (r *responseData) getResult(result interface{}) error {
 }
 
 // Login gets the Zabbix session
-func (z *Zabbix) Login(host, user, password string) error {
+func (z *Context) Login(host, user, password string) error {
 
 	var err error
 
@@ -89,7 +89,7 @@ func (z *Zabbix) Login(host, user, password string) error {
 }
 
 // Logout destroys the Zabbix session
-func (z *Zabbix) Logout() error {
+func (z *Context) Logout() error {
 
 	_, _, err := z.userLogout()
 
@@ -102,7 +102,7 @@ func (z *Zabbix) Logout() error {
 	return nil
 }
 
-func (z *Zabbix) request(method string, params interface{}, result interface{}) (int, error) {
+func (z *Context) request(method string, params interface{}, result interface{}) (int, error) {
 
 	resp := responseData{}
 
@@ -131,7 +131,7 @@ func (z *Zabbix) request(method string, params interface{}, result interface{}) 
 	return status, nil
 }
 
-func (z *Zabbix) httpPost(in interface{}, out interface{}) (int, error) {
+func (z *Context) httpPost(in interface{}, out interface{}) (int, error) {
 
 	var bodyBytes []byte
 

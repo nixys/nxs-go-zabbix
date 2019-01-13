@@ -61,7 +61,7 @@ type templateDeleteResult struct {
 }
 
 // TemplateGet gets templates
-func (z *Zabbix) TemplateGet(params TemplateGetParams) ([]TemplateObject, int, error) {
+func (z *Context) TemplateGet(params TemplateGetParams) ([]TemplateObject, int, error) {
 
 	var result []TemplateObject
 
@@ -74,7 +74,7 @@ func (z *Zabbix) TemplateGet(params TemplateGetParams) ([]TemplateObject, int, e
 }
 
 // TemplateCreate creates templates
-func (z *Zabbix) TemplateCreate(params []TemplateObject) ([]string, int, error) {
+func (z *Context) TemplateCreate(params []TemplateObject) ([]string, int, error) {
 
 	var result templateCreateResult
 
@@ -87,7 +87,7 @@ func (z *Zabbix) TemplateCreate(params []TemplateObject) ([]string, int, error) 
 }
 
 // TemplateDelete deletes templates
-func (z *Zabbix) TemplateDelete(templateIDs []string) ([]string, int, error) {
+func (z *Context) TemplateDelete(templateIDs []string) ([]string, int, error) {
 
 	var result templateDeleteResult
 

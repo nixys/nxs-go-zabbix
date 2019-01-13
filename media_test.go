@@ -6,7 +6,7 @@ import (
 
 func TestUsermediaCRUD(t *testing.T) {
 
-	var z Zabbix
+	var z Context
 
 	// Login
 	loginTest(&z, t)
@@ -16,7 +16,7 @@ func TestUsermediaCRUD(t *testing.T) {
 	testUsermediaGet(t, z)
 }
 
-func testUsermediaGet(t *testing.T, z Zabbix) []MediaObject {
+func testUsermediaGet(t *testing.T, z Context) []MediaObject {
 
 	mObjects, _, err := z.UsermediaGet(UsermediaGetParams{
 		GetParameters: GetParameters{

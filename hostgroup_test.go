@@ -11,7 +11,7 @@ const (
 
 func TestHostgroupCRUD(t *testing.T) {
 
-	var z Zabbix
+	var z Context
 
 	// Login
 	loginTest(&z, t)
@@ -25,7 +25,7 @@ func TestHostgroupCRUD(t *testing.T) {
 	testHostgroupGet(t, z, hgCreatedIDs)
 }
 
-func testHostgroupCreate(t *testing.T, z Zabbix) []string {
+func testHostgroupCreate(t *testing.T, z Context) []string {
 
 	hgCreatedIDs, _, err := z.HostgroupCreate([]HostgroupObject{
 		{
@@ -45,7 +45,7 @@ func testHostgroupCreate(t *testing.T, z Zabbix) []string {
 	return hgCreatedIDs
 }
 
-func testHostgroupDelete(t *testing.T, z Zabbix, hgCreatedIDs []string) []string {
+func testHostgroupDelete(t *testing.T, z Context, hgCreatedIDs []string) []string {
 
 	hgDeletedIDs, _, err := z.HostgroupDelete(hgCreatedIDs)
 	if err != nil {
@@ -65,7 +65,7 @@ func testHostgroupDelete(t *testing.T, z Zabbix, hgCreatedIDs []string) []string
 	return hgDeletedIDs
 }
 
-func testHostgroupGet(t *testing.T, z Zabbix, hgCreatedIDs []string) []HostgroupObject {
+func testHostgroupGet(t *testing.T, z Context, hgCreatedIDs []string) []HostgroupObject {
 
 	hgObjects, _, err := z.HostgroupGet(HostgroupGetParams{
 		GroupIDs: hgCreatedIDs,

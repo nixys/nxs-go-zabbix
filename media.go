@@ -32,7 +32,7 @@ type UsermediaGetParams struct {
 }
 
 // UsermediaGet gets medias
-func (z *Zabbix) UsermediaGet(params UsermediaGetParams) ([]MediaObject, int, error) {
+func (z *Context) UsermediaGet(params UsermediaGetParams) ([]MediaObject, int, error) {
 
 	var result []MediaObject
 

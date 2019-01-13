@@ -70,7 +70,7 @@ type hostinterfaceDeleteResult struct {
 }
 
 // HostinterfaceGet gets hostinterfaces
-func (z *Zabbix) HostinterfaceGet(params HostinterfaceGetParams) ([]HostinterfaceObject, int, error) {
+func (z *Context) HostinterfaceGet(params HostinterfaceGetParams) ([]HostinterfaceObject, int, error) {
 
 	var result []HostinterfaceObject
 
@@ -83,7 +83,7 @@ func (z *Zabbix) HostinterfaceGet(params HostinterfaceGetParams) ([]Hostinterfac
 }
 
 // HostinterfaceCreate creates hostinterfaces
-func (z *Zabbix) HostinterfaceCreate(params []HostinterfaceObject) ([]string, int, error) {
+func (z *Context) HostinterfaceCreate(params []HostinterfaceObject) ([]string, int, error) {
 
 	var result hostinterfaceCreateResult
 
@@ -96,7 +96,7 @@ func (z *Zabbix) HostinterfaceCreate(params []HostinterfaceObject) ([]string, in
 }
 
 // HostinterfaceDelete deletes hostinterfaces
-func (z *Zabbix) HostinterfaceDelete(hostinterfaceIDs []string) ([]string, int, error) {
+func (z *Context) HostinterfaceDelete(hostinterfaceIDs []string) ([]string, int, error) {
 
 	var result hostinterfaceDeleteResult
 

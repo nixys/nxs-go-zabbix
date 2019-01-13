@@ -289,7 +289,7 @@ type actionDeleteResult struct {
 }
 
 // ActionGet gets actions
-func (z *Zabbix) ActionGet(params ActionGetParams) ([]ActionObject, int, error) {
+func (z *Context) ActionGet(params ActionGetParams) ([]ActionObject, int, error) {
 
 	var result []ActionObject
 
@@ -302,7 +302,7 @@ func (z *Zabbix) ActionGet(params ActionGetParams) ([]ActionObject, int, error) 
 }
 
 // ActionCreate creates actions
-func (z *Zabbix) ActionCreate(params []ActionObject) ([]int, int, error) {
+func (z *Context) ActionCreate(params []ActionObject) ([]int, int, error) {
 
 	var result actionCreateResult
 
@@ -315,7 +315,7 @@ func (z *Zabbix) ActionCreate(params []ActionObject) ([]int, int, error) {
 }
 
 // ActionDelete deletes actions
-func (z *Zabbix) ActionDelete(actionIDs []int) ([]int, int, error) {
+func (z *Context) ActionDelete(actionIDs []int) ([]int, int, error) {
 
 	var result actionDeleteResult
 

@@ -26,7 +26,7 @@ import (
 	"github.com/nixys/nxs-go-zabbix"
 )
 
-func zabbixLogin(z *zabbix.Zabbix, zbxHost, zbxUsername, zbxPassword string) {
+func zabbixLogin(z *zabbix.Context, zbxHost, zbxUsername, zbxPassword string) {
 
 	if err := z.Login(zbxHost, zbxUsername, zbxPassword); err != nil {
 		fmt.Println("Login error:", err)
@@ -36,7 +36,7 @@ func zabbixLogin(z *zabbix.Zabbix, zbxHost, zbxUsername, zbxPassword string) {
 	}
 }
 
-func zabbixLogout(z *zabbix.Zabbix) {
+func zabbixLogout(z *zabbix.Context) {
 
 	if err := z.Logout(); err != nil {
 		fmt.Println("Logout error:", err)
@@ -48,7 +48,7 @@ func zabbixLogout(z *zabbix.Zabbix) {
 
 func main() {
 
-	var z zabbix.Zabbix
+	var z zabbix.Context
 
 	/* Get variables from environment to login to Zabbix server */
 	zbxHost := os.Getenv("ZABBIX_HOST")

@@ -82,7 +82,7 @@ type usergroupDeleteResult struct {
 }
 
 // UsergroupGet gets usergroups
-func (z *Zabbix) UsergroupGet(params UsergroupGetParams) ([]UsergroupObject, int, error) {
+func (z *Context) UsergroupGet(params UsergroupGetParams) ([]UsergroupObject, int, error) {
 
 	var result []UsergroupObject
 
@@ -95,7 +95,7 @@ func (z *Zabbix) UsergroupGet(params UsergroupGetParams) ([]UsergroupObject, int
 }
 
 // UsergroupCreate creates usergroups
-func (z *Zabbix) UsergroupCreate(params []UsergroupObject) ([]string, int, error) {
+func (z *Context) UsergroupCreate(params []UsergroupObject) ([]string, int, error) {
 
 	var result usergroupCreateResult
 
@@ -108,7 +108,7 @@ func (z *Zabbix) UsergroupCreate(params []UsergroupObject) ([]string, int, error
 }
 
 // UsergroupUpdate updates usergroups
-func (z *Zabbix) UsergroupUpdate(params []UsergroupObject) ([]string, int, error) {
+func (z *Context) UsergroupUpdate(params []UsergroupObject) ([]string, int, error) {
 
 	var result usergroupUpdateResult
 
@@ -121,7 +121,7 @@ func (z *Zabbix) UsergroupUpdate(params []UsergroupObject) ([]string, int, error
 }
 
 // UsergroupDelete deletes usergroups
-func (z *Zabbix) UsergroupDelete(usergroupIDs []string) ([]string, int, error) {
+func (z *Context) UsergroupDelete(usergroupIDs []string) ([]string, int, error) {
 
 	var result usergroupDeleteResult
 

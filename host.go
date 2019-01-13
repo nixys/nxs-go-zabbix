@@ -184,7 +184,7 @@ type hostDeleteResult struct {
 }
 
 // HostGet gets hosts
-func (z *Zabbix) HostGet(params HostGetParams) ([]HostObject, int, error) {
+func (z *Context) HostGet(params HostGetParams) ([]HostObject, int, error) {
 
 	var result []HostObject
 
@@ -197,7 +197,7 @@ func (z *Zabbix) HostGet(params HostGetParams) ([]HostObject, int, error) {
 }
 
 // HostCreate creates hosts
-func (z *Zabbix) HostCreate(params []HostObject) ([]string, int, error) {
+func (z *Context) HostCreate(params []HostObject) ([]string, int, error) {
 
 	var result hostCreateResult
 
@@ -210,7 +210,7 @@ func (z *Zabbix) HostCreate(params []HostObject) ([]string, int, error) {
 }
 
 // HostDelete deletes hosts
-func (z *Zabbix) HostDelete(hostIDs []string) ([]string, int, error) {
+func (z *Context) HostDelete(hostIDs []string) ([]string, int, error) {
 
 	var result hostDeleteResult
 

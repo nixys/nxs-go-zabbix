@@ -18,7 +18,7 @@ const (
 
 func TestUserCRUD(t *testing.T) {
 
-	var z Zabbix
+	var z Context
 
 	// Login
 	loginTest(&z, t)
@@ -36,7 +36,7 @@ func TestUserCRUD(t *testing.T) {
 	testUserGet(t, z, uCreatedIDs)
 }
 
-func testUserCreate(t *testing.T, z Zabbix, ugCreatedIDs []string) []string {
+func testUserCreate(t *testing.T, z Context, ugCreatedIDs []string) []string {
 
 	var usergroups []UsergroupObject
 
@@ -83,7 +83,7 @@ func testUserCreate(t *testing.T, z Zabbix, ugCreatedIDs []string) []string {
 	return uCreatedIDs
 }
 
-func testUserDelete(t *testing.T, z Zabbix, uCreatedIDs []string) []string {
+func testUserDelete(t *testing.T, z Context, uCreatedIDs []string) []string {
 
 	uDeletedIDs, _, err := z.UserDelete(uCreatedIDs)
 	if err != nil {
@@ -103,7 +103,7 @@ func testUserDelete(t *testing.T, z Zabbix, uCreatedIDs []string) []string {
 	return uDeletedIDs
 }
 
-func testUserGet(t *testing.T, z Zabbix, uCreatedIDs []string) []UserObject {
+func testUserGet(t *testing.T, z Context, uCreatedIDs []string) []UserObject {
 
 	uObjects, _, err := z.UserGet(UserGetParams{
 		UserIDs:          uCreatedIDs,

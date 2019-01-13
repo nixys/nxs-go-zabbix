@@ -87,7 +87,7 @@ type userDeleteResult struct {
 }
 
 // UserGet gets users
-func (z *Zabbix) UserGet(params UserGetParams) ([]UserObject, int, error) {
+func (z *Context) UserGet(params UserGetParams) ([]UserObject, int, error) {
 
 	var result []UserObject
 
@@ -100,7 +100,7 @@ func (z *Zabbix) UserGet(params UserGetParams) ([]UserObject, int, error) {
 }
 
 // UserCreate creates users
-func (z *Zabbix) UserCreate(params []UserObject) ([]string, int, error) {
+func (z *Context) UserCreate(params []UserObject) ([]string, int, error) {
 
 	var result userCreateResult
 
@@ -113,7 +113,7 @@ func (z *Zabbix) UserCreate(params []UserObject) ([]string, int, error) {
 }
 
 // UserDelete deletes users
-func (z *Zabbix) UserDelete(userIDs []string) ([]string, int, error) {
+func (z *Context) UserDelete(userIDs []string) ([]string, int, error) {
 
 	var result userDeleteResult
 
@@ -125,7 +125,7 @@ func (z *Zabbix) UserDelete(userIDs []string) ([]string, int, error) {
 	return result.UserIDs, status, nil
 }
 
-func (z *Zabbix) userLogin(params UserLoginParams) (string, int, error) {
+func (z *Context) userLogin(params UserLoginParams) (string, int, error) {
 
 	var result string
 
@@ -137,7 +137,7 @@ func (z *Zabbix) userLogin(params UserLoginParams) (string, int, error) {
 	return result, status, nil
 }
 
-func (z *Zabbix) userLogout() (bool, int, error) {
+func (z *Context) userLogout() (bool, int, error) {
 
 	var result bool
 

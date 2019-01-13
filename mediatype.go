@@ -58,7 +58,7 @@ type mediatypeDeleteResult struct {
 }
 
 // MediatypeGet gets mediatypes
-func (z *Zabbix) MediatypeGet(params MediatypeGetParams) ([]MediatypeObject, int, error) {
+func (z *Context) MediatypeGet(params MediatypeGetParams) ([]MediatypeObject, int, error) {
 
 	var result []MediatypeObject
 
@@ -71,7 +71,7 @@ func (z *Zabbix) MediatypeGet(params MediatypeGetParams) ([]MediatypeObject, int
 }
 
 // MediatypeCreate creates mediatypes
-func (z *Zabbix) MediatypeCreate(params []MediatypeObject) ([]string, int, error) {
+func (z *Context) MediatypeCreate(params []MediatypeObject) ([]string, int, error) {
 
 	var result mediatypeCreateResult
 
@@ -84,7 +84,7 @@ func (z *Zabbix) MediatypeCreate(params []MediatypeObject) ([]string, int, error
 }
 
 // MediatypeDelete deletes mediatypes
-func (z *Zabbix) MediatypeDelete(mediatypeIDs []string) ([]string, int, error) {
+func (z *Context) MediatypeDelete(mediatypeIDs []string) ([]string, int, error) {
 
 	var result mediatypeDeleteResult
 

@@ -11,7 +11,7 @@ const (
 
 func TestTemplateCRUD(t *testing.T) {
 
-	var z Zabbix
+	var z Context
 
 	// Login
 	loginTest(&z, t)
@@ -29,7 +29,7 @@ func TestTemplateCRUD(t *testing.T) {
 	testTemplateGet(t, z, tCreatedIDs, hgCreatedIDs)
 }
 
-func testTemplateCreate(t *testing.T, z Zabbix, hgCreatedIDs []string) []string {
+func testTemplateCreate(t *testing.T, z Context, hgCreatedIDs []string) []string {
 
 	var groups []HostgroupObject
 
@@ -59,7 +59,7 @@ func testTemplateCreate(t *testing.T, z Zabbix, hgCreatedIDs []string) []string 
 	return tCreatedIDs
 }
 
-func testTemplateDelete(t *testing.T, z Zabbix, tCreatedIDs []string) []string {
+func testTemplateDelete(t *testing.T, z Context, tCreatedIDs []string) []string {
 
 	tDeletedIDs, _, err := z.TemplateDelete(tCreatedIDs)
 	if err != nil {
@@ -79,7 +79,7 @@ func testTemplateDelete(t *testing.T, z Zabbix, tCreatedIDs []string) []string {
 	return tDeletedIDs
 }
 
-func testTemplateGet(t *testing.T, z Zabbix, tCreatedIDs, hgCreatedIDs []string) []TemplateObject {
+func testTemplateGet(t *testing.T, z Context, tCreatedIDs, hgCreatedIDs []string) []TemplateObject {
 
 	tObjects, _, err := z.TemplateGet(TemplateGetParams{
 		TemplateIDs: tCreatedIDs,
