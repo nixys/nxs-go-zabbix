@@ -36,7 +36,7 @@ func TestHostCRUD(t *testing.T) {
 	testHostGet(t, z, hCreatedIDs, tCreatedIDs, hgCreatedIDs)
 }
 
-func testHostCreate(t *testing.T, z Context, hgCreatedIDs, tCreatedIDs []string) []string {
+func testHostCreate(t *testing.T, z Context, hgCreatedIDs, tCreatedIDs []int) []int {
 
 	var groups []HostgroupObject
 	var templates []TemplateObject
@@ -91,7 +91,7 @@ func testHostCreate(t *testing.T, z Context, hgCreatedIDs, tCreatedIDs []string)
 	return hCreatedIDs
 }
 
-func testHostDelete(t *testing.T, z Context, hCreatedIDs []string) []string {
+func testHostDelete(t *testing.T, z Context, hCreatedIDs []int) []int {
 
 	hDeletedIDs, _, err := z.HostDelete(hCreatedIDs)
 	if err != nil {
@@ -111,7 +111,7 @@ func testHostDelete(t *testing.T, z Context, hCreatedIDs []string) []string {
 	return hDeletedIDs
 }
 
-func testHostGet(t *testing.T, z Context, hCreatedIDs, tCreatedIDs, hgCreatedIDs []string) []HostObject {
+func testHostGet(t *testing.T, z Context, hCreatedIDs, tCreatedIDs, hgCreatedIDs []int) []HostObject {
 
 	hObjects, _, err := z.HostGet(HostGetParams{
 		SelectParentTemplates: SelectExtendedOutput,

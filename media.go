@@ -2,21 +2,21 @@ package zabbix
 
 // For `MediaObject` field: `Active`
 const (
-	MediaActiveEnabled  = "0"
-	MediaActiveDisabled = "1"
+	MediaActiveEnabled  = 0
+	MediaActiveDisabled = 1
 )
 
 // MediaObject struct is used to store media operations results
 //
 // see: https://www.zabbix.com/documentation/2.4/manual/api/reference/usermedia/object
 type MediaObject struct {
-	MediaID     string `json:"mediaid,omitempty"`
-	Active      string `json:"active,omitempty"` // has defined consts, see above
-	MediaTypeID string `json:"mediatypeid,omitempty"`
+	MediaID     int    `json:"mediaid,omitempty"`
+	Active      int    `json:"active,omitempty"` // has defined consts, see above
+	MediaTypeID int    `json:"mediatypeid,omitempty"`
 	Period      string `json:"period,omitempty"`
 	SendTo      string `json:"sendto,omitempty"`
-	Severity    string `json:"severity,omitempty"`
-	UserID      string `json:"userid,omitempty"`
+	Severity    int    `json:"severity,omitempty"`
+	UserID      int    `json:"userid,omitempty"`
 }
 
 // UsermediaGetParams struct is used for media get requests
@@ -25,10 +25,10 @@ type MediaObject struct {
 type UsermediaGetParams struct {
 	GetParameters
 
-	MediaIDs     []string `json:"mediaids,omitempty"`
-	UsrgrpIDs    []string `json:"usrgrpids,omitempty"`
-	UserIDs      []string `json:"userids,omitempty"`
-	MediatypeIDs []string `json:"mediatypeids,omitempty"`
+	MediaIDs     []int `json:"mediaids,omitempty"`
+	UsrgrpIDs    []int `json:"usrgrpids,omitempty"`
+	UserIDs      []int `json:"userids,omitempty"`
+	MediatypeIDs []int `json:"mediatypeids,omitempty"`
 }
 
 // UsermediaGet gets medias

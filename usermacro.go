@@ -4,7 +4,7 @@ package zabbix
 //
 // see: https://www.zabbix.com/documentation/2.4/manual/api/reference/usermacro/object#global_macro
 type GlobalmacroObject struct {
-	GlobalmacroID string `json:"globalmacroid,omitempty"`
+	GlobalmacroID int    `json:"globalmacroid,omitempty"`
 	Macro         string `json:"macro ,omitempty"`
 	Value         string `json:"value ,omitempty"`
 }
@@ -13,8 +13,8 @@ type GlobalmacroObject struct {
 //
 // see: https://www.zabbix.com/documentation/2.4/manual/api/reference/usermacro/object#host_macro
 type HostmacroObject struct {
-	HostmacroID string `json:"hostmacroid,omitempty"`
-	HostID      string `json:"hostid,omitempty"`
+	HostmacroID int    `json:"hostmacroid,omitempty"`
+	HostID      int    `json:"hostid,omitempty"`
 	Macro       string `json:"macro,omitempty"`
 	Value       string `json:"value,omitempty"`
 
@@ -29,10 +29,10 @@ type HostmacroObject struct {
 type HostmacroGetParams struct {
 	GetParameters
 
-	GroupIDs     []string `json:"groupids,omitempty"`
-	HostIDs      []string `json:"hostids,omitempty"`
-	HostmacroIDs []string `json:"hostmacroids,omitempty"`
-	TemplateIDs  []string `json:"templateids,omitempty"`
+	GroupIDs     []int `json:"groupids,omitempty"`
+	HostIDs      []int `json:"hostids,omitempty"`
+	HostmacroIDs []int `json:"hostmacroids,omitempty"`
+	TemplateIDs  []int `json:"templateids,omitempty"`
 
 	SelectGroups    SelectQuery `json:"selectGroups,omitempty"`
 	SelectHosts     SelectQuery `json:"selectHosts,omitempty"`
@@ -41,12 +41,12 @@ type HostmacroGetParams struct {
 
 // Structure to store creation result
 type hostmacroCreateResult struct {
-	HostmacroIDs []string `json:"hostmacroids"`
+	HostmacroIDs []int `json:"hostmacroids"`
 }
 
 // Structure to store deletion result
 type hostmacroDeleteResult struct {
-	HostmacroIDs []string `json:"hostmacroids"`
+	HostmacroIDs []int `json:"hostmacroids"`
 }
 
 // HostmacroGet gets hostmacros
@@ -63,7 +63,7 @@ func (z *Context) HostmacroGet(params HostmacroGetParams) ([]HostmacroObject, in
 }
 
 // HostmacroCreate creates new hostmacros
-func (z *Context) HostmacroCreate(params []HostmacroObject) ([]string, int, error) {
+func (z *Context) HostmacroCreate(params []HostmacroObject) ([]int, int, error) {
 
 	var result hostmacroCreateResult
 
@@ -76,7 +76,7 @@ func (z *Context) HostmacroCreate(params []HostmacroObject) ([]string, int, erro
 }
 
 // HostmacroDelete deletes hostmacros
-func (z *Context) HostmacroDelete(hostmacroIDs []string) ([]string, int, error) {
+func (z *Context) HostmacroDelete(hostmacroIDs []int) ([]int, int, error) {
 
 	var result hostmacroDeleteResult
 

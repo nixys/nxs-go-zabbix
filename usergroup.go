@@ -2,53 +2,53 @@ package zabbix
 
 // For `UsergroupObject` field: `DebugMode`
 const (
-	UsergroupDebugModeDisabled = "0"
-	UsergroupDebugModeEnabled  = "1"
+	UsergroupDebugModeDisabled = 0
+	UsergroupDebugModeEnabled  = 1
 )
 
 // For `UsergroupObject` field: `GuiAccess`
 const (
-	UsergroupGuiAccessSystemDefaultAuth = "0"
-	UsergroupGuiAccessInternalAuth      = "1"
-	UsergroupGuiAccessDisableFrontend   = "2"
+	UsergroupGuiAccessSystemDefaultAuth = 0
+	UsergroupGuiAccessInternalAuth      = 1
+	UsergroupGuiAccessDisableFrontend   = 2
 )
 
 // For `UsergroupObject` field: `UsersStatus`
 const (
-	UsergroupUsersStatusEnabled  = "0"
-	UsergroupUsersStatusDisabled = "1"
+	UsergroupUsersStatusEnabled  = 0
+	UsergroupUsersStatusDisabled = 1
 )
 
 // For `UsergroupPermissionObject` field: `Permission`
 const (
-	UsergroupPermissionDenied = "0"
-	UsergroupPermissionRO     = "2"
-	UsergroupPermissionRW     = "3"
+	UsergroupPermissionDenied = 0
+	UsergroupPermissionRO     = 2
+	UsergroupPermissionRW     = 3
 )
 
 // UsergroupObject struct is used to store usergroup operations results
 //
 // see: https://www.zabbix.com/documentation/2.4/manual/api/reference/usergroup/object#user_group
 type UsergroupObject struct {
-	UsrgrpID    string `json:"usrgrpid,omitempty"`
+	UsrgrpID    int    `json:"usrgrpid,omitempty"`
 	Name        string `json:"name,omitempty"`
-	DebugMode   string `json:"debug_mode,omitempty"`   // has defined consts, see above
-	GuiAccess   string `json:"gui_access,omitempty"`   // has defined consts, see above
-	UsersStatus string `json:"users_status,omitempty"` // has defined consts, see above
+	DebugMode   int    `json:"debug_mode,omitempty"`   // has defined consts, see above
+	GuiAccess   int    `json:"gui_access,omitempty"`   // has defined consts, see above
+	UsersStatus int    `json:"users_status,omitempty"` // has defined consts, see above
 
 	Users  []UserObject                `json:"users,omitempty"`
 	Rights []UsergroupPermissionObject `json:"rights,omitempty"`
 
 	// used when new usergroup created or updated
-	UserIDs []string `json:"userids,omitempty"`
+	UserIDs []int `json:"userids,omitempty"`
 }
 
 // UsergroupPermissionObject struct is used to store usergroup permissions
 //
 // see: https://www.zabbix.com/documentation/2.4/manual/api/reference/usergroup/object#permission
 type UsergroupPermissionObject struct {
-	ID         string `json:"id"`
-	Permission string `json:"permission"` // has defined consts, see above
+	ID         int `json:"id"`
+	Permission int `json:"permission"` // has defined consts, see above
 }
 
 // UsergroupGetParams struct is used for usergroup get requests
@@ -57,10 +57,10 @@ type UsergroupPermissionObject struct {
 type UsergroupGetParams struct {
 	GetParameters
 
-	Status        []string `json:"status,omitempty"`
-	UserIDs       []string `json:"userids,omitempty"`
-	UsrgrpIDs     []string `json:"usrgrpids,omitempty"`
-	WithGuiAccess []string `json:"with_gui_access,omitempty"`
+	Status        []int `json:"status,omitempty"`
+	UserIDs       []int `json:"userids,omitempty"`
+	UsrgrpIDs     []int `json:"usrgrpids,omitempty"`
+	WithGuiAccess []int `json:"with_gui_access,omitempty"`
 
 	SelectUsers  SelectQuery `json:"selectUsers,omitempty"`
 	SelectRights SelectQuery `json:"selectRights,omitempty"`
@@ -68,17 +68,17 @@ type UsergroupGetParams struct {
 
 // Structure to store creation result
 type usergroupCreateResult struct {
-	UsrgrpIDs []string `json:"usrgrpids"`
+	UsrgrpIDs []int `json:"usrgrpids"`
 }
 
 // Structure to store updation result
 type usergroupUpdateResult struct {
-	UsrgrpIDs []string `json:"usrgrpids"`
+	UsrgrpIDs []int `json:"usrgrpids"`
 }
 
 // Structure to store deletion result
 type usergroupDeleteResult struct {
-	UsrgrpIDs []string `json:"usrgrpids"`
+	UsrgrpIDs []int `json:"usrgrpids"`
 }
 
 // UsergroupGet gets usergroups
@@ -95,7 +95,7 @@ func (z *Context) UsergroupGet(params UsergroupGetParams) ([]UsergroupObject, in
 }
 
 // UsergroupCreate creates usergroups
-func (z *Context) UsergroupCreate(params []UsergroupObject) ([]string, int, error) {
+func (z *Context) UsergroupCreate(params []UsergroupObject) ([]int, int, error) {
 
 	var result usergroupCreateResult
 
@@ -108,7 +108,7 @@ func (z *Context) UsergroupCreate(params []UsergroupObject) ([]string, int, erro
 }
 
 // UsergroupUpdate updates usergroups
-func (z *Context) UsergroupUpdate(params []UsergroupObject) ([]string, int, error) {
+func (z *Context) UsergroupUpdate(params []UsergroupObject) ([]int, int, error) {
 
 	var result usergroupUpdateResult
 
@@ -121,7 +121,7 @@ func (z *Context) UsergroupUpdate(params []UsergroupObject) ([]string, int, erro
 }
 
 // UsergroupDelete deletes usergroups
-func (z *Context) UsergroupDelete(usergroupIDs []string) ([]string, int, error) {
+func (z *Context) UsergroupDelete(usergroupIDs []int) ([]int, int, error) {
 
 	var result usergroupDeleteResult
 

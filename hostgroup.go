@@ -2,24 +2,24 @@ package zabbix
 
 // For `HostgroupObject` field: `Status`
 const (
-	HostgroupFlagsPlain       = "0"
-	HostgroupFlagsDiscrovered = "4"
+	HostgroupFlagsPlain       = 0
+	HostgroupFlagsDiscrovered = 4
 )
 
 // For `HostgroupObject` field: `Internal`
 const (
-	HostgroupInternalFalse = "0"
-	HostgroupInternalTrue  = "1"
+	HostgroupInternalFalse = 0
+	HostgroupInternalTrue  = 1
 )
 
 // HostgroupObject struct is used to store hostgroup operations results
 //
 // see: https://www.zabbix.com/documentation/2.4/manual/api/reference/hostgroup/object
 type HostgroupObject struct {
-	GroupID  string `json:"groupid,omitempty"`
+	GroupID  int    `json:"groupid,omitempty"`
 	Name     string `json:"name,omitempty"`
-	Flags    string `json:"flags,omitempty"`    // has defined consts, see above
-	Internal string `json:"internal,omitempty"` // has defined consts, see above
+	Flags    int    `json:"flags,omitempty"`    // has defined consts, see above
+	Internal int    `json:"internal,omitempty"` // has defined consts, see above
 
 	Hosts     []HostObject     `json:"hosts,omitempty"`
 	Templates []TemplateObject `json:"templates,omitempty"`
@@ -31,15 +31,15 @@ type HostgroupObject struct {
 type HostgroupGetParams struct {
 	GetParameters
 
-	GraphIDs       []string `json:"graphids,omitempty"`
-	GroupIDs       []string `json:"groupids,omitempty"`
-	HostIDs        []string `json:"hostids,omitempty"`
-	MaintenanceIDs []string `json:"maintenanceids,omitempty"`
-	MonitoredHosts bool     `json:"monitored_hosts,omitempty"`
-	RealHosts      bool     `json:"real_hosts,omitempty"`
-	TemplatedHosts bool     `json:"templated_hosts,omitempty"`
-	TemplateIDs    []string `json:"templateids,omitempty"`
-	TriggerIDs     []string `json:"triggerids,omitempty"`
+	GraphIDs       []int `json:"graphids,omitempty"`
+	GroupIDs       []int `json:"groupids,omitempty"`
+	HostIDs        []int `json:"hostids,omitempty"`
+	MaintenanceIDs []int `json:"maintenanceids,omitempty"`
+	MonitoredHosts bool  `json:"monitored_hosts,omitempty"`
+	RealHosts      bool  `json:"real_hosts,omitempty"`
+	TemplatedHosts bool  `json:"templated_hosts,omitempty"`
+	TemplateIDs    []int `json:"templateids,omitempty"`
+	TriggerIDs     []int `json:"triggerids,omitempty"`
 
 	WithApplications       bool `json:"with_applications,omitempty"`
 	WithGraphs             bool `json:"with_graphs,omitempty"`
@@ -60,12 +60,12 @@ type HostgroupGetParams struct {
 
 // Structure to store creation result
 type hostgroupCreateResult struct {
-	GroupIDs []string `json:"groupids"`
+	GroupIDs []int `json:"groupids"`
 }
 
 // Structure to store deletion result
 type hostgroupDeleteResult struct {
-	GroupIDs []string `json:"groupids"`
+	GroupIDs []int `json:"groupids"`
 }
 
 // HostgroupGet gets hostgroups
@@ -82,7 +82,7 @@ func (z *Context) HostgroupGet(params HostgroupGetParams) ([]HostgroupObject, in
 }
 
 // HostgroupCreate creates hostgroups
-func (z *Context) HostgroupCreate(params []HostgroupObject) ([]string, int, error) {
+func (z *Context) HostgroupCreate(params []HostgroupObject) ([]int, int, error) {
 
 	var result hostgroupCreateResult
 
@@ -95,7 +95,7 @@ func (z *Context) HostgroupCreate(params []HostgroupObject) ([]string, int, erro
 }
 
 // HostgroupDelete deletes hostgroups
-func (z *Context) HostgroupDelete(groupIDs []string) ([]string, int, error) {
+func (z *Context) HostgroupDelete(groupIDs []int) ([]int, int, error) {
 
 	var result hostgroupDeleteResult
 

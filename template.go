@@ -4,7 +4,7 @@ package zabbix
 //
 // see: https://www.zabbix.com/documentation/2.4/manual/api/reference/template/object
 type TemplateObject struct {
-	TemplateID  string `json:"templateid,omitempty"`
+	TemplateID  int    `json:"templateid,omitempty"`
 	Host        string `json:"host,omitempty"`
 	Description string `json:"description,omitempty"`
 	Name        string `json:"name,omitempty"`
@@ -22,13 +22,13 @@ type TemplateObject struct {
 type TemplateGetParams struct {
 	GetParameters
 
-	TemplateIDs       []string `json:"templateids,omitempty"`
-	GroupIDs          []string `json:"groupids,omitempty"`
-	ParentTemplateIDs []string `json:"parentTemplateids,omitempty"`
-	HostIDs           []string `json:"hostids,omitempty"`
-	GraphIDs          []string `json:"graphids,omitempty"`
-	ItemIDs           []string `json:"itemids,omitempty"`
-	TriggerIDs        []string `json:"triggerids,omitempty"`
+	TemplateIDs       []int `json:"templateids,omitempty"`
+	GroupIDs          []int `json:"groupids,omitempty"`
+	ParentTemplateIDs []int `json:"parentTemplateids,omitempty"`
+	HostIDs           []int `json:"hostids,omitempty"`
+	GraphIDs          []int `json:"graphids,omitempty"`
+	ItemIDs           []int `json:"itemids,omitempty"`
+	TriggerIDs        []int `json:"triggerids,omitempty"`
 
 	WithItems     bool `json:"with_items,omitempty"`
 	WithTriggers  bool `json:"with_triggers,omitempty"`
@@ -52,12 +52,12 @@ type TemplateGetParams struct {
 
 // Structure to store creation result
 type templateCreateResult struct {
-	TemplateIDs []string `json:"templateids"`
+	TemplateIDs []int `json:"templateids"`
 }
 
 // Structure to store deletion result
 type templateDeleteResult struct {
-	TemplateIDs []string `json:"templateids"`
+	TemplateIDs []int `json:"templateids"`
 }
 
 // TemplateGet gets templates
@@ -74,7 +74,7 @@ func (z *Context) TemplateGet(params TemplateGetParams) ([]TemplateObject, int, 
 }
 
 // TemplateCreate creates templates
-func (z *Context) TemplateCreate(params []TemplateObject) ([]string, int, error) {
+func (z *Context) TemplateCreate(params []TemplateObject) ([]int, int, error) {
 
 	var result templateCreateResult
 
@@ -87,7 +87,7 @@ func (z *Context) TemplateCreate(params []TemplateObject) ([]string, int, error)
 }
 
 // TemplateDelete deletes templates
-func (z *Context) TemplateDelete(templateIDs []string) ([]string, int, error) {
+func (z *Context) TemplateDelete(templateIDs []int) ([]int, int, error) {
 
 	var result templateDeleteResult
 

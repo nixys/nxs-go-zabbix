@@ -7,7 +7,7 @@ import (
 
 const (
 	testUsergroupName = "testUsergroupName"
-	testUserAdminID   = "1"
+	testUserAdminID   = 1
 )
 
 func TestUsergroupCRUD(t *testing.T) {
@@ -29,7 +29,7 @@ func TestUsergroupCRUD(t *testing.T) {
 	testUsergroupGet(t, z, ugCreatedIDs)
 }
 
-func testUsergroupCreate(t *testing.T, z Context) []string {
+func testUsergroupCreate(t *testing.T, z Context) []int {
 
 	ugCreatedIDs, _, err := z.UsergroupCreate([]UsergroupObject{
 		{
@@ -49,7 +49,7 @@ func testUsergroupCreate(t *testing.T, z Context) []string {
 	return ugCreatedIDs
 }
 
-func testUsergroupUpdate(t *testing.T, z Context, ugCreatedIDs []string) []string {
+func testUsergroupUpdate(t *testing.T, z Context, ugCreatedIDs []int) []int {
 
 	var ugObjects []UsergroupObject
 
@@ -57,7 +57,7 @@ func testUsergroupUpdate(t *testing.T, z Context, ugCreatedIDs []string) []strin
 	for _, i := range ugCreatedIDs {
 		ugObjects = append(ugObjects, UsergroupObject{
 			UsrgrpID: i,
-			UserIDs:  []string{testUserAdminID},
+			UserIDs:  []int{testUserAdminID},
 		})
 	}
 
@@ -79,7 +79,7 @@ func testUsergroupUpdate(t *testing.T, z Context, ugCreatedIDs []string) []strin
 	return ugUpdatedIDs
 }
 
-func testUsergroupDelete(t *testing.T, z Context, ugCreatedIDs []string) []string {
+func testUsergroupDelete(t *testing.T, z Context, ugCreatedIDs []int) []int {
 
 	ugDeletedIDs, _, err := z.UsergroupDelete(ugCreatedIDs)
 	if err != nil {
@@ -99,7 +99,7 @@ func testUsergroupDelete(t *testing.T, z Context, ugCreatedIDs []string) []strin
 	return ugDeletedIDs
 }
 
-func testUsergroupGet(t *testing.T, z Context, ugCreatedIDs []string) []UsergroupObject {
+func testUsergroupGet(t *testing.T, z Context, ugCreatedIDs []int) []UsergroupObject {
 
 	ugObjects, _, err := z.UsergroupGet(UsergroupGetParams{
 		UsrgrpIDs:    ugCreatedIDs,

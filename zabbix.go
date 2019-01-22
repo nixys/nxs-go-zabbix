@@ -3,9 +3,12 @@ package zabbix
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"strings"
+
+	"github.com/mitchellh/mapstructure"
 )
 
 // Zabbix select constants
@@ -54,19 +57,14 @@ type requestData struct {
 }
 
 type responseData struct {
-	JSONRPC string          `json:"jsonrpc"`
-	Result  json.RawMessage `json:"result"`
+	JSONRPC string      `json:"jsonrpc"`
+	Result  interface{} `json:"result"`
 	Error   struct {
 		Code    int    `json:"code"`
 		Message string `json:"message"`
 		Data    string `json:"data"`
 	} `json:"error"`
 	ID int `json:"id"`
-}
-
-func (r *responseData) getResult(result interface{}) error {
-
-	return json.Unmarshal(r.Result, result)
 }
 
 // Login gets the Zabbix session
@@ -104,9 +102,11 @@ func (z *Context) Logout() error {
 
 func (z *Context) request(method string, params interface{}, result interface{}) (int, error) {
 
-	resp := responseData{}
+	resp := responseData{
+		Result: result,
+	}
 
-	r := requestData{
+	req := requestData{
 		JSONRPC: "2.0",
 		Method:  method,
 		Params:  params,
@@ -114,26 +114,19 @@ func (z *Context) request(method string, params interface{}, result interface{})
 		ID:      1,
 	}
 
-	status, err := z.httpPost(r, &resp)
+	status, err := z.httpPost(req, &resp)
 	if err != nil {
 		return status, err
 	}
 
 	if resp.Error.Code != 0 {
-		err = errors.New(resp.Error.Data + " " + resp.Error.Message)
-		return status, err
-	}
-
-	if err := resp.getResult(result); err != nil {
-		return status, err
+		return status, errors.New(resp.Error.Data + " " + resp.Error.Message)
 	}
 
 	return status, nil
 }
 
 func (z *Context) httpPost(in interface{}, out interface{}) (int, error) {
-
-	var bodyBytes []byte
 
 	s, err := json.Marshal(in)
 	if err != nil {
@@ -156,19 +149,32 @@ func (z *Context) httpPost(in interface{}, out interface{}) (int, error) {
 	defer res.Body.Close()
 
 	if res.StatusCode != 200 {
-		bodyBytes, err = ioutil.ReadAll(res.Body)
-		if err == nil {
-			err = errors.New(string(bodyBytes))
+		if bodyBytes, err := ioutil.ReadAll(res.Body); err == nil {
+			return res.StatusCode, errors.New(string(bodyBytes))
 		}
 	} else {
 		if out != nil {
-			decoder := json.NewDecoder(res.Body)
-			err = decoder.Decode(out)
-		}
-	}
 
-	if err != nil {
-		return res.StatusCode, err
+			rawConf := make(map[string]interface{})
+
+			dJ := json.NewDecoder(res.Body)
+			if err := dJ.Decode(&rawConf); err != nil {
+				return res.StatusCode, fmt.Errorf("json decode error: %v", err)
+			}
+
+			dM, err := mapstructure.NewDecoder(&mapstructure.DecoderConfig{
+				WeaklyTypedInput: true,
+				Result:           out,
+				TagName:          "json",
+			})
+			if err != nil {
+				return res.StatusCode, fmt.Errorf("mapstructure create decoder error: %v", err)
+			}
+
+			if err := dM.Decode(rawConf); err != nil {
+				return res.StatusCode, fmt.Errorf("mapstructure decode error: %v", err)
+			}
+		}
 	}
 
 	return res.StatusCode, nil

@@ -2,135 +2,135 @@ package zabbix
 
 // For `ActionObject` field: `RecoveryMsg`
 const (
-	ActionRecoveryMsgDisabled = "0"
-	ActionRecoveryMsgEnabled  = "1"
+	ActionRecoveryMsgDisabled = 0
+	ActionRecoveryMsgEnabled  = 1
 )
 
 // For `ActionObject` field: `Status`
 const (
-	ActionStatusEnabled  = "0"
-	ActionStatusDisabled = "1"
+	ActionStatusEnabled  = 0
+	ActionStatusDisabled = 1
 )
 
 // For `ActionOperationObject` field: `OperationType`
 const (
-	ActionOperationTypeSendMsg         = "0"
-	ActionOperationTypeRemoteCmd       = "1"
-	ActionOperationTypeAddHost         = "2"
-	ActionOperationTypeRmHost          = "3"
-	ActionOperationTypeAddToHostGroup  = "4"
-	ActionOperationTypeRmFromHostGroup = "5"
-	ActionOperationTypeLinkToTpl       = "6"
-	ActionOperationTypeUnlinkFromTpl   = "7"
-	ActionOperationTypeEnableHost      = "8"
-	ActionOperationTypeDisableHost     = "9"
+	ActionOperationTypeSendMsg         = 0
+	ActionOperationTypeRemoteCmd       = 1
+	ActionOperationTypeAddHost         = 2
+	ActionOperationTypeRmHost          = 3
+	ActionOperationTypeAddToHostGroup  = 4
+	ActionOperationTypeRmFromHostGroup = 5
+	ActionOperationTypeLinkToTpl       = 6
+	ActionOperationTypeUnlinkFromTpl   = 7
+	ActionOperationTypeEnableHost      = 8
+	ActionOperationTypeDisableHost     = 9
 )
 
 // For `ActionOperationObject` field: `EvalType`
 const (
-	ActionOperationEvalTypeAndOR = "0"
-	ActionOperationEvalTypeAnd   = "1"
-	ActionOperationEvalTypeOr    = "2"
+	ActionOperationEvalTypeAndOR = 0
+	ActionOperationEvalTypeAnd   = 1
+	ActionOperationEvalTypeOr    = 2
 )
 
 // For `ActionOperationCommandObject` field: `Type`
 const (
-	ActionOperationCommandTypeCustomScript = "0"
-	ActionOperationCommandTypeIPMI         = "1"
-	ActionOperationCommandTypeSSH          = "2"
-	ActionOperationCommandTypeTelnet       = "3"
-	ActionOperationCommandTypeGlobalScript = "4"
+	ActionOperationCommandTypeCustomScript = 0
+	ActionOperationCommandTypeIPMI         = 1
+	ActionOperationCommandTypeSSH          = 2
+	ActionOperationCommandTypeTelnet       = 3
+	ActionOperationCommandTypeGlobalScript = 4
 )
 
 // For `ActionOperationCommandObject` field: `AuthType`
 const (
-	ActionOperationCommandAuthTypePassword = "0"
-	ActionOperationCommandAuthTypePubKey   = "1"
+	ActionOperationCommandAuthTypePassword = 0
+	ActionOperationCommandAuthTypePubKey   = 1
 )
 
 // For `ActionOperationCommandObject` field: `ExecuteOn`
 const (
-	ActionOperationCommandExecuteOnAgent  = "0"
-	ActionOperationCommandExecuteOnServer = "1"
+	ActionOperationCommandExecuteOnAgent  = 0
+	ActionOperationCommandExecuteOnServer = 1
 )
 
 // For `ActionOperationMessageObject` field: `DefaultMsg`
 const (
-	ActionOperationMessageDefaultMsgFromOperation = "0"
-	ActionOperationMessageDefaultMsgFromAction    = "1"
+	ActionOperationMessageDefaultMsgFromOperation = 0
+	ActionOperationMessageDefaultMsgFromAction    = 1
 )
 
 // For `ActionOperationConditionObject` field: `ConditionType`
 const (
-	ActionOperationConditionTypeEventAcknowledged = "14"
+	ActionOperationConditionTypeEventAcknowledged = 4
 )
 
 // For `ActionOperationConditionObject` field: `Operator`
 const (
-	ActionOperationConditionOperatorEq = "0"
+	ActionOperationConditionOperatorEq = 0
 )
 
 // For `ActionFilterObject` field: `EvalType`
 const (
-	ActionFilterEvalTypeAndOr  = "0"
-	ActionFilterEvalTypeAnd    = "1"
-	ActionFilterEvalTypeOr     = "2"
-	ActionFilterEvalTypeCustom = "3"
+	ActionFilterEvalTypeAndOr  = 0
+	ActionFilterEvalTypeAnd    = 1
+	ActionFilterEvalTypeOr     = 2
+	ActionFilterEvalTypeCustom = 3
 )
 
 // For `ActionFilterConditionObject` field: `ConditionType`
 const (
-	ActionFilterConditionTypeHostroup             = "0"
-	ActionFilterConditionTypeHost                 = "1"
-	ActionFilterConditionTypeTrigger              = "2"
-	ActionFilterConditionTypeTriggerName          = "3"
-	ActionFilterConditionTypeTriggerPriority      = "4"
-	ActionFilterConditionTypeTriggerValue         = "5"
-	ActionFilterConditionTypeTimePeriod           = "6"
-	ActionFilterConditionTypeHostIP               = "7"
-	ActionFilterConditionTypeDiscoveryServiceType = "8"
-	ActionFilterConditionTypeDiscoveryServicePort = "9"
-	ActionFilterConditionTypeDiscoveryStatus      = "10"
-	ActionFilterConditionTypeUpdownTimeDuration   = "11"
-	ActionFilterConditionTypeRcvValue             = "12"
-	ActionFilterConditionTypeHostTemplate         = "13"
-	ActionFilterConditionTypeItemGroup            = "15"
-	ActionFilterConditionTypeMaintenanceStatus    = "16"
-	ActionFilterConditionTypeDiscRule             = "18"
-	ActionFilterConditionTypeDiscCheck            = "19"
-	ActionFilterConditionTypeProxy                = "20"
-	ActionFilterConditionTypeDiscObject           = "21"
-	ActionFilterConditionTypeHostName             = "22"
-	ActionFilterConditionTypeEventType            = "23"
-	ActionFilterConditionTypeHostMetadata         = "24"
+	ActionFilterConditionTypeHostroup             = 0
+	ActionFilterConditionTypeHost                 = 1
+	ActionFilterConditionTypeTrigger              = 2
+	ActionFilterConditionTypeTriggerName          = 3
+	ActionFilterConditionTypeTriggerPriority      = 4
+	ActionFilterConditionTypeTriggerValue         = 5
+	ActionFilterConditionTypeTimePeriod           = 6
+	ActionFilterConditionTypeHostIP               = 7
+	ActionFilterConditionTypeDiscoveryServiceType = 8
+	ActionFilterConditionTypeDiscoveryServicePort = 9
+	ActionFilterConditionTypeDiscoveryStatus      = 10
+	ActionFilterConditionTypeUpdownTimeDuration   = 11
+	ActionFilterConditionTypeRcvValue             = 12
+	ActionFilterConditionTypeHostTemplate         = 13
+	ActionFilterConditionTypeItemGroup            = 15
+	ActionFilterConditionTypeMaintenanceStatus    = 16
+	ActionFilterConditionTypeDiscRule             = 18
+	ActionFilterConditionTypeDiscCheck            = 19
+	ActionFilterConditionTypeProxy                = 20
+	ActionFilterConditionTypeDiscObject           = 21
+	ActionFilterConditionTypeHostName             = 22
+	ActionFilterConditionTypeEventType            = 23
+	ActionFilterConditionTypeHostMetadata         = 24
 )
 
 // For `ActionFilterConditionObject` field: `Operator`
 const (
-	ActionFilterConditionOperatorEQ      = "0" // =
-	ActionFilterConditionOperatorNE      = "1" // <>
-	ActionFilterConditionOperatorLike    = "2" // like
-	ActionFilterConditionOperatorNotLike = "3" // not like
-	ActionFilterConditionOperatorIN      = "4" // in
-	ActionFilterConditionOperatorGE      = "5" // >=
-	ActionFilterConditionOperatorLE      = "6" // <=
-	ActionFilterConditionOperatorNotIn   = "7" // not in
+	ActionFilterConditionOperatorEQ      = 0 // =
+	ActionFilterConditionOperatorNE      = 1 // <>
+	ActionFilterConditionOperatorLike    = 2 // like
+	ActionFilterConditionOperatorNotLike = 3 // not like
+	ActionFilterConditionOperatorIN      = 4 // in
+	ActionFilterConditionOperatorGE      = 5 // >=
+	ActionFilterConditionOperatorLE      = 6 // <=
+	ActionFilterConditionOperatorNotIn   = 7 // not in
 )
 
 // ActionObject struct is used to store action operations results
 //
 // see: https://www.zabbix.com/documentation/2.4/manual/api/reference/action/object#action
 type ActionObject struct {
-	ActionID     string `json:"actionid,omitempty"`
-	EscPeriod    string `json:"esc_period"`
-	Eventsource  string `json:"eventsource"`
+	ActionID     int    `json:"actionid,omitempty"`
+	EscPeriod    int    `json:"esc_period"`
+	Eventsource  int    `json:"eventsource"`
 	Name         string `json:"name"`
 	DefLongdata  string `json:"def_longdata,omitempty"`
 	DefShortdata string `json:"def_shortdata,omitempty"`
 	RlongData    string `json:"r_longdata,omitempty"`
 	RshortData   string `json:"r_shortdata,omitempty"`
-	RecoveryMsg  string `json:"recovery_msg,omitempty"` // has defined consts, see above
-	Status       string `json:"status,omitempty"`       // has defined consts, see above
+	RecoveryMsg  int    `json:"recovery_msg,omitempty"` // has defined consts, see above
+	Status       int    `json:"status,omitempty"`       // has defined consts, see above
 
 	Operations []ActionOperationObject `json:"operations,omitempty"`
 	Filter     ActionFilterObject      `json:"filter,omitempty"`
@@ -140,13 +140,13 @@ type ActionObject struct {
 //
 // see: https://www.zabbix.com/documentation/2.4/manual/api/reference/action/object#action_operation
 type ActionOperationObject struct {
-	OperationID   string                           `json:"operationid,omitempty"`
-	OperationType string                           `json:"operationtype"` // has defined consts, see above
-	ActionID      string                           `json:"actionid,omitempty"`
-	EscPeriod     string                           `json:"esc_period,omitempty"`
-	EscStepFrom   string                           `json:"esc_step_from,omitempty"`
-	EscStepTo     string                           `json:"esc_step_to,omitempty"`
-	EvalType      string                           `json:"evaltype,omitempty"` // has defined consts, see above
+	OperationID   int                              `json:"operationid,omitempty"`
+	OperationType int                              `json:"operationtype"` // has defined consts, see above
+	ActionID      int                              `json:"actionid,omitempty"`
+	EscPeriod     int                              `json:"esc_period,omitempty"`
+	EscStepFrom   int                              `json:"esc_step_from,omitempty"`
+	EscStepTo     int                              `json:"esc_step_to,omitempty"`
+	EvalType      int                              `json:"evaltype,omitempty"` // has defined consts, see above
 	Opcommand     ActionOperationCommandObject     `json:"opcommand,omitempty"`
 	OpcommandGrp  []ActionOpcommandGrpObject       `json:"opcommand_grp,omitempty"`
 	OpcommandHst  []ActionOpcommandHstObject       `json:"opcommand_hst,omitempty"`
@@ -162,16 +162,16 @@ type ActionOperationObject struct {
 //
 // see: https://www.zabbix.com/documentation/2.4/manual/api/reference/action/object#action_operation_command
 type ActionOperationCommandObject struct {
-	OperationID string `json:"operationid,omitempty"`
+	OperationID int    `json:"operationid,omitempty"`
 	Command     string `json:"command"`
-	Type        string `json:"type"`                 // has defined consts, see above
-	AuthType    string `json:"authtype,omitempty"`   // has defined consts, see above
-	ExecuteOn   string `json:"execute_on,omitempty"` // has defined consts, see above
+	Type        int    `json:"type"`                 // has defined consts, see above
+	AuthType    int    `json:"authtype,omitempty"`   // has defined consts, see above
+	ExecuteOn   int    `json:"execute_on,omitempty"` // has defined consts, see above
 	Password    string `json:"password,omitempty"`
 	Port        string `json:"port,omitempty"`
 	PrivateKey  string `json:"privatekey,omitempty"`
 	PublicKey   string `json:"publickey,omitempty"`
-	ScriptID    string `json:"scriptid,omitempty"`
+	ScriptID    int    `json:"scriptid,omitempty"`
 	UserName    string `json:"username,omitempty"`
 }
 
@@ -179,9 +179,9 @@ type ActionOperationCommandObject struct {
 //
 // see: https://www.zabbix.com/documentation/2.4/manual/api/reference/action/object#action_operation_message
 type ActionOperationMessageObject struct {
-	OperationID string `json:"operationid,omitempty"`
-	DefaultMsg  string `json:"default_msg,omitempty"` // has defined consts, see above
-	MediatypeID string `json:"mediatypeid,omitempty"`
+	OperationID int    `json:"operationid,omitempty"`
+	DefaultMsg  int    `json:"default_msg,omitempty"` // has defined consts, see above
+	MediatypeID int    `json:"mediatypeid,omitempty"`
 	Message     string `json:"message,omitempty"`
 	Subject     string `json:"subject,omitempty"`
 }
@@ -190,11 +190,11 @@ type ActionOperationMessageObject struct {
 //
 // see: https://www.zabbix.com/documentation/2.4/manual/api/reference/action/object#action_operation_condition
 type ActionOperationConditionObject struct {
-	OpconditionID string `json:"opconditionid,omitempty"`
-	ConditionType string `json:"conditiontype"` // has defined consts, see above
+	OpconditionID int    `json:"opconditionid,omitempty"`
+	ConditionType int    `json:"conditiontype"` // has defined consts, see above
 	Value         string `json:"value"`
-	OperationID   string `json:"operationid,omitempty"`
-	Operator      string `json:"operator,omitempty"`
+	OperationID   int    `json:"operationid,omitempty"`
+	Operator      int    `json:"operator,omitempty"`
 }
 
 // ActionFilterObject struct is used to store action filters
@@ -202,7 +202,7 @@ type ActionOperationConditionObject struct {
 // see: https://www.zabbix.com/documentation/2.4/manual/api/reference/action/object#action_filter
 type ActionFilterObject struct {
 	Conditions  []ActionFilterConditionObject `json:"conditions"`
-	EvalType    string                        `json:"evaltype"` // has defined consts, see above
+	EvalType    int                           `json:"evaltype"` // has defined consts, see above
 	EvalFormula string                        `json:"eval_formula,omitempty"`
 	Formula     string                        `json:"formula,omitempty"`
 }
@@ -211,52 +211,52 @@ type ActionFilterObject struct {
 //
 // see: https://www.zabbix.com/documentation/2.4/manual/api/reference/action/object#action_filter_condition
 type ActionFilterConditionObject struct {
-	ConditionID   string `json:"conditionid,omitempty"`
-	ConditionType string `json:"conditiontype"` // has defined consts, see above
+	ConditionID   int    `json:"conditionid,omitempty"`
+	ConditionType int    `json:"conditiontype"` // has defined consts, see above
 	Value         string `json:"value"`
-	ActionID      string `json:"actionid,omitempty"`
+	ActionID      int    `json:"actionid,omitempty"`
 	FormulaID     string `json:"formulaid,omitempty"`
-	Operator      string `json:"operator,omitempty"` // has defined consts, see above
+	Operator      int    `json:"operator,omitempty"` // has defined consts, see above
 }
 
 // Additional types for `ActionOperationObject`
 
 // ActionOpcommandGrpObject struct is used to store action opcommand groups
 type ActionOpcommandGrpObject struct {
-	OpcommandGrpID string `json:"opcommand_grpid,omitempty"`
-	OperationID    string `json:"operationid,omitempty"`
-	GroupID        string `json:"groupid,omitempty"`
+	OpcommandGrpID int `json:"opcommand_grpid,omitempty"`
+	OperationID    int `json:"operationid,omitempty"`
+	GroupID        int `json:"groupid,omitempty"`
 }
 
 // ActionOpcommandHstObject struct is used to store action opcommand hosts
 type ActionOpcommandHstObject struct {
-	OpcommandHstID string `json:"opcommand_hstid,omitempty"`
-	OperationID    string `json:"operationid,omitempty"`
-	HostID         string `json:"hostid,omitempty"`
+	OpcommandHstID int `json:"opcommand_hstid,omitempty"`
+	OperationID    int `json:"operationid,omitempty"`
+	HostID         int `json:"hostid,omitempty"`
 }
 
 // ActionOpgroupObject struct is used to store action opgroups
 type ActionOpgroupObject struct {
-	OperationID string `json:"operationid,omitempty"`
-	GroupID     string `json:"groupid,omitempty"`
+	OperationID int `json:"operationid,omitempty"`
+	GroupID     int `json:"groupid,omitempty"`
 }
 
 // ActionOpmessageGrpObject struct is used to store action opmessage groups
 type ActionOpmessageGrpObject struct {
-	OperationID string `json:"operationid,omitempty"`
-	UsrgrpID    string `json:"usrgrpid,omitempty"`
+	OperationID int `json:"operationid,omitempty"`
+	UsrgrpID    int `json:"usrgrpid,omitempty"`
 }
 
 // ActionOpmessageUsrObject struct is used to store action opmessage users
 type ActionOpmessageUsrObject struct {
-	OperationID string `json:"operationid,omitempty"`
-	UserID      string `json:"userid,omitempty"`
+	OperationID int `json:"operationid,omitempty"`
+	UserID      int `json:"userid,omitempty"`
 }
 
 // ActionOptemplateObject struct is used to store action optemplates
 type ActionOptemplateObject struct {
-	OperationID string `json:"operationid,omitempty"`
-	TemplateID  string `json:"templateid,omitempty"`
+	OperationID int `json:"operationid,omitempty"`
+	TemplateID  int `json:"templateid,omitempty"`
 }
 
 // ActionGetParams struct is used for action get requests

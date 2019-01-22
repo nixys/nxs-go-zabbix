@@ -2,8 +2,8 @@ package zabbix
 
 // For `UserObject` field: `AutoLogin`
 const (
-	UserAutoLoginDisabled = "0"
-	UserAutoLoginEnabled  = "1"
+	UserAutoLoginDisabled = 0
+	UserAutoLoginEnabled  = 1
 )
 
 // For `UserObject` field: `Theme`
@@ -17,29 +17,29 @@ const (
 
 // For `UserObject` field: `Type`
 const (
-	UserTypeUser       = "1"
-	UserTypeAdmin      = "2"
-	UserTypeSuperAdmin = "3"
+	UserTypeUser       = 1
+	UserTypeAdmin      = 2
+	UserTypeSuperAdmin = 3
 )
 
 // UserObject struct is used to store user operations results
 //
 // see: https://www.zabbix.com/documentation/2.4/manual/api/reference/user/object
 type UserObject struct {
-	UserID        string `json:"userid,omitempty"`
+	UserID        int    `json:"userid,omitempty"`
 	Alias         string `json:"alias,omitempty"`
-	AttemptClock  string `json:"attempt_clock,omitempty"`
-	AttemptFailed string `json:"attempt_failed,omitempty"`
+	AttemptClock  int    `json:"attempt_clock,omitempty"`
+	AttemptFailed int    `json:"attempt_failed,omitempty"`
 	AttemptIP     string `json:"attempt_ip,omitempty"`
-	AutoLogin     string `json:"autologin,omitempty"` // has defined consts, see above
-	AutoLogout    string `json:"autologout,omitempty"`
+	AutoLogin     int    `json:"autologin,omitempty"` // has defined consts, see above
+	AutoLogout    int    `json:"autologout,omitempty"`
 	Lang          string `json:"lang,omitempty"`
 	Name          string `json:"name,omitempty"`
-	Refresh       string `json:"refresh,omitempty"`
-	RowsPerPage   string `json:"rows_per_page,omitempty"`
+	Refresh       int    `json:"refresh,omitempty"`
+	RowsPerPage   int    `json:"rows_per_page,omitempty"`
 	Surname       string `json:"surname,omitempty"`
 	Theme         string `json:"theme,omitempty"` // has defined consts, see above
-	Type          string `json:"type,omitempty"`  // has defined consts, see above
+	Type          int    `json:"type,omitempty"`  // has defined consts, see above
 	URL           string `json:"url,omitempty"`
 
 	Medias     []MediaObject     `json:"medias,omitempty"`
@@ -65,10 +65,10 @@ type UserLoginParams struct {
 type UserGetParams struct {
 	GetParameters
 
-	MediaIDs     []string `json:"mediaids,omitempty"`
-	NediatypeIDs []string `json:"mediatypeids,omitempty"`
-	UserIDs      []string `json:"userids,omitempty"`
-	UsrgrpIDs    []string `json:"usrgrpids,omitempty"`
+	MediaIDs     []int `json:"mediaids,omitempty"`
+	NediatypeIDs []int `json:"mediatypeids,omitempty"`
+	UserIDs      []int `json:"userids,omitempty"`
+	UsrgrpIDs    []int `json:"usrgrpids,omitempty"`
 
 	GetAccess        bool        `json:"getAccess,omitempty"`
 	SelectMedias     SelectQuery `json:"selectMedias,omitempty"`
@@ -78,12 +78,12 @@ type UserGetParams struct {
 
 // Structure to store creation result
 type userCreateResult struct {
-	UserIDs []string `json:"userids"`
+	UserIDs []int `json:"userids"`
 }
 
 // Structure to store deletion result
 type userDeleteResult struct {
-	UserIDs []string `json:"userids"`
+	UserIDs []int `json:"userids"`
 }
 
 // UserGet gets users
@@ -100,7 +100,7 @@ func (z *Context) UserGet(params UserGetParams) ([]UserObject, int, error) {
 }
 
 // UserCreate creates users
-func (z *Context) UserCreate(params []UserObject) ([]string, int, error) {
+func (z *Context) UserCreate(params []UserObject) ([]int, int, error) {
 
 	var result userCreateResult
 
@@ -113,7 +113,7 @@ func (z *Context) UserCreate(params []UserObject) ([]string, int, error) {
 }
 
 // UserDelete deletes users
-func (z *Context) UserDelete(userIDs []string) ([]string, int, error) {
+func (z *Context) UserDelete(userIDs []int) ([]int, int, error) {
 
 	var result userDeleteResult
 

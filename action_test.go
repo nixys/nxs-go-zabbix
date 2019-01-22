@@ -2,15 +2,16 @@ package zabbix
 
 import (
 	"reflect"
+	"strconv"
 	"testing"
 )
 
 const (
 	testActionName         = "testAction"
-	testActionEscPeriod    = "300"
+	testActionEscPeriod    = 300
 	testActionDefShortdata = "{HOST.NAME1} [{TRIGGER.STATUS}]: {TRIGGER.NAME}"
 	testActionDefLongdata  = "Trigger: {TRIGGER.NAME}\r\nTrigger status: {TRIGGER.STATUS}\r\nTrigger severity: {TRIGGER.SEVERITY}\r\nTrigger URL: {TRIGGER.URL}\r\nEvent type: E1\r\n\r\nItem values:\r\n\r\n1. {ITEM.NAME1} ({HOST.NAME1}:{ITEM.KEY1}): {ITEM.VALUE1}\r\n2. {ITEM.NAME2} ({HOST.NAME2}:{ITEM.KEY2}): {ITEM.VALUE2}\r\n3. {ITEM.NAME3} ({HOST.NAME3}:{ITEM.KEY3}): {ITEM.VALUE3}\r\n\r\nOriginal event ID: {EVENT.ID}"
-	testMediaTypeID        = "1"
+	testMediaTypeID        = 1
 )
 
 func TestActionCRUD(t *testing.T) {
@@ -26,19 +27,19 @@ func TestActionCRUD(t *testing.T) {
 	defer testHostgroupDelete(t, z, hgCreatedIDs)
 
 	// Create and delete
-	aCreatedIDs := testActionCreate(t, z, hgCreatedIDs[0], "258")
+	aCreatedIDs := testActionCreate(t, z, hgCreatedIDs[0], 258)
 	defer testActionDelete(t, z, aCreatedIDs)
 
 	// Get
 	testActionGet(t, z, aCreatedIDs)
 }
 
-func testActionCreate(t *testing.T, z Context, hostgrp, usergrp string) []int {
+func testActionCreate(t *testing.T, z Context, hostgrpID, usergrpID int) []int {
 
 	aCreatedIDs, _, err := z.ActionCreate([]ActionObject{
 		{
 			Name:         testActionName,
-			Eventsource:  "0",
+			Eventsource:  0,
 			Status:       ActionStatusEnabled,
 			EscPeriod:    testActionEscPeriod,
 			DefShortdata: testActionDefShortdata,
@@ -58,16 +59,16 @@ func testActionCreate(t *testing.T, z Context, hostgrp, usergrp string) []int {
 					{
 						ConditionType: ActionFilterConditionTypeHostroup,
 						Operator:      ActionFilterConditionOperatorEQ,
-						Value:         hostgrp,
+						Value:         strconv.Itoa(hostgrpID),
 					},
 				},
 			},
 			Operations: []ActionOperationObject{
 				{
 					OperationType: ActionOperationTypeSendMsg,
-					EscPeriod:     "0",
-					EscStepFrom:   "2",
-					EscStepTo:     "2",
+					EscPeriod:     0,
+					EscStepFrom:   2,
+					EscStepTo:     2,
 					EvalType:      ActionOperationEvalTypeAndOR,
 					Opconditions: []ActionOperationConditionObject{
 						{
@@ -82,7 +83,7 @@ func testActionCreate(t *testing.T, z Context, hostgrp, usergrp string) []int {
 					},
 					OpmessageGrp: []ActionOpmessageGrpObject{
 						{
-							UsrgrpID: usergrp,
+							UsrgrpID: usergrpID,
 						},
 					},
 				},
