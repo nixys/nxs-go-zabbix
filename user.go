@@ -32,7 +32,7 @@ type UserObject struct {
 	AttemptFailed int    `json:"attempt_failed,omitempty"`
 	AttemptIP     string `json:"attempt_ip,omitempty"`
 	AutoLogin     int    `json:"autologin,omitempty"` // has defined consts, see above
-	AutoLogout    int    `json:"autologout,omitempty"`
+	AutoLogout    int    `json:"autologout"`
 	Lang          string `json:"lang,omitempty"`
 	Name          string `json:"name,omitempty"`
 	Refresh       int    `json:"refresh,omitempty"`
