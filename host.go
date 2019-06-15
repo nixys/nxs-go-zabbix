@@ -178,6 +178,11 @@ type hostCreateResult struct {
 	HostIDs []int `json:"hostids"`
 }
 
+// Structure to store updation result
+type hostUpdateResult struct {
+	HostIDs []int `json:"hostids"`
+}
+
 // Structure to store deletion result
 type hostDeleteResult struct {
 	HostIDs []int `json:"hostids"`
@@ -202,6 +207,19 @@ func (z *Context) HostCreate(params []HostObject) ([]int, int, error) {
 	var result hostCreateResult
 
 	status, err := z.request("host.create", params, &result)
+	if err != nil {
+		return nil, status, err
+	}
+
+	return result.HostIDs, status, nil
+}
+
+// HostUpdate updates hosts
+func (z *Context) HostUpdate(params []HostObject) ([]int, int, error) {
+
+	var result hostUpdateResult
+
+	status, err := z.request("host.update", params, &result)
 	if err != nil {
 		return nil, status, err
 	}

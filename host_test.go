@@ -32,6 +32,9 @@ func TestHostCRUD(t *testing.T) {
 	hCreatedIDs := testHostCreate(t, z, hgCreatedIDs, tCreatedIDs)
 	defer testHostDelete(t, z, hCreatedIDs)
 
+	// Update
+	testHostUpdate(t, z, hCreatedIDs)
+
 	// Get
 	testHostGet(t, z, hCreatedIDs, tCreatedIDs, hgCreatedIDs)
 }
@@ -91,6 +94,36 @@ func testHostCreate(t *testing.T, z Context, hgCreatedIDs, tCreatedIDs []int) []
 	return hCreatedIDs
 }
 
+func testHostUpdate(t *testing.T, z Context, hCreatedIDs []int) []int {
+
+	var hObjects []HostObject
+
+	// Preparing host objects array to update
+	for _, i := range hCreatedIDs {
+		hObjects = append(hObjects, HostObject{
+			HostID: i,
+			Name:   testHostName + "_upd",
+		})
+	}
+
+	hUpdatedIDs, _, err := z.HostUpdate(hObjects)
+	if err != nil {
+		t.Fatal("Host update error:", err)
+	}
+
+	if len(hUpdatedIDs) == 0 {
+		t.Fatal("Host update error: empty IDs array")
+	}
+
+	if reflect.DeepEqual(hUpdatedIDs, hCreatedIDs) == false {
+		t.Fatal("Host update error: IDs arrays for created and updated hosts are mismatch")
+	}
+
+	t.Logf("Host update: success")
+
+	return hUpdatedIDs
+}
+
 func testHostDelete(t *testing.T, z Context, hCreatedIDs []int) []int {
 
 	hDeletedIDs, _, err := z.HostDelete(hCreatedIDs)
@@ -121,7 +154,7 @@ func testHostGet(t *testing.T, z Context, hCreatedIDs, tCreatedIDs, hgCreatedIDs
 		GroupIDs:              hgCreatedIDs,
 		GetParameters: GetParameters{
 			Filter: map[string]interface{}{
-				"name": testHostName,
+				"name": testHostName + "_upd",
 			},
 			Output: SelectExtendedOutput,
 		},
