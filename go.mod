@@ -1,4 +1,4 @@
-module github.com/nixys/nxs-go-zabbix
+module github.com/nixys/nxs-go-zabbix/v2
 
 go 1.13
 
