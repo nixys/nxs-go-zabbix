@@ -17,6 +17,12 @@ const (
 	SelectCount          = "count"
 )
 
+// For `GetParameters` field: `SortOrder`
+const (
+	GetParametersSortOrderASC  = "ASC"
+	GetParametersSortOrderDESC = "DESC"
+)
+
 // Context struct is used for store settings to communicate with Zabbix API
 type Context struct {
 	sessionKey string
@@ -25,20 +31,19 @@ type Context struct {
 
 // GetParameters struct is used as embedded struct for some other structs within package
 //
-// see for details: https://www.zabbix.com/documentation/2.4/manual/api/reference_commentary#data_types
+// see for details: https://www.zabbix.com/documentation/4.4/manual/api/reference_commentary#common_get_method_parameters
 type GetParameters struct {
 	Editable               bool                   `json:"editable,omitempty"`
 	ExcludeSearch          bool                   `json:"excludeSearch,omitempty"`
 	Filter                 map[string]interface{} `json:"filter,omitempty"`
 	Limit                  int                    `json:"limit,omitempty"`
-	NodeIDs                []string               `json:"nodeids,omitempty"`
 	Output                 SelectQuery            `json:"output,omitempty"`
 	PreserveKeys           bool                   `json:"preservekeys,omitempty"`
 	Search                 map[string]string      `json:"search,omitempty"`
 	SearchByAny            bool                   `json:"searchByAny,omitempty"`
 	SearchWildcardsEnabled bool                   `json:"searchWildcardsEnabled,omitempty"`
 	SortField              []string               `json:"sortfield,omitempty"`
-	SortOrder              string                 `json:"sortorder,omitempty"`
+	SortOrder              []string               `json:"sortorder,omitempty"` // has defined consts, see above
 	StartSearch            bool                   `json:"startSearch,omitempty"`
 }
 

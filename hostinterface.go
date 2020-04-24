@@ -28,7 +28,7 @@ const (
 
 // HostinterfaceObject struct is used to store hostinterface operations results
 //
-// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/hostinterface/object#hostinterface
+// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/hostinterface/object#hostinterface
 type HostinterfaceObject struct {
 	InterfaceID int    `json:"interfaceid,omitempty"`
 	DNS         string `json:"dns"`
@@ -46,7 +46,7 @@ type HostinterfaceObject struct {
 
 // HostinterfaceGetParams struct is used for hostinterface get requests
 //
-// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/hostinterface/get#parameters
+// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/hostinterface/get#parameters
 type HostinterfaceGetParams struct {
 	GetParameters
 

@@ -27,7 +27,7 @@ func TestActionCRUD(t *testing.T) {
 	defer testHostgroupDelete(t, z, hgCreatedIDs)
 
 	// Create and delete
-	aCreatedIDs := testActionCreate(t, z, hgCreatedIDs[0], 258)
+	aCreatedIDs := testActionCreate(t, z, hgCreatedIDs[0], 7)
 	defer testActionDelete(t, z, aCreatedIDs)
 
 	// Get
@@ -48,13 +48,8 @@ func testActionCreate(t *testing.T, z Context, hostgrpID, usergrpID int) []int {
 				EvalType: ActionFilterEvalTypeAndOr,
 				Conditions: []ActionFilterConditionObject{
 					{
-						ConditionType: ActionFilterConditionTypeMaintenanceStatus,
-						Operator:      ActionFilterConditionOperatorNotIn,
-					},
-					{
-						ConditionType: ActionFilterConditionTypeTriggerValue,
-						Operator:      ActionFilterConditionOperatorEQ,
-						Value:         "1",
+						ConditionType: ActionFilterConditionTypeProblemIsSuppressed,
+						Operator:      ActionFilterConditionOperatorNo,
 					},
 					{
 						ConditionType: ActionFilterConditionTypeHostroup,

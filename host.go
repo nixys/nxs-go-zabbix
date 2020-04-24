@@ -79,9 +79,35 @@ const (
 	HostStatusUnmonitored = 1
 )
 
+// For `HostObject` field: `TLSConnect`
+const (
+	TLSConnectNoEncryption = 1
+	TLSConnectPSK          = 2
+	TLSConnectCertificate  = 4
+)
+
+// For `HostObject` field: `TLSAccept`
+const (
+	TLSAcceptNoEncryption = 1
+	TLSAcceptPSK          = 2
+	TLSAcceptCertificate  = 4
+)
+
+// For `HostGetParams` field: `Evaltype`
+const (
+	HostEvaltypeAndOr = 0
+	HostEvaltypeOr    = 2
+)
+
+// For `HostTag` field: `Operator`
+const (
+	HostTagOperatorContains = 0
+	HostTagOperatorEquals   = 1
+)
+
 // HostObject struct is used to store host operations results
 //
-// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/host/object#host
+// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/host/object#host
 type HostObject struct {
 	HostID            int    `json:"hostid,omitempty"`
 	Host              string `json:"host,omitempty"`
@@ -116,17 +142,35 @@ type HostObject struct {
 	SnmpErrorsFrom    int    `json:"snmp_errors_from,omitempty"`
 	Status            int    `json:"status,omitempty"` // has defined consts, see above
 
+	TLSConnect     int    `json:"tls_connect,omitempty"` // has defined consts, see above
+	TLSAccept      int    `json:"tls_accept,omitempty"`  // has defined consts, see above
+	TLSIssuer      string `json:"tls_issuer,omitempty"`
+	TLSSubject     string `json:"tls_subject,omitempty"`
+	TLSPSKIdentity string `json:"tls_psk_identity,omitempty"`
+	TLSPSK         string `json:"tls_psk,omitempty"`
+
 	Groups     []HostgroupObject     `json:"groups,omitempty"`
 	Interfaces []HostinterfaceObject `json:"interfaces,omitempty"`
-	Macros     []HostmacroObject     `json:"macros,omitempty"`
+	Tags       []HostTagObject       `json:"tags,omitempty"`
+	Macros     []UsermacroObject     `json:"macros,omitempty"`
 
 	ParentTemplates []TemplateObject `json:"parentTemplates,omitempty"` // Used to store result for `get` operations
 	Templates       []TemplateObject `json:"templates,omitempty"`       // Used for `create` operations
 }
 
+// HostTagObject struct is used to store host tag
+//
+// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/host/object#host_tag
+type HostTagObject struct {
+	Tag   string `json:"tag"`
+	Value string `json:"value,omitempty"`
+
+	Operator int `json:"operator,omitempty"` // Used for `get` operations, has defined consts, see above
+}
+
 // HostGetParams struct is used for host get requests
 //
-// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/host/get#parameters
+// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/host/get#parameters
 type HostGetParams struct {
 	GetParameters
 
@@ -146,16 +190,20 @@ type HostGetParams struct {
 	TemplateIDs    []int `json:"templateids,omitempty"`
 	TriggerIDs     []int `json:"triggerids,omitempty"`
 
-	WithItems              bool `json:"with_items,omitempty"`
-	WithApplications       bool `json:"with_applications,omitempty"`
-	WithGraphs             bool `json:"with_graphs,omitempty"`
-	WithHttptests          bool `json:"with_httptests,omitempty"`
-	WithMonitoredHttptests bool `json:"with_monitored_httptests,omitempty"`
-	WithMonitoredItems     bool `json:"with_monitored_items,omitempty"`
-	WithMonitoredTriggers  bool `json:"with_monitored_triggers,omitempty"`
-	WithSimpleGraphItems   bool `json:"with_simple_graph_items,omitempty"`
-	WithTriggers           bool `json:"with_triggers,omitempty"`
-	WithInventory          bool `json:"withInventory,omitempty"`
+	WithItems                     bool            `json:"with_items,omitempty"`
+	WithItemPrototypes            bool            `json:"with_item_prototypes,omitempty"`
+	WithSimpleGraphItemPrototypes bool            `json:"with_simple_graph_item_prototypes,omitempty"`
+	WithApplications              bool            `json:"with_applications,omitempty"`
+	WithGraphs                    bool            `json:"with_graphs,omitempty"`
+	WithGraphPrototypes           bool            `json:"with_graph_prototypes,omitempty"`
+	WithHttptests                 bool            `json:"with_httptests,omitempty"`
+	WithMonitoredHttptests        bool            `json:"with_monitored_httptests,omitempty"`
+	WithMonitoredItems            bool            `json:"with_monitored_items,omitempty"`
+	WithMonitoredTriggers         bool            `json:"with_monitored_triggers,omitempty"`
+	WithSimpleGraphItems          bool            `json:"with_simple_graph_items,omitempty"`
+	WithTriggers                  bool            `json:"with_triggers,omitempty"`
+	Evaltype                      int             `json:"evaltype,omitempty"` // has defined consts, see above
+	Tags                          []HostTagObject `json:"tags,omitempty"`
 
 	SelectGroups          SelectQuery `json:"selectGroups,omitempty"`
 	SelectApplications    SelectQuery `json:"selectApplications,omitempty"`
@@ -170,6 +218,7 @@ type HostGetParams struct {
 	SelectMacros          SelectQuery `json:"selectMacros,omitempty"`
 	SelectParentTemplates SelectQuery `json:"selectParentTemplates,omitempty"`
 	SelectScreens         SelectQuery `json:"selectScreens,omitempty"`
+	SelectTags            SelectQuery `json:"selectTags,omitempty"`
 	SelectTriggers        SelectQuery `json:"selectTriggers,omitempty"`
 }
 

@@ -8,11 +8,9 @@ const (
 
 // For `UserObject` field: `Theme`
 const (
-	UserThemeDefault      = "default"
-	UserThemeClassic      = "classic"
-	UserThemeOriginalBlue = "originalblue"
-	UserThemeDarkBlue     = "darkblue"
-	UserThemeDarkOrange   = "darkorange"
+	UserThemeDefault = "default"
+	UserThemeBlue    = "blue-theme"
+	UserThemeDark    = "dark-theme"
 )
 
 // For `UserObject` field: `Type`
@@ -22,9 +20,15 @@ const (
 	UserTypeSuperAdmin = 3
 )
 
+// For `MediaObject` field: `Active`
+const (
+	MediaActiveEnabled  = 0
+	MediaActiveDisabled = 1
+)
+
 // UserObject struct is used to store user operations results
 //
-// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/user/object
+// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/user/object
 type UserObject struct {
 	UserID        int    `json:"userid,omitempty"`
 	Alias         string `json:"alias,omitempty"`
@@ -32,10 +36,10 @@ type UserObject struct {
 	AttemptFailed int    `json:"attempt_failed,omitempty"`
 	AttemptIP     string `json:"attempt_ip,omitempty"`
 	AutoLogin     int    `json:"autologin,omitempty"` // has defined consts, see above
-	AutoLogout    int    `json:"autologout"`
+	AutoLogout    string `json:"autologout"`
 	Lang          string `json:"lang,omitempty"`
 	Name          string `json:"name,omitempty"`
-	Refresh       int    `json:"refresh,omitempty"`
+	Refresh       string `json:"refresh,omitempty"`
 	RowsPerPage   int    `json:"rows_per_page,omitempty"`
 	Surname       string `json:"surname,omitempty"`
 	Theme         string `json:"theme,omitempty"` // has defined consts, see above
@@ -51,9 +55,21 @@ type UserObject struct {
 	Passwd     string        `json:"passwd"`
 }
 
+// MediaObject struct is used to store media operations results
+//
+// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/user/object#media
+type MediaObject struct {
+	MediaID     int      `json:"mediaid,omitempty"`
+	MediaTypeID int      `json:"mediatypeid,omitempty"`
+	SendTo      []string `json:"sendto,omitempty"`
+	Active      int      `json:"active,omitempty"` // has defined consts, see above
+	Severity    int      `json:"severity,omitempty"`
+	Period      string   `json:"period,omitempty"`
+}
+
 // UserLoginParams struct is used for login requests
 //
-// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/user/login#parameters
+// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/user/login#parameters
 type UserLoginParams struct {
 	User     string `json:"user"`
 	Password string `json:"password"`
@@ -61,7 +77,7 @@ type UserLoginParams struct {
 
 // UserGetParams struct is used for user get requests
 //
-// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/user/get#parameters
+// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/user/get#parameters
 type UserGetParams struct {
 	GetParameters
 

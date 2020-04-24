@@ -54,15 +54,15 @@ func testUserCreate(t *testing.T, z Context, ugCreatedIDs []int) []int {
 			Surname:    testUserSurname,
 			Passwd:     testUserPasswd,
 			AutoLogin:  UserAutoLoginDisabled,
-			AutoLogout: 0,
+			AutoLogout: "15m",
 			Lang:       testUserLang,
 			Type:       UserTypeUser,
-			Refresh:    90,
+			Refresh:    "90s",
 			Usrgrps:    usergroups,
 			UserMedias: []MediaObject{
 				{
 					MediaTypeID: 1,
-					SendTo:      testUserMediaEmail,
+					SendTo:      []string{testUserMediaEmail},
 					Active:      MediaActiveEnabled,
 					Severity:    testUserMediaSeverity,
 					Period:      testUserMediaPeriod,

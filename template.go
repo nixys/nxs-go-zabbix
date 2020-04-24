@@ -1,24 +1,47 @@
 package zabbix
 
+// For `TemplateGetParams` field: `Evaltype`
+const (
+	TemplateEvaltypeAndOr = 0
+	TemplateEvaltypeOr    = 2
+)
+
+// For `TemplateTag` field: `Operator`
+const (
+	TemplateTagOperatorContains = 0
+	TemplateTagOperatorEquals   = 1
+)
+
 // TemplateObject struct is used to store template operations results
 //
-// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/template/object
+// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/template/object
 type TemplateObject struct {
 	TemplateID  int    `json:"templateid,omitempty"`
 	Host        string `json:"host,omitempty"`
 	Description string `json:"description,omitempty"`
 	Name        string `json:"name,omitempty"`
 
-	Groups          []HostgroupObject `json:"groups,omitempty"`
-	Hosts           []HostObject      `json:"hosts,omitempty"`
-	Templates       []TemplateObject  `json:"templates,omitempty"`
-	ParentTemplates []TemplateObject  `json:"parentTemplates,omitempty"`
-	Macros          []HostmacroObject `json:"macros,omitempty"`
+	Groups          []HostgroupObject   `json:"groups,omitempty"`
+	Tags            []TemplateTagObject `json:"tags,omitempty"`
+	Templates       []TemplateObject    `json:"templates,omitempty"`
+	ParentTemplates []TemplateObject    `json:"parentTemplates,omitempty"`
+	Macros          []UsermacroObject   `json:"macros,omitempty"`
+	Hosts           []HostObject        `json:"hosts,omitempty"`
+}
+
+// TemplateTagObject struct is used to store template tag data
+//
+// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/template/object#template_tag
+type TemplateTagObject struct {
+	Tag   string `json:"tag,omitempty"`
+	Value string `json:"value,omitempty"`
+
+	Operator int `json:"operator,omitempty"` // Used for `get` operations, has defined consts, see above
 }
 
 // TemplateGetParams struct is used for template get requests
 //
-// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/template/get#parameters
+// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/template/get#parameters
 type TemplateGetParams struct {
 	GetParameters
 
@@ -30,12 +53,15 @@ type TemplateGetParams struct {
 	ItemIDs           []int `json:"itemids,omitempty"`
 	TriggerIDs        []int `json:"triggerids,omitempty"`
 
-	WithItems     bool `json:"with_items,omitempty"`
-	WithTriggers  bool `json:"with_triggers,omitempty"`
-	WithGraphs    bool `json:"with_graphs,omitempty"`
-	WithHttptests bool `json:"with_httptests,omitempty"`
+	WithItems     bool                `json:"with_items,omitempty"`
+	WithTriggers  bool                `json:"with_triggers,omitempty"`
+	WithGraphs    bool                `json:"with_graphs,omitempty"`
+	WithHttptests bool                `json:"with_httptests,omitempty"`
+	Evaltype      int                 `json:"evaltype,omitempty"` // has defined consts, see above
+	Tags          []TemplateTagObject `json:"tags,omitempty"`
 
 	SelectGroups          SelectQuery `json:"selectGroups,omitempty"`
+	SelectTags            SelectQuery `json:"selectTags,omitempty"`
 	SelectHosts           SelectQuery `json:"selectHosts,omitempty"`
 	SelectTemplates       SelectQuery `json:"selectTemplates,omitempty"`
 	SelectParentTemplates SelectQuery `json:"selectParentTemplates,omitempty"`

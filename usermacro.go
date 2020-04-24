@@ -1,38 +1,43 @@
 package zabbix
 
-// GlobalmacroObject struct is used to store globalmacro get operations results (not implemented yet)
+// UsermacroObject struct is used to store hostmacro and globalmacro operations results.
+// In API docs Global and Host it is a two different object types that are joined in this package
+// into one object `UsermacroObject` that includes fields form both API objects.
+// The reason is the some other objects do not separates this types.
 //
-// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/usermacro/object#global_macro
-type GlobalmacroObject struct {
-	GlobalmacroID int    `json:"globalmacroid,omitempty"`
-	Macro         string `json:"macro ,omitempty"`
-	Value         string `json:"value ,omitempty"`
-}
+// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/usermacro/object#host_macro
+// and https://www.zabbix.com/documentation/4.4/manual/api/reference/usermacro/object#global_macro
+type UsermacroObject struct {
 
-// HostmacroObject struct is used to store hostmacro operations results
-//
-// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/usermacro/object#host_macro
-type HostmacroObject struct {
-	HostmacroID int    `json:"hostmacroid,omitempty"`
-	HostID      int    `json:"hostid,omitempty"`
+	// Gobal macro fields only
+	GlobalmacroID int `json:"globalmacroid,omitempty"`
+
+	// Host macro fields only
+	HostmacroID int `json:"hostmacroid,omitempty"`
+	HostID      int `json:"hostid,omitempty"`
+
+	// Common fields
 	Macro       string `json:"macro,omitempty"`
 	Value       string `json:"value,omitempty"`
+	Description string `json:"description,omitempty"`
 
 	Groups    []HostgroupObject `json:"groups,omitempty"`
 	Hosts     []HostObject      `json:"hosts,omitempty"`
 	Templates []TemplateObject  `json:"templates,omitempty"`
 }
 
-// HostmacroGetParams struct is used for hostmacro get requests
+// UsermacroGetParams struct is used for hostmacro get requests
 //
-// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/usermacro/get#parameters
-type HostmacroGetParams struct {
+// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/usermacro/get#parameters
+type UsermacroGetParams struct {
 	GetParameters
 
-	GroupIDs     []int `json:"groupids,omitempty"`
-	HostIDs      []int `json:"hostids,omitempty"`
-	HostmacroIDs []int `json:"hostmacroids,omitempty"`
-	TemplateIDs  []int `json:"templateids,omitempty"`
+	Globalmacro    bool  `json:"globalmacro,omitempty"`
+	GlobalmacroIDs []int `json:"globalmacroids,omitempty"`
+	GroupIDs       []int `json:"groupids,omitempty"`
+	HostIDs        []int `json:"hostids,omitempty"`
+	HostmacroIDs   []int `json:"hostmacroids,omitempty"`
+	TemplateIDs    []int `json:"templateids,omitempty"`
 
 	SelectGroups    SelectQuery `json:"selectGroups,omitempty"`
 	SelectHosts     SelectQuery `json:"selectHosts,omitempty"`
@@ -44,15 +49,25 @@ type hostmacroCreateResult struct {
 	HostmacroIDs []int `json:"hostmacroids"`
 }
 
+// Structure to store creation global macros result
+type globalmacroCreateResult struct {
+	GlobalmacroIDs []int `json:"globalmacroids"`
+}
+
 // Structure to store deletion result
 type hostmacroDeleteResult struct {
 	HostmacroIDs []int `json:"hostmacroids"`
 }
 
-// HostmacroGet gets hostmacros
-func (z *Context) HostmacroGet(params HostmacroGetParams) ([]HostmacroObject, int, error) {
+// Structure to store deletion global macros result
+type globalmacroDeleteResult struct {
+	GlobalmacroIDs []int `json:"globalmacroids"`
+}
 
-	var result []HostmacroObject
+// UsermacroGet gets global or host macros according to the given parameters
+func (z *Context) UsermacroGet(params UsermacroGetParams) ([]UsermacroObject, int, error) {
+
+	var result []UsermacroObject
 
 	status, err := z.request("usermacro.get", params, &result)
 	if err != nil {
@@ -63,7 +78,7 @@ func (z *Context) HostmacroGet(params HostmacroGetParams) ([]HostmacroObject, in
 }
 
 // HostmacroCreate creates new hostmacros
-func (z *Context) HostmacroCreate(params []HostmacroObject) ([]int, int, error) {
+func (z *Context) HostmacroCreate(params []UsermacroObject) ([]int, int, error) {
 
 	var result hostmacroCreateResult
 
@@ -73,6 +88,19 @@ func (z *Context) HostmacroCreate(params []HostmacroObject) ([]int, int, error) 
 	}
 
 	return result.HostmacroIDs, status, nil
+}
+
+// GlobalmacroCreate creates new globalmacros
+func (z *Context) GlobalmacroCreate(params []UsermacroObject) ([]int, int, error) {
+
+	var result globalmacroCreateResult
+
+	status, err := z.request("usermacro.createglobal", params, &result)
+	if err != nil {
+		return nil, status, err
+	}
+
+	return result.GlobalmacroIDs, status, nil
 }
 
 // HostmacroDelete deletes hostmacros
@@ -86,4 +114,17 @@ func (z *Context) HostmacroDelete(hostmacroIDs []int) ([]int, int, error) {
 	}
 
 	return result.HostmacroIDs, status, nil
+}
+
+// GlobalmacroDelete deletes globalmacros
+func (z *Context) GlobalmacroDelete(globalmacroIDs []int) ([]int, int, error) {
+
+	var result globalmacroDeleteResult
+
+	status, err := z.request("usermacro.deleteglobal", globalmacroIDs, &result)
+	if err != nil {
+		return nil, status, err
+	}
+
+	return result.GlobalmacroIDs, status, nil
 }

@@ -72,7 +72,7 @@ func testHostCreate(t *testing.T, z Context, hgCreatedIDs, tCreatedIDs []int) []
 					UseIP: HostinterfaceUseipIP,
 				},
 			},
-			Macros: []HostmacroObject{
+			Macros: []UsermacroObject{
 				{
 					Macro: testMacro,
 					Value: testMacroValue,

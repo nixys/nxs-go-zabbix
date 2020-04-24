@@ -6,6 +6,7 @@ import (
 )
 
 const (
+	testMediatypeName        = "testMediatypeName"
 	testMediatypeDescription = "testMediatypeDescription"
 	testMediatypeExecPath    = "test_script.sh"
 )
@@ -30,6 +31,7 @@ func testMediatypeCreate(t *testing.T, z Context) []int {
 
 	hiCreatedIDs, _, err := z.MediatypeCreate([]MediatypeObject{
 		{
+			Name:        testMediatypeName,
 			Description: testMediatypeDescription,
 			Type:        MediatypeScript,
 			ExecPath:    testMediatypeExecPath,
@@ -76,6 +78,7 @@ func testMediatypeGet(t *testing.T, z Context, mtCreatedIDs []int) []MediatypeOb
 		MediatypeIDs: mtCreatedIDs,
 		GetParameters: GetParameters{
 			Filter: map[string]interface{}{
+				"name":      testMediatypeName,
 				"exec_path": testMediatypeExecPath,
 			},
 			Output: SelectExtendedOutput,

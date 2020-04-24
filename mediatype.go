@@ -2,11 +2,29 @@ package zabbix
 
 // For `MediatypeObject` field: `Type`
 const (
-	MediatypeEmail     = 0
-	MediatypeScript    = 1
-	MediatypeSMS       = 2
-	MediatypeJabber    = 3
-	MediatypeEzTexting = 100
+	MediatypeEmail   = 0
+	MediatypeScript  = 1
+	MediatypeSMS     = 2
+	MediatypeWebhook = 4
+)
+
+// For `MediatypeObject` field: `SMTPSecurity`
+const (
+	MediatypeSMTPSecurityNone     = 0
+	MediatypeSMTPSecuritySTARTTLS = 1
+	MediatypeSMTPSecuritySSLTLS   = 2
+)
+
+// For `MediatypeObject` field: `SMTPVerifyHost`
+const (
+	MediatypeSMTPVerifyHostNo  = 0
+	MediatypeSMTPVerifyHostYes = 1
+)
+
+// For `MediatypeObject` field: `SMTPVerifyPeer`
+const (
+	MediatypeSMTPVerifyPeerNo  = 0
+	MediatypeSMTPVerifyPeerYes = 1
 )
 
 // For `MediatypeObject` field: `Status`
@@ -15,28 +33,71 @@ const (
 	MediatypeScriptDisabled = 1
 )
 
+// For `MediatypeObject` field: `ContentType`
+const (
+	MediatypeContentTypePlainText = 0
+	MediatypeContentTypeHTML      = 1
+)
+
+// For `MediatypeObject` field: `ProcessTags`
+const (
+	MediatypeProcessTagsNo  = 0
+	MediatypeProcessTagsYes = 1
+)
+
+// For `MediatypeObject` field: `ShowEventMenu`
+const (
+	MediatypeShowEventMenuNo  = 0
+	MediatypeShowEventMenuYes = 1
+)
+
 // MediatypeObject struct is used to store mediatype operations results
 //
-// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/mediatype/object
+// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/mediatype/object
 type MediatypeObject struct {
-	MediatypeID int    `json:"mediatypeid,omitempty"`
-	Description string `json:"description,omitempty"`
-	Type        int    `json:"type,omitempty"` // has defined consts, see above
-	ExecPath    string `json:"exec_path,omitempty"`
-	GsmModem    string `json:"gsm_modem,omitempty"`
-	Passwd      string `json:"passwd,omitempty"`
-	SMTPEmail   string `json:"smtp_email,omitempty"`
-	SMTPHelo    string `json:"smtp_helo,omitempty"`
-	SMTPServer  string `json:"smtp_server,omitempty"`
-	Status      int    `json:"status,omitempty"` // has defined consts, see above
-	Username    string `json:"username,omitempty"`
+	MediatypeID     int                                `json:"mediatypeid,omitempty"`
+	Name            string                             `json:"name,omitempty"`
+	Type            int                                `json:"type,omitempty"` // has defined consts, see above
+	ExecPath        string                             `json:"exec_path,omitempty"`
+	GsmModem        string                             `json:"gsm_modem,omitempty"`
+	Passwd          string                             `json:"passwd,omitempty"`
+	SMTPEmail       string                             `json:"smtp_email,omitempty"`
+	SMTPHelo        string                             `json:"smtp_helo,omitempty"`
+	SMTPServer      string                             `json:"smtp_server,omitempty"`
+	SMTPPort        int                                `json:"smtp_port,omitempty"`
+	SMTPSecurity    int                                `json:"smtp_security,omitempty"`    // has defined consts, see above
+	SMTPVerifyHost  int                                `json:"smtp_verify_host,omitempty"` // has defined consts, see above
+	SMTPVerifyPeer  int                                `json:"smtp_verify_peer,omitempty"` // has defined consts, see above
+	Status          int                                `json:"status,omitempty"`           // has defined consts, see above
+	Username        string                             `json:"username,omitempty"`
+	ExecParams      string                             `json:"exec_params,omitempty"`
+	MaxSessions     int                                `json:"maxsessions,omitempty"`
+	MaxAttempts     int                                `json:"maxattempts,omitempty"`
+	AttemptInterval string                             `json:"attempt_interval,omitempty"`
+	ContentType     int                                `json:"content_type,omitempty"` // has defined consts, see above
+	Script          string                             `json:"script,omitempty"`
+	Timeout         string                             `json:"timeout,omitempty"`
+	ProcessTags     int                                `json:"process_tags,omitempty"`    // has defined consts, see above
+	ShowEventMenu   int                                `json:"show_event_menu,omitempty"` // has defined consts, see above
+	EventMenuURL    string                             `json:"event_menu_url,omitempty"`
+	EventMenuName   string                             `json:"event_menu_name,omitempty"`
+	Parameters      []MediatypeWebhookParametersObject `json:"parameters,omitempty"`
+	Description     string                             `json:"description,omitempty"`
 
 	Users []UserObject `json:"users,omitempty"`
 }
 
+// MediatypeWebhookParametersObject struct is used for mediatypes webhook parameters
+//
+// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/mediatype/object#webhook_parameters
+type MediatypeWebhookParametersObject struct {
+	Name  string `json:"name,omitempty"`
+	Value string `json:"value,omitempty"`
+}
+
 // MediatypeGetParams struct is used for mediatype get requests
 //
-// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/mediatype/get#parameters
+// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/mediatype/get#parameters
 type MediatypeGetParams struct {
 	GetParameters
 

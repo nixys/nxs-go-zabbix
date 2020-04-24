@@ -38,7 +38,7 @@ func TestHostmacroCRUD(t *testing.T) {
 
 func testHostmacroCreate(t *testing.T, z Context, hCreatedID int) []int {
 
-	hmCreatedIDs, _, err := z.HostmacroCreate([]HostmacroObject{
+	hmCreatedIDs, _, err := z.HostmacroCreate([]UsermacroObject{
 		{
 			HostID: hCreatedID,
 			Macro:  testHostmacroMacro,
@@ -78,9 +78,9 @@ func testHostmacroDelete(t *testing.T, z Context, hmCreatedIDs []int) []int {
 	return hmDeletedIDs
 }
 
-func testHostmacroGet(t *testing.T, z Context, hmCreatedIDs []int) []HostmacroObject {
+func testHostmacroGet(t *testing.T, z Context, hmCreatedIDs []int) []UsermacroObject {
 
-	hmObjects, _, err := z.HostmacroGet(HostmacroGetParams{
+	hmObjects, _, err := z.UsermacroGet(UsermacroGetParams{
 		HostmacroIDs:    hmCreatedIDs,
 		SelectGroups:    SelectExtendedOutput,
 		SelectHosts:     SelectExtendedOutput,

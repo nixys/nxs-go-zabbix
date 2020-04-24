@@ -14,7 +14,7 @@ const (
 
 // HostgroupObject struct is used to store hostgroup operations results
 //
-// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/hostgroup/object
+// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/hostgroup/object
 type HostgroupObject struct {
 	GroupID  int    `json:"groupid,omitempty"`
 	Name     string `json:"name,omitempty"`
@@ -27,7 +27,7 @@ type HostgroupObject struct {
 
 // HostgroupGetParams struct is used for hostgroup get requests
 //
-// see: https://www.zabbix.com/documentation/2.4/manual/api/reference/hostgroup/get#parameters
+// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/hostgroup/get#parameters
 type HostgroupGetParams struct {
 	GetParameters
 
@@ -41,19 +41,22 @@ type HostgroupGetParams struct {
 	TemplateIDs    []int `json:"templateids,omitempty"`
 	TriggerIDs     []int `json:"triggerids,omitempty"`
 
-	WithApplications       bool `json:"with_applications,omitempty"`
-	WithGraphs             bool `json:"with_graphs,omitempty"`
-	WithHostsAndTemplates  bool `json:"with_hosts_and_templates,omitempty"`
-	WithHttptests          bool `json:"with_httptests,omitempty"`
-	WithItems              bool `json:"with_items,omitempty"`
-	WithMonitoredHttptests bool `json:"with_monitored_httptests,omitempty"`
-	WithMonitoredItems     bool `json:"with_monitored_items,omitempty"`
-	WithMonitoredTriggers  bool `json:"with_monitored_triggers,omitempty"`
-	WithSimpleGraphItems   bool `json:"with_simple_graph_items,omitempty"`
-	WithTriggers           bool `json:"with_triggers,omitempty"`
+	WithApplications              bool `json:"with_applications,omitempty"`
+	WithGraphs                    bool `json:"with_graphs,omitempty"`
+	WithGraphPrototypes           bool `json:"with_graph_prototypes,omitempty"`
+	WithHostsAndTemplates         bool `json:"with_hosts_and_templates,omitempty"`
+	WithHttptests                 bool `json:"with_httptests,omitempty"`
+	WithItems                     bool `json:"with_items,omitempty"`
+	WithItemPrototypes            bool `json:"with_item_prototypes,omitempty"`
+	WithSimpleGraphItemPrototypes bool `json:"with_simple_graph_item_prototypes,omitempty"`
+	WithMonitoredHttptests        bool `json:"with_monitored_httptests,omitempty"`
+	WithMonitoredItems            bool `json:"with_monitored_items,omitempty"`
+	WithMonitoredTriggers         bool `json:"with_monitored_triggers,omitempty"`
+	WithSimpleGraphItems          bool `json:"with_simple_graph_items,omitempty"`
+	WithTriggers                  bool `json:"with_triggers,omitempty"`
 
 	// SelectDiscoveryRule  SelectQuery `json:"selectDiscoveryRule,omitempty"` // not implemented yet
-	// SelectGroupDiscovery SelectQuery `json:"selectGroupDiscovery,omitempty"` / not implemented yet
+	// SelectGroupDiscovery SelectQuery `json:"selectGroupDiscovery,omitempty"` // not implemented yet
 	SelectHosts     SelectQuery `json:"selectHosts,omitempty"`
 	SelectTemplates SelectQuery `json:"selectTemplates,omitempty"`
 }
