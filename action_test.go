@@ -38,12 +38,10 @@ func testActionCreate(t *testing.T, z Context, hostgrpID, usergrpID int) []int {
 
 	aCreatedIDs, _, err := z.ActionCreate([]ActionObject{
 		{
-			Name:         testActionName,
-			Eventsource:  0,
-			Status:       ActionStatusEnabled,
-			EscPeriod:    testActionEscPeriod,
-			DefShortdata: testActionDefShortdata,
-			DefLongdata:  testActionDefLongdata,
+			Name:        testActionName,
+			Eventsource: 0,
+			Status:      ActionStatusEnabled,
+			EscPeriod:   testActionEscPeriod,
 			Filter: ActionFilterObject{
 				EvalType: ActionFilterEvalTypeAndOr,
 				Conditions: []ActionFilterConditionObject{

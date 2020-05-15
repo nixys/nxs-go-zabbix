@@ -1,13 +1,14 @@
 # nxs-go-zabbix
 
-This Go package provides access to Zabbix API v4.4.
+This Go package provides access to Zabbix API v5.0.
+Also see older versions in other branches.
 
 At the time not all Zabbix API methods are implemented, but work in progress.
 
 ## Install
 
 ```
-go get github.com/nixys/nxs-go-zabbix/v4
+go get github.com/nixys/nxs-go-zabbix/v5
 ```
 
 ## Example of usage
@@ -23,7 +24,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/nixys/nxs-go-zabbix/v4"
+	"github.com/nixys/nxs-go-zabbix/v5"
 )
 
 func zabbixLogin(z *zabbix.Context, zbxHost, zbxUsername, zbxPassword string) {

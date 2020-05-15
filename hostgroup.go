@@ -14,7 +14,7 @@ const (
 
 // HostgroupObject struct is used to store hostgroup operations results
 //
-// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/hostgroup/object
+// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/hostgroup/object
 type HostgroupObject struct {
 	GroupID  int    `json:"groupid,omitempty"`
 	Name     string `json:"name,omitempty"`
@@ -27,7 +27,7 @@ type HostgroupObject struct {
 
 // HostgroupGetParams struct is used for hostgroup get requests
 //
-// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/hostgroup/get#parameters
+// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/hostgroup/get#parameters
 type HostgroupGetParams struct {
 	GetParameters
 

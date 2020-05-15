@@ -13,7 +13,7 @@ const (
 
 // HistoryFloatObject struct is used to store history float operations results
 //
-// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/history/object#float_history
+// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/history/object#float_history
 type HistoryFloatObject struct {
 	Clock  int     `json:"clock,omitempty"`
 	ItemID int     `json:"itemid,omitempty"`
@@ -23,7 +23,7 @@ type HistoryFloatObject struct {
 
 // HistoryIntegerObject struct is used to store history integer operations results
 //
-// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/history/object#integer_history
+// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/history/object#integer_history
 type HistoryIntegerObject struct {
 	Clock  int `json:"clock,omitempty"`
 	ItemID int `json:"itemid,omitempty"`
@@ -33,7 +33,7 @@ type HistoryIntegerObject struct {
 
 // HistoryStringObject struct is used to store history string operations results
 //
-// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/history/object#string_history
+// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/history/object#string_history
 type HistoryStringObject struct {
 	Clock  int    `json:"clock,omitempty"`
 	ItemID int    `json:"itemid,omitempty"`
@@ -43,7 +43,7 @@ type HistoryStringObject struct {
 
 // HistoryTextObject struct is used to store history text operations results
 //
-// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/history/object#text_history
+// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/history/object#text_history
 type HistoryTextObject struct {
 	ID     int    `json:"id,omitempty"`
 	Clock  int    `json:"clock,omitempty"`
@@ -54,7 +54,7 @@ type HistoryTextObject struct {
 
 // HistoryLogObject struct is used to store history log operations results
 //
-// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/history/object#log_history
+// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/history/object#log_history
 type HistoryLogObject struct {
 	ID         int    `json:"id,omitempty"`
 	Clock      int    `json:"clock,omitempty"`
@@ -69,7 +69,7 @@ type HistoryLogObject struct {
 
 // HistoryGetParams struct is used for history get requests
 //
-// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/history/get#parameters
+// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/history/get#parameters
 type HistoryGetParams struct {
 	GetParameters
 

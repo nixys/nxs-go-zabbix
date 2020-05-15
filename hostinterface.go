@@ -20,33 +20,75 @@ const (
 	HostinterfaceUseipIP  = 1
 )
 
-// For `HostinterfaceObject` field: `Bulk`
+// For `HostinterfaceDetailsTagObject` field: `Bulk`
 const (
-	HostinterfaceBulkDontUse = 0
-	HostinterfaceBulkUse     = 1
+	HostinterfaceDetailsTagBulkDontUse = 0
+	HostinterfaceDetailsTagBulkUse     = 1
+)
+
+// For `HostinterfaceDetailsTagObject` field: `Version`
+const (
+	HostinterfaceDetailsTagVersionSNMPv1  = 1
+	HostinterfaceDetailsTagVersionSNMPv2c = 2
+	HostinterfaceDetailsTagVersionSNMPv3  = 3
+)
+
+// For `HostinterfaceDetailsTagObject` field: `SecurityLevel`
+const (
+	HostinterfaceDetailsTagSecurityLevelNoAuthNoPriv = 0
+	HostinterfaceDetailsTagSecurityLevelAuthNoPriv   = 1
+	HostinterfaceDetailsTagSecurityLevelAuthPriv     = 2
+)
+
+// For `HostinterfaceDetailsTagObject` field: `AuthProtocol`
+const (
+	HostinterfaceDetailsTagAuthProtocolMD5 = 0
+	HostinterfaceDetailsTagAuthProtocolSHA = 1
+)
+
+// For `HostinterfaceDetailsTagObject` field: `PrivProtocol`
+const (
+	HostinterfaceDetailsTagPrivProtocolDES = 0
+	HostinterfaceDetailsTagPrivProtocolAES = 1
 )
 
 // HostinterfaceObject struct is used to store hostinterface operations results
 //
-// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/hostinterface/object#hostinterface
+// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/hostinterface/object#hostinterface
 type HostinterfaceObject struct {
-	InterfaceID int    `json:"interfaceid,omitempty"`
-	DNS         string `json:"dns"`
-	HostID      int    `json:"hostid,omitempty"`
-	IP          string `json:"ip"`
-	Main        int    `json:"main"` // has defined consts, see above
-	Port        string `json:"port"`
-	Type        int    `json:"type"`           // has defined consts, see above
-	UseIP       int    `json:"useip"`          // has defined consts, see above
-	Bulk        int    `json:"bulk,omitempty"` // has defined consts, see above
+	InterfaceID int                             `json:"interfaceid,omitempty"`
+	DNS         string                          `json:"dns"`
+	HostID      int                             `json:"hostid,omitempty"`
+	IP          string                          `json:"ip"`
+	Main        int                             `json:"main"` // has defined consts, see above
+	Port        string                          `json:"port"`
+	Type        int                             `json:"type"`  // has defined consts, see above
+	UseIP       int                             `json:"useip"` // has defined consts, see above
+	Details     []HostinterfaceDetailsTagObject `json:"details,omitempty"`
 
 	// Items []ItemObject `json:"items,omitempty"` // not implemented yet
 	Hosts []HostObject `json:"hosts,omitempty"`
 }
 
+// HostinterfaceDetailsTagObject struct is used to store hostinterface details
+//
+// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/hostinterface/object#details_tag
+type HostinterfaceDetailsTagObject struct {
+	Version        int    `json:"version,omitempty"` // has defined consts, see above
+	Bulk           int    `json:"bulk,omitempty"`    // has defined consts, see above
+	Community      string `json:"community,omitempty"`
+	SecurityName   string `json:"securityname,omitempty"`
+	SecurityLevel  int    `json:"securitylevel,omitempty"` // has defined consts, see above
+	AuthPassPhrase string `json:"authpassphrase,omitempty"`
+	PrivPassPhrase string `json:"privpassphrase,omitempty"`
+	AuthProtocol   int    `json:"authprotocol,omitempty"` // has defined consts, see above
+	PrivProtocol   int    `json:"privprotocol,omitempty"` // has defined consts, see above
+	ContextName    string `json:"contextname,omitempty"`
+}
+
 // HostinterfaceGetParams struct is used for hostinterface get requests
 //
-// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/hostinterface/get#parameters
+// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/hostinterface/get#parameters
 type HostinterfaceGetParams struct {
 	GetParameters
 

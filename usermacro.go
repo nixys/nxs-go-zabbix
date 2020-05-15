@@ -1,12 +1,18 @@
 package zabbix
 
+// For `UsermacroObject` field: `Type`
+const (
+	UsermacroTypeText   = 0
+	UsermacroTypeSecret = 1
+)
+
 // UsermacroObject struct is used to store hostmacro and globalmacro operations results.
 // In API docs Global and Host it is a two different object types that are joined in this package
 // into one object `UsermacroObject` that includes fields form both API objects.
 // The reason is the some other objects do not separates this types.
 //
-// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/usermacro/object#host_macro
-// and https://www.zabbix.com/documentation/4.4/manual/api/reference/usermacro/object#global_macro
+// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/usermacro/object#host_macro
+// and https://www.zabbix.com/documentation/5.0/manual/api/reference/usermacro/object#global_macro
 type UsermacroObject struct {
 
 	// Gobal macro fields only
@@ -19,6 +25,7 @@ type UsermacroObject struct {
 	// Common fields
 	Macro       string `json:"macro,omitempty"`
 	Value       string `json:"value,omitempty"`
+	Type        int    `json:"type,omitempty"` // has defined consts, see above
 	Description string `json:"description,omitempty"`
 
 	Groups    []HostgroupObject `json:"groups,omitempty"`
@@ -28,7 +35,7 @@ type UsermacroObject struct {
 
 // UsermacroGetParams struct is used for hostmacro get requests
 //
-// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/usermacro/get#parameters
+// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/usermacro/get#parameters
 type UsermacroGetParams struct {
 	GetParameters
 

@@ -31,8 +31,9 @@ type Context struct {
 
 // GetParameters struct is used as embedded struct for some other structs within package
 //
-// see for details: https://www.zabbix.com/documentation/4.4/manual/api/reference_commentary#common_get_method_parameters
+// see for details: https://www.zabbix.com/documentation/5.0/manual/api/reference_commentary#common_get_method_parameters
 type GetParameters struct {
+	CountOutput            bool                   `json:"countOutput,omitempty"`
 	Editable               bool                   `json:"editable,omitempty"`
 	ExcludeSearch          bool                   `json:"excludeSearch,omitempty"`
 	Filter                 map[string]interface{} `json:"filter,omitempty"`

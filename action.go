@@ -59,7 +59,7 @@ const (
 // For `ActionOperationMessageObject` field: `DefaultMsg`
 const (
 	ActionOperationMessageDefaultMsgFromOperation = 0
-	ActionOperationMessageDefaultMsgFromAction    = 1
+	ActionOperationMessageDefaultMsgFromMediaType = 1
 )
 
 // For `ActionOperationConditionObject` field: `ConditionType`
@@ -141,18 +141,12 @@ const (
 
 // ActionObject struct is used to store action operations results
 //
-// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/action/object#action
+// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/action/object#action
 type ActionObject struct {
 	ActionID        int    `json:"actionid,omitempty"`
 	EscPeriod       int    `json:"esc_period"`
 	Eventsource     int    `json:"eventsource"`
 	Name            string `json:"name"`
-	DefLongdata     string `json:"def_longdata,omitempty"`
-	DefShortdata    string `json:"def_shortdata,omitempty"`
-	RlongData       string `json:"r_longdata,omitempty"`
-	RshortData      string `json:"r_shortdata,omitempty"`
-	AckLongdata     string `json:"ack_longdata,omitempty"`
-	AckShortdata    string `json:"ack_shortdata,omitempty"`
 	Status          int    `json:"status,omitempty"`           // has defined consts, see above
 	PauseSuppressed int    `json:"pause_suppressed,omitempty"` // has defined consts, see above
 
@@ -164,7 +158,7 @@ type ActionObject struct {
 
 // ActionOperationObject struct is used to store action operations
 //
-// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/action/object#action_operation
+// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/action/object#action_operation
 type ActionOperationObject struct {
 	OperationID   int                              `json:"operationid,omitempty"`
 	OperationType int                              `json:"operationtype"` // has defined consts, see above
@@ -187,26 +181,24 @@ type ActionOperationObject struct {
 
 // ActionOperationCommandObject struct is used to store action operation commands
 //
-// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/action/object#action_operation_command
+// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/action/object#action_operation_command
 type ActionOperationCommandObject struct {
-	OperationID int    `json:"operationid,omitempty"`
-	Command     string `json:"command"`
-	Type        int    `json:"type"`                 // has defined consts, see above
-	AuthType    int    `json:"authtype,omitempty"`   // has defined consts, see above
-	ExecuteOn   int    `json:"execute_on,omitempty"` // has defined consts, see above
-	Password    string `json:"password,omitempty"`
-	Port        string `json:"port,omitempty"`
-	PrivateKey  string `json:"privatekey,omitempty"`
-	PublicKey   string `json:"publickey,omitempty"`
-	ScriptID    int    `json:"scriptid,omitempty"`
-	UserName    string `json:"username,omitempty"`
+	Command    string `json:"command"`
+	Type       int    `json:"type"`                 // has defined consts, see above
+	AuthType   int    `json:"authtype,omitempty"`   // has defined consts, see above
+	ExecuteOn  int    `json:"execute_on,omitempty"` // has defined consts, see above
+	Password   string `json:"password,omitempty"`
+	Port       string `json:"port,omitempty"`
+	PrivateKey string `json:"privatekey,omitempty"`
+	PublicKey  string `json:"publickey,omitempty"`
+	ScriptID   int    `json:"scriptid,omitempty"`
+	UserName   string `json:"username,omitempty"`
 }
 
 // ActionOperationMessageObject struct is used to store action operation messages
 //
-// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/action/object#action_operation_message
+// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/action/object#action_operation_message
 type ActionOperationMessageObject struct {
-	OperationID int    `json:"operationid,omitempty"`
 	DefaultMsg  int    `json:"default_msg,omitempty"` // has defined consts, see above
 	MediatypeID int    `json:"mediatypeid,omitempty"`
 	Message     string `json:"message,omitempty"`
@@ -215,7 +207,7 @@ type ActionOperationMessageObject struct {
 
 // ActionOperationConditionObject struct is used to store action operation conditions
 //
-// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/action/object#action_operation_condition
+// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/action/object#action_operation_condition
 type ActionOperationConditionObject struct {
 	OpconditionID int    `json:"opconditionid,omitempty"`
 	ConditionType int    `json:"conditiontype"` // has defined consts, see above
@@ -226,7 +218,7 @@ type ActionOperationConditionObject struct {
 
 // ActionRecoveryOperationObject struct is used to store action recovery operations
 //
-// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/action/object#action_recovery_operation
+// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/action/object#action_recovery_operation
 type ActionRecoveryOperationObject struct {
 	OperationID   int                          `json:"operationid"`
 	OperationType int                          `json:"operationtype,omitempty"` // has defined consts, see above
@@ -241,7 +233,7 @@ type ActionRecoveryOperationObject struct {
 
 // ActionUpdateOperationObject struct is used to store action update operations
 //
-// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/action/object#action_update_operation
+// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/action/object#action_update_operation
 type ActionUpdateOperationObject struct {
 	OperationID   int                          `json:"operationid"`
 	OperationType int                          `json:"operationtype,omitempty"` // has defined consts, see above
@@ -255,7 +247,7 @@ type ActionUpdateOperationObject struct {
 
 // ActionFilterObject struct is used to store action filters
 //
-// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/action/object#action_filter
+// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/action/object#action_filter
 type ActionFilterObject struct {
 	Conditions  []ActionFilterConditionObject `json:"conditions"`
 	EvalType    int                           `json:"evaltype"` // has defined consts, see above
@@ -265,7 +257,7 @@ type ActionFilterObject struct {
 
 // ActionFilterConditionObject struct is used to store action filter conditions
 //
-// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/action/object#action_filter_condition
+// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/action/object#action_filter_condition
 type ActionFilterConditionObject struct {
 	ConditionID   int    `json:"conditionid,omitempty"`
 	ConditionType int    `json:"conditiontype"` // has defined consts, see above
@@ -322,7 +314,7 @@ type ActionOpinventoryObject struct {
 
 // ActionGetParams struct is used for action get requests
 //
-// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/action/get#parameters
+// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/action/get#parameters
 type ActionGetParams struct {
 	GetParameters
 

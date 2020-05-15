@@ -28,7 +28,7 @@ const (
 
 // UserObject struct is used to store user operations results
 //
-// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/user/object
+// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/user/object
 type UserObject struct {
 	UserID        int    `json:"userid,omitempty"`
 	Alias         string `json:"alias,omitempty"`
@@ -46,18 +46,21 @@ type UserObject struct {
 	Type          int    `json:"type,omitempty"`  // has defined consts, see above
 	URL           string `json:"url,omitempty"`
 
+	// used for user.login
+	UserDataObject
+
 	Medias     []MediaObject     `json:"medias,omitempty"`
 	Mediatypes []MediatypeObject `json:"mediatypes,omitempty"`
 	Usrgrps    []UsergroupObject `json:"usrgrps,omitempty"`
 
 	// used when new user created
 	UserMedias []MediaObject `json:"user_medias,omitempty"`
-	Passwd     string        `json:"passwd"`
+	Passwd     string        `json:"passwd,omitempty"`
 }
 
 // MediaObject struct is used to store media operations results
 //
-// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/user/object#media
+// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/user/object#media
 type MediaObject struct {
 	MediaID     int      `json:"mediaid,omitempty"`
 	MediaTypeID int      `json:"mediatypeid,omitempty"`
@@ -69,15 +72,26 @@ type MediaObject struct {
 
 // UserLoginParams struct is used for login requests
 //
-// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/user/login#parameters
+// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/user/login#parameters
 type UserLoginParams struct {
 	User     string `json:"user"`
 	Password string `json:"password"`
+	UserData string `json:"userData,omitempty"`
+}
+
+// UserDataObject struct is used to store authenticated user additional info
+//
+// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/user/login#return_values
+type UserDataObject struct {
+	DebugMode bool   `json:"debug_mode,omitempty"`
+	GUIAccess int    `json:"gui_access,omitempty"`
+	SessionID string `json:"sessionid,omitempty"`
+	UserIP    string `json:"userip,omitempty"`
 }
 
 // UserGetParams struct is used for user get requests
 //
-// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/user/get#parameters
+// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/user/get#parameters
 type UserGetParams struct {
 	GetParameters
 

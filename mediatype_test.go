@@ -35,6 +35,14 @@ func testMediatypeCreate(t *testing.T, z Context) []int {
 			Description: testMediatypeDescription,
 			Type:        MediatypeScript,
 			ExecPath:    testMediatypeExecPath,
+			MessageTemplates: []MediatypeMessageTemplateObject{
+				{
+					EventSource: MediatypeMessageTemplateEventSourceTriggers,
+					Recovery:    MediatypeMessageTemplateRecoveryOperations,
+					Subject:     "SSS",
+					Message:     "MMM",
+				},
+			},
 		},
 	})
 

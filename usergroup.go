@@ -29,7 +29,7 @@ const (
 
 // UsergroupObject struct is used to store usergroup operations results
 //
-// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/usergroup/object#user_group
+// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/usergroup/object#user_group
 type UsergroupObject struct {
 	UsrgrpID    int    `json:"usrgrpid,omitempty"`
 	Name        string `json:"name,omitempty"`
@@ -47,7 +47,7 @@ type UsergroupObject struct {
 
 // UsergroupPermissionObject struct is used to store usergroup permissions
 //
-// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/usergroup/object#permission
+// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/usergroup/object#permission
 type UsergroupPermissionObject struct {
 	ID         int `json:"id"`
 	Permission int `json:"permission"` // has defined consts, see above
@@ -55,7 +55,7 @@ type UsergroupPermissionObject struct {
 
 // UsergroupTagBasedPermissionObject struct is used to store usergroup tag based permission
 //
-// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/usergroup/object#tag_based_permission
+// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/usergroup/object#tag_based_permission
 type UsergroupTagBasedPermissionObject struct {
 	GroupID int    `json:"groupid,omitempty"`
 	Tag     string `json:"tag,omitempty"`
@@ -64,7 +64,7 @@ type UsergroupTagBasedPermissionObject struct {
 
 // UsergroupGetParams struct is used for usergroup get requests
 //
-// see: https://www.zabbix.com/documentation/4.4/manual/api/reference/usergroup/get#parameters
+// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/usergroup/get#parameters
 type UsergroupGetParams struct {
 	GetParameters
 
