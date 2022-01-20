@@ -27,7 +27,7 @@ func TestMediatypeCRUD(t *testing.T) {
 	testMediatypeGet(t, z, mtCreatedIDs)
 }
 
-func testMediatypeCreate(t *testing.T, z Context) []int {
+func testMediatypeCreate(t *testing.T, z Context) []string {
 
 	hiCreatedIDs, _, err := z.MediatypeCreate([]MediatypeObject{
 		{
@@ -59,7 +59,7 @@ func testMediatypeCreate(t *testing.T, z Context) []int {
 	return hiCreatedIDs
 }
 
-func testMediatypeDelete(t *testing.T, z Context, mtCreatedIDs []int) []int {
+func testMediatypeDelete(t *testing.T, z Context, mtCreatedIDs []string) []string {
 
 	mtDeletedIDs, _, err := z.MediatypeDelete(mtCreatedIDs)
 	if err != nil {
@@ -79,7 +79,7 @@ func testMediatypeDelete(t *testing.T, z Context, mtCreatedIDs []int) []int {
 	return mtDeletedIDs
 }
 
-func testMediatypeGet(t *testing.T, z Context, mtCreatedIDs []int) []MediatypeObject {
+func testMediatypeGet(t *testing.T, z Context, mtCreatedIDs []string) []MediatypeObject {
 
 	mtObjects, _, err := z.MediatypeGet(MediatypeGetParams{
 		SelectUsers:  SelectExtendedOutput,

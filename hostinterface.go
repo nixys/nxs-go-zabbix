@@ -54,17 +54,21 @@ const (
 
 // HostinterfaceObject struct is used to store hostinterface operations results
 //
-// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/hostinterface/object#hostinterface
+// see: https://www.zabbix.com/documentation/5.4/manual/api/reference/hostinterface/object#hostinterface
 type HostinterfaceObject struct {
-	InterfaceID int                             `json:"interfaceid,omitempty"`
-	DNS         string                          `json:"dns"`
-	HostID      int                             `json:"hostid,omitempty"`
-	IP          string                          `json:"ip"`
-	Main        int                             `json:"main"` // has defined consts, see above
-	Port        string                          `json:"port"`
-	Type        int                             `json:"type"`  // has defined consts, see above
-	UseIP       int                             `json:"useip"` // has defined consts, see above
-	Details     []HostinterfaceDetailsTagObject `json:"details,omitempty"`
+	Available              int                             `json:"available,omitempty"`
+	Details                []HostinterfaceDetailsTagObject `json:"details,omitempty"`
+	DisableUntil           int                             `json:"disable_until"`
+	DNS                    string                          `json:"dns"`
+	HostInterfaceError     string                          `json:"error,omitempty"`
+	HostInterfaceErrorFrom int                             `json:"errors_from,omitempty"`
+	HostID                 string                          `json:"hostid,omitempty"`
+	InterfaceID            string                          `json:"interfaceid,omitempty"`
+	IP                     string                          `json:"ip"`
+	Main                   int                             `json:"main"` // has defined consts, see above
+	Port                   string                          `json:"port"`
+	Type                   int                             `json:"type"`  // has defined consts, see above
+	UseIP                  int                             `json:"useip"` // has defined consts, see above
 
 	// Items []ItemObject `json:"items,omitempty"` // not implemented yet
 	Hosts []HostObject `json:"hosts,omitempty"`
@@ -72,7 +76,7 @@ type HostinterfaceObject struct {
 
 // HostinterfaceDetailsTagObject struct is used to store hostinterface details
 //
-// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/hostinterface/object#details_tag
+// see: https://www.zabbix.com/documentation/5.4/manual/api/reference/hostinterface/object#details_tag
 type HostinterfaceDetailsTagObject struct {
 	Version        int    `json:"version,omitempty"` // has defined consts, see above
 	Bulk           int    `json:"bulk,omitempty"`    // has defined consts, see above
@@ -88,14 +92,14 @@ type HostinterfaceDetailsTagObject struct {
 
 // HostinterfaceGetParams struct is used for hostinterface get requests
 //
-// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/hostinterface/get#parameters
+// see: https://www.zabbix.com/documentation/5.4/manual/api/reference/hostinterface/get#parameters
 type HostinterfaceGetParams struct {
 	GetParameters
 
-	HostIDs      []int `json:"hostids,omitempty"`
-	InterfaceIDs []int `json:"interfaceids,omitempty"`
-	ItemIDs      []int `json:"itemids,omitempty"`
-	TriggerIDs   []int `json:"triggerids,omitempty"`
+	HostIDs      []string `json:"hostids,omitempty"`
+	InterfaceIDs []string `json:"interfaceids,omitempty"`
+	ItemIDs      []string `json:"itemids,omitempty"`
+	TriggerIDs   []string `json:"triggerids,omitempty"`
 
 	// SelectItems SelectQuery `json:"selectItems,omitempty"` // not implemented yet
 	SelectHosts SelectQuery `json:"selectHosts,omitempty"`
@@ -103,12 +107,12 @@ type HostinterfaceGetParams struct {
 
 // Structure to store creation result
 type hostinterfaceCreateResult struct {
-	InterfaceIDs []int `json:"interfaceids"`
+	InterfaceIDs []string `json:"interfaceids"`
 }
 
 // Structure to store deletion result
 type hostinterfaceDeleteResult struct {
-	InterfaceIDs []int `json:"interfaceids"`
+	InterfaceIDs []string `json:"interfaceids"`
 }
 
 // HostinterfaceGet gets hostinterfaces
@@ -125,7 +129,7 @@ func (z *Context) HostinterfaceGet(params HostinterfaceGetParams) ([]Hostinterfa
 }
 
 // HostinterfaceCreate creates hostinterfaces
-func (z *Context) HostinterfaceCreate(params []HostinterfaceObject) ([]int, int, error) {
+func (z *Context) HostinterfaceCreate(params []HostinterfaceObject) ([]string, int, error) {
 
 	var result hostinterfaceCreateResult
 
@@ -138,7 +142,7 @@ func (z *Context) HostinterfaceCreate(params []HostinterfaceObject) ([]int, int,
 }
 
 // HostinterfaceDelete deletes hostinterfaces
-func (z *Context) HostinterfaceDelete(hostinterfaceIDs []int) ([]int, int, error) {
+func (z *Context) HostinterfaceDelete(hostinterfaceIDs []string) ([]string, int, error) {
 
 	var result hostinterfaceDeleteResult
 

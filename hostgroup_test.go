@@ -25,7 +25,7 @@ func TestHostgroupCRUD(t *testing.T) {
 	testHostgroupGet(t, z, hgCreatedIDs)
 }
 
-func testHostgroupCreate(t *testing.T, z Context) []int {
+func testHostgroupCreate(t *testing.T, z Context) []string {
 
 	hgCreatedIDs, _, err := z.HostgroupCreate([]HostgroupObject{
 		{
@@ -45,7 +45,7 @@ func testHostgroupCreate(t *testing.T, z Context) []int {
 	return hgCreatedIDs
 }
 
-func testHostgroupDelete(t *testing.T, z Context, hgCreatedIDs []int) []int {
+func testHostgroupDelete(t *testing.T, z Context, hgCreatedIDs []string) []string {
 
 	hgDeletedIDs, _, err := z.HostgroupDelete(hgCreatedIDs)
 	if err != nil {
@@ -65,7 +65,7 @@ func testHostgroupDelete(t *testing.T, z Context, hgCreatedIDs []int) []int {
 	return hgDeletedIDs
 }
 
-func testHostgroupGet(t *testing.T, z Context, hgCreatedIDs []int) []HostgroupObject {
+func testHostgroupGet(t *testing.T, z Context, hgCreatedIDs []string) []HostgroupObject {
 
 	hgObjects, _, err := z.HostgroupGet(HostgroupGetParams{
 		GroupIDs: hgCreatedIDs,

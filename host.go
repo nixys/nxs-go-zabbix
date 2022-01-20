@@ -1,19 +1,12 @@
 package zabbix
 
-// For `HostObject` field: `Available`
-const (
-	HostAvailableUnknown     = 0
-	HostAvailableAvailable   = 1
-	HostAvailableUnavailable = 2
-)
-
 // For `HostObject` field: `Flags`
 const (
 	HostFlagsPlain      = 0
 	HostFlagsDiscovered = 4
 )
 
-// For `HostObject` field: `Flags`
+// For `HostObject` field: `InventoryMode`
 const (
 	HostInventoryModeDisabled  = -1
 	HostInventoryModeManual    = 0
@@ -31,13 +24,6 @@ const (
 	HostIpmiAuthtypeRMCP     = 6
 )
 
-// For `HostObject` field: `IpmiAvailable`
-const (
-	HostIpmiAvailableUnknown     = 0
-	HostIpmiAvailableAvailable   = 1
-	HostIpmiAvailableUnavailable = 2
-)
-
 // For `HostObject` field: `IpmiPrivilege`
 const (
 	HostIpmiPrivilegeCallback = 1
@@ -45,13 +31,6 @@ const (
 	HostIpmiPrivilegeOperator = 3
 	HostIpmiPrivilegeAdmin    = 4
 	HostIpmiPrivilegeOEM      = 5
-)
-
-// For `HostObject` field: `JmxAvailable`
-const (
-	HostJmxAvailableUnknown     = 0
-	HostJmxAvailableAvailable   = 1
-	HostJmxAvailableUnavailable = 2
 )
 
 // For `HostObject` field: `MaintenanceStatus`
@@ -64,13 +43,6 @@ const (
 const (
 	HostMaintenanceTypeDataCollectionEnabled  = 0
 	HostMaintenanceTypeDataCollectionDisabled = 1
-)
-
-// For `HostObject` field: `SnmpAvailable`
-const (
-	HostSnmpAvailableUnknown     = 0
-	HostSnmpAvailableAvailable   = 1
-	HostSnmpAvailableUnavailable = 2
 )
 
 // For `HostObject` field: `Status`
@@ -107,39 +79,23 @@ const (
 
 // HostObject struct is used to store host operations results
 //
-// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/host/object#host
+// see: https://www.zabbix.com/documentation/5.4/manual/api/reference/host/object#host
 type HostObject struct {
-	HostID            int    `json:"hostid,omitempty"`
+	HostID            string `json:"hostid,omitempty"`
 	Host              string `json:"host,omitempty"`
-	Available         int    `json:"available,omitempty"` // has defined consts, see above
 	Description       string `json:"description,omitempty"`
-	DisableUntil      int    `json:"disable_until,omitempty"`
-	Error             string `json:"error,omitempty"`
-	ErrorsFrom        int    `json:"errors_from,omitempty"`
 	Flags             int    `json:"flags,omitempty"`          // has defined consts, see above
 	InventoryMode     int    `json:"inventory_mode,omitempty"` // has defined consts, see above
 	IpmiAuthtype      int    `json:"ipmi_authtype,omitempty"`  // has defined consts, see above
-	IpmiAvailable     int    `json:"ipmi_available,omitempty"` // has defined consts, see above
-	IpmiDisableUntil  int    `json:"ipmi_disable_until,omitempty"`
-	IpmiError         string `json:"ipmi_error,omitempty"`
-	IpmiErrorsFrom    int    `json:"ipmi_errors_from,omitempty"`
 	IpmiPassword      string `json:"ipmi_password,omitempty"`
 	IpmiPrivilege     int    `json:"ipmi_privilege,omitempty"` // has defined consts, see above
 	IpmiUsername      string `json:"ipmi_username,omitempty"`
-	JmxAvailable      int    `json:"jmx_available,omitempty"` // has defined consts, see above
-	JmxDisableUntil   int    `json:"jmx_disable_until,omitempty"`
-	JmxError          string `json:"jmx_error,omitempty"`
-	JmxErrorsFrom     int    `json:"jmx_errors_from,omitempty"`
 	MaintenanceFrom   int    `json:"maintenance_from,omitempty"`
 	MaintenanceStatus int    `json:"maintenance_status,omitempty"` // has defined consts, see above
 	MaintenanceType   int    `json:"maintenance_type,omitempty"`   // has defined consts, see above
 	MaintenanceID     int    `json:"maintenanceid,omitempty"`
 	Name              string `json:"name,omitempty"`
 	ProxyHostID       int    `json:"proxy_hostid,omitempty"`
-	SnmpAvailable     int    `json:"snmp_available,omitempty"` // has defined consts, see above
-	SnmpDisableUntil  int    `json:"snmp_disable_until,omitempty"`
-	SnmpError         string `json:"snmp_error,omitempty"`
-	SnmpErrorsFrom    int    `json:"snmp_errors_from,omitempty"`
 	Status            int    `json:"status,omitempty"`      // has defined consts, see above
 	TLSConnect        int    `json:"tls_connect,omitempty"` // has defined consts, see above
 	TLSAccept         int    `json:"tls_accept,omitempty"`  // has defined consts, see above
@@ -159,7 +115,7 @@ type HostObject struct {
 
 // HostTagObject struct is used to store host tag
 //
-// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/host/object#host_tag
+// see: https://www.zabbix.com/documentation/5.4/manual/api/reference/host/object#host_tag
 type HostTagObject struct {
 	Tag   string `json:"tag"`
 	Value string `json:"value,omitempty"`
@@ -169,25 +125,24 @@ type HostTagObject struct {
 
 // HostGetParams struct is used for host get requests
 //
-// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/host/get#parameters
+// see: https://www.zabbix.com/documentation/5.4/manual/api/reference/host/get#parameters
 type HostGetParams struct {
 	GetParameters
 
-	GroupIDs       []int `json:"groupids,omitempty"`
-	ApplicationIDs []int `json:"applicationids,omitempty"`
-	DserviceIDs    []int `json:"dserviceids,omitempty"`
-	GraphIDs       []int `json:"graphids,omitempty"`
-	HostIDs        []int `json:"hostids,omitempty"`
-	HttptestIDs    []int `json:"httptestids,omitempty"`
-	InterfaceIDs   []int `json:"interfaceids,omitempty"`
-	ItemIDs        []int `json:"itemids,omitempty"`
-	MaintenanceIDs []int `json:"maintenanceids,omitempty"`
-	MonitoredHosts bool  `json:"monitored_hosts,omitempty"`
-	ProxyHosts     bool  `json:"proxy_hosts,omitempty"`
-	ProxyIDs       []int `json:"proxyids,omitempty"`
-	TemplatedHosts bool  `json:"templated_hosts,omitempty"`
-	TemplateIDs    []int `json:"templateids,omitempty"`
-	TriggerIDs     []int `json:"triggerids,omitempty"`
+	GroupIDs       []string `json:"groupids,omitempty"`
+	DserviceIDs    []string `json:"dserviceids,omitempty"`
+	GraphIDs       []string `json:"graphids,omitempty"`
+	HostIDs        []string `json:"hostids,omitempty"`
+	HttptestIDs    []string `json:"httptestids,omitempty"`
+	InterfaceIDs   []string `json:"interfaceids,omitempty"`
+	ItemIDs        []string `json:"itemids,omitempty"`
+	MaintenanceIDs []string `json:"maintenanceids,omitempty"`
+	MonitoredHosts bool     `json:"monitored_hosts,omitempty"`
+	ProxyHosts     bool     `json:"proxy_hosts,omitempty"`
+	ProxyIDs       []string `json:"proxyids,omitempty"`
+	TemplatedHosts bool     `json:"templated_hosts,omitempty"`
+	TemplateIDs    []string `json:"templateids,omitempty"`
+	TriggerIDs     []string `json:"triggerids,omitempty"`
 
 	WithItems                     bool            `json:"with_items,omitempty"`
 	WithItemPrototypes            bool            `json:"with_item_prototypes,omitempty"`
@@ -227,17 +182,17 @@ type HostGetParams struct {
 
 // Structure to store creation result
 type hostCreateResult struct {
-	HostIDs []int `json:"hostids"`
+	HostIDs []string `json:"hostids"`
 }
 
 // Structure to store updation result
 type hostUpdateResult struct {
-	HostIDs []int `json:"hostids"`
+	HostIDs []string `json:"hostids"`
 }
 
 // Structure to store deletion result
 type hostDeleteResult struct {
-	HostIDs []int `json:"hostids"`
+	HostIDs []string `json:"hostids"`
 }
 
 // HostGet gets hosts
@@ -254,7 +209,7 @@ func (z *Context) HostGet(params HostGetParams) ([]HostObject, int, error) {
 }
 
 // HostCreate creates hosts
-func (z *Context) HostCreate(params []HostObject) ([]int, int, error) {
+func (z *Context) HostCreate(params []HostObject) ([]string, int, error) {
 
 	var result hostCreateResult
 
@@ -267,7 +222,7 @@ func (z *Context) HostCreate(params []HostObject) ([]int, int, error) {
 }
 
 // HostUpdate updates hosts
-func (z *Context) HostUpdate(params []HostObject) ([]int, int, error) {
+func (z *Context) HostUpdate(params []HostObject) ([]string, int, error) {
 
 	var result hostUpdateResult
 
@@ -280,7 +235,7 @@ func (z *Context) HostUpdate(params []HostObject) ([]int, int, error) {
 }
 
 // HostDelete deletes hosts
-func (z *Context) HostDelete(hostIDs []int) ([]int, int, error) {
+func (z *Context) HostDelete(hostIDs []string) ([]string, int, error) {
 
 	var result hostDeleteResult
 
