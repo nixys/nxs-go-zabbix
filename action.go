@@ -141,10 +141,10 @@ const (
 
 // ActionObject struct is used to store action operations results
 //
-// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/action/object#action
+// see: https://www.zabbix.com/documentation/5.4/manual/api/reference/action/object#action
 type ActionObject struct {
-	ActionID        int    `json:"actionid,omitempty"`
-	EscPeriod       int    `json:"esc_period"`
+	ActionID        string `json:"actionid,omitempty"`
+	EscPeriod       string `json:"esc_period"`
 	Eventsource     int    `json:"eventsource"`
 	Name            string `json:"name"`
 	Status          int    `json:"status,omitempty"`           // has defined consts, see above
@@ -158,12 +158,12 @@ type ActionObject struct {
 
 // ActionOperationObject struct is used to store action operations
 //
-// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/action/object#action_operation
+// see: https://www.zabbix.com/documentation/5.4/manual/api/reference/action/object#action_operation
 type ActionOperationObject struct {
-	OperationID   int                              `json:"operationid,omitempty"`
+	OperationID   string                           `json:"operationid,omitempty"`
 	OperationType int                              `json:"operationtype"` // has defined consts, see above
-	ActionID      int                              `json:"actionid,omitempty"`
-	EscPeriod     int                              `json:"esc_period,omitempty"`
+	ActionID      string                           `json:"actionid,omitempty"`
+	EscPeriod     string                           `json:"esc_period,omitempty"`
 	EscStepFrom   int                              `json:"esc_step_from,omitempty"`
 	EscStepTo     int                              `json:"esc_step_to,omitempty"`
 	EvalType      int                              `json:"evaltype,omitempty"` // has defined consts, see above
@@ -181,7 +181,7 @@ type ActionOperationObject struct {
 
 // ActionOperationCommandObject struct is used to store action operation commands
 //
-// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/action/object#action_operation_command
+// see: https://www.zabbix.com/documentation/5.4/manual/api/reference/action/object#action_operation_command
 type ActionOperationCommandObject struct {
 	Command    string `json:"command"`
 	Type       int    `json:"type"`                 // has defined consts, see above
@@ -197,22 +197,22 @@ type ActionOperationCommandObject struct {
 
 // ActionOperationMessageObject struct is used to store action operation messages
 //
-// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/action/object#action_operation_message
+// see: https://www.zabbix.com/documentation/5.4/manual/api/reference/action/object#action_operation_message
 type ActionOperationMessageObject struct {
 	DefaultMsg  int    `json:"default_msg,omitempty"` // has defined consts, see above
-	MediatypeID int    `json:"mediatypeid,omitempty"`
+	MediatypeID string `json:"mediatypeid,omitempty"`
 	Message     string `json:"message,omitempty"`
 	Subject     string `json:"subject,omitempty"`
 }
 
 // ActionOperationConditionObject struct is used to store action operation conditions
 //
-// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/action/object#action_operation_condition
+// see: https://www.zabbix.com/documentation/5.4/manual/api/reference/action/object#action_operation_condition
 type ActionOperationConditionObject struct {
-	OpconditionID int    `json:"opconditionid,omitempty"`
+	OpconditionID string `json:"opconditionid,omitempty"`
 	ConditionType int    `json:"conditiontype"` // has defined consts, see above
 	Value         string `json:"value"`
-	OperationID   int    `json:"operationid,omitempty"`
+	OperationID   string `json:"operationid,omitempty"`
 	Operator      int    `json:"operator,omitempty"`
 }
 
@@ -270,62 +270,62 @@ type ActionFilterConditionObject struct {
 
 // ActionOpcommandGrpObject struct is used to store action opcommand groups
 type ActionOpcommandGrpObject struct {
-	OpcommandGrpID int `json:"opcommand_grpid,omitempty"`
-	OperationID    int `json:"operationid,omitempty"`
-	GroupID        int `json:"groupid,omitempty"`
+	OpcommandGrpID int    `json:"opcommand_grpid,omitempty"`
+	OperationID    string `json:"operationid,omitempty"`
+	GroupID        string `json:"groupid,omitempty"`
 }
 
 // ActionOpcommandHstObject struct is used to store action opcommand hosts
 type ActionOpcommandHstObject struct {
-	OpcommandHstID int `json:"opcommand_hstid,omitempty"`
-	OperationID    int `json:"operationid,omitempty"`
-	HostID         int `json:"hostid,omitempty"`
+	OpcommandHstID int    `json:"opcommand_hstid,omitempty"`
+	OperationID    string `json:"operationid,omitempty"`
+	HostID         string `json:"hostid,omitempty"`
 }
 
 // ActionOpgroupObject struct is used to store action opgroups
 type ActionOpgroupObject struct {
-	OperationID int `json:"operationid,omitempty"`
-	GroupID     int `json:"groupid,omitempty"`
+	OperationID string `json:"operationid,omitempty"`
+	GroupID     string `json:"groupid,omitempty"`
 }
 
 // ActionOpmessageGrpObject struct is used to store action opmessage groups
 type ActionOpmessageGrpObject struct {
-	OperationID int `json:"operationid,omitempty"`
-	UsrgrpID    int `json:"usrgrpid,omitempty"`
+	OperationID string `json:"operationid,omitempty"`
+	UsrgrpID    string `json:"usrgrpid,omitempty"`
 }
 
 // ActionOpmessageUsrObject struct is used to store action opmessage users
 type ActionOpmessageUsrObject struct {
-	OperationID int `json:"operationid,omitempty"`
-	UserID      int `json:"userid,omitempty"`
+	OperationID string `json:"operationid,omitempty"`
+	UserID      string `json:"userid,omitempty"`
 }
 
 // ActionOptemplateObject struct is used to store action optemplates
 type ActionOptemplateObject struct {
-	OperationID int `json:"operationid,omitempty"`
-	TemplateID  int `json:"templateid,omitempty"`
+	OperationID string `json:"operationid,omitempty"`
+	TemplateID  string `json:"templateid,omitempty"`
 }
 
 // ActionOpinventoryObject struct is used to store action opinventory
 type ActionOpinventoryObject struct {
-	OperationID   int `json:"operationid,omitempty"`
-	InventoryMode int `json:"inventory_mode,omitempty"`
+	OperationID   string `json:"operationid,omitempty"`
+	InventoryMode int    `json:"inventory_mode,omitempty"`
 }
 
 // ActionGetParams struct is used for action get requests
 //
-// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/action/get#parameters
+// see: https://www.zabbix.com/documentation/5.4/manual/api/reference/action/get#parameters
 type ActionGetParams struct {
 	GetParameters
 
-	ActionIDs    []int `json:"actionids,omitempty"`
-	GroupIDs     []int `json:"groupids,omitempty"`
-	HostIDs      []int `json:"hostids,omitempty"`
-	TriggerIDs   []int `json:"triggerids,omitempty"`
-	MediatypeIDs []int `json:"mediatypeids,omitempty"`
-	UsrgrpIDs    []int `json:"usrgrpids,omitempty"`
-	UserIDs      []int `json:"userids,omitempty"`
-	ScriptIDs    []int `json:"scriptids,omitempty"`
+	ActionIDs    []string `json:"actionids,omitempty"`
+	GroupIDs     []string `json:"groupids,omitempty"`
+	HostIDs      []string `json:"hostids,omitempty"`
+	TriggerIDs   []string `json:"triggerids,omitempty"`
+	MediatypeIDs []string `json:"mediatypeids,omitempty"`
+	UsrgrpIDs    []string `json:"usrgrpids,omitempty"`
+	UserIDs      []string `json:"userids,omitempty"`
+	ScriptIDs    []string `json:"scriptids,omitempty"`
 
 	SelectFilter             SelectQuery `json:"selectFilter,omitempty"`
 	SelectOperations         SelectQuery `json:"selectOperations,omitempty"`
@@ -335,12 +335,12 @@ type ActionGetParams struct {
 
 // Structure to store creation result
 type actionCreateResult struct {
-	ActionIDs []int `json:"actionids"`
+	ActionIDs []string `json:"actionids"`
 }
 
 // Structure to store deletion result
 type actionDeleteResult struct {
-	ActionIDs []int `json:"actionids"`
+	ActionIDs []string `json:"actionids"`
 }
 
 // ActionGet gets actions
@@ -357,7 +357,7 @@ func (z *Context) ActionGet(params ActionGetParams) ([]ActionObject, int, error)
 }
 
 // ActionCreate creates actions
-func (z *Context) ActionCreate(params []ActionObject) ([]int, int, error) {
+func (z *Context) ActionCreate(params []ActionObject) ([]string, int, error) {
 
 	var result actionCreateResult
 
@@ -370,7 +370,7 @@ func (z *Context) ActionCreate(params []ActionObject) ([]int, int, error) {
 }
 
 // ActionDelete deletes actions
-func (z *Context) ActionDelete(actionIDs []int) ([]int, int, error) {
+func (z *Context) ActionDelete(actionIDs []string) ([]string, int, error) {
 
 	var result actionDeleteResult
 

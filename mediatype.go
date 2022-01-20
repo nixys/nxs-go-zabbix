@@ -74,11 +74,11 @@ const (
 
 // MediatypeObject struct is used to store mediatype operations results
 //
-// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/mediatype/object
+// see: https://www.zabbix.com/documentation/5.4/manual/api/reference/mediatype/object
 type MediatypeObject struct {
-	MediatypeID        int                                `json:"mediatypeid,omitempty"`
-	Name               string                             `json:"name,omitempty"`
-	Type               int                                `json:"type,omitempty"` // has defined consts, see above
+	MediatypeID        string                             `json:"mediatypeid,omitempty"`
+	Name               string                             `json:"name"`
+	Type               int                                `json:"type"` // has defined consts, see above
 	ExecPath           string                             `json:"exec_path,omitempty"`
 	GsmModem           string                             `json:"gsm_modem,omitempty"`
 	Passwd             string                             `json:"passwd,omitempty"`
@@ -112,15 +112,15 @@ type MediatypeObject struct {
 
 // MediatypeWebhookParametersObject struct is used for mediatypes webhook parameters
 //
-// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/mediatype/object#webhook_parameters
+// see: https://www.zabbix.com/documentation/5.4/manual/api/reference/mediatype/object#webhook_parameters
 type MediatypeWebhookParametersObject struct {
-	Name  string `json:"name,omitempty"`
+	Name  string `json:"name"`
 	Value string `json:"value,omitempty"`
 }
 
 // MediatypeMessageTemplateObject struct is used for mediatypes message template
 //
-// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/mediatype/object#message_template
+// see: https://www.zabbix.com/documentation/5.4/manual/api/reference/mediatype/object#message_template
 type MediatypeMessageTemplateObject struct {
 	EventSource int    `json:"eventsource"` // has defined consts, see above
 	Recovery    int    `json:"recovery"`    // has defined consts, see above
@@ -130,13 +130,13 @@ type MediatypeMessageTemplateObject struct {
 
 // MediatypeGetParams struct is used for mediatype get requests
 //
-// see: https://www.zabbix.com/documentation/5.0/manual/api/reference/mediatype/get#parameters
+// see: https://www.zabbix.com/documentation/5.4/manual/api/reference/mediatype/get#parameters
 type MediatypeGetParams struct {
 	GetParameters
 
-	MediatypeIDs []int `json:"mediatypeids,omitempty"`
-	MediaIDs     []int `json:"mediaids,omitempty"`
-	UserIDs      []int `json:"userids,omitempty"`
+	MediatypeIDs []string `json:"mediatypeids,omitempty"`
+	MediaIDs     []string `json:"mediaids,omitempty"`
+	UserIDs      []string `json:"userids,omitempty"`
 
 	SelectMessageTemplates SelectQuery `json:"selectMessageTemplates,omitempty"`
 	SelectUsers            SelectQuery `json:"selectUsers,omitempty"`
@@ -144,12 +144,12 @@ type MediatypeGetParams struct {
 
 // Structure to store creation result
 type mediatypeCreateResult struct {
-	MediatypeIDs []int `json:"mediatypeids"`
+	MediatypeIDs []string `json:"mediatypeids"`
 }
 
 // Structure to store deletion result
 type mediatypeDeleteResult struct {
-	MediatypeIDs []int `json:"mediatypeids"`
+	MediatypeIDs []string `json:"mediatypeids"`
 }
 
 // MediatypeGet gets mediatypes
@@ -166,7 +166,7 @@ func (z *Context) MediatypeGet(params MediatypeGetParams) ([]MediatypeObject, in
 }
 
 // MediatypeCreate creates mediatypes
-func (z *Context) MediatypeCreate(params []MediatypeObject) ([]int, int, error) {
+func (z *Context) MediatypeCreate(params []MediatypeObject) ([]string, int, error) {
 
 	var result mediatypeCreateResult
 
@@ -179,7 +179,7 @@ func (z *Context) MediatypeCreate(params []MediatypeObject) ([]int, int, error) 
 }
 
 // MediatypeDelete deletes mediatypes
-func (z *Context) MediatypeDelete(mediatypeIDs []int) ([]int, int, error) {
+func (z *Context) MediatypeDelete(mediatypeIDs []string) ([]string, int, error) {
 
 	var result mediatypeDeleteResult
 

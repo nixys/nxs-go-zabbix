@@ -36,7 +36,7 @@ func TestUserCRUD(t *testing.T) {
 	testUserGet(t, z, uCreatedIDs)
 }
 
-func testUserCreate(t *testing.T, z Context, ugCreatedIDs []int) []int {
+func testUserCreate(t *testing.T, z Context, ugCreatedIDs []string) []string {
 
 	var usergroups []UsergroupObject
 
@@ -49,19 +49,17 @@ func testUserCreate(t *testing.T, z Context, ugCreatedIDs []int) []int {
 
 	uCreatedIDs, _, err := z.UserCreate([]UserObject{
 		{
-			Alias:      testUserAlias,
 			Name:       testUserName,
 			Surname:    testUserSurname,
 			Passwd:     testUserPasswd,
 			AutoLogin:  UserAutoLoginDisabled,
 			AutoLogout: "15m",
 			Lang:       testUserLang,
-			Type:       UserTypeUser,
 			Refresh:    "90s",
 			Usrgrps:    usergroups,
 			UserMedias: []MediaObject{
 				{
-					MediaTypeID: 1,
+					MediaTypeID: "1",
 					SendTo:      []string{testUserMediaEmail},
 					Active:      MediaActiveEnabled,
 					Severity:    testUserMediaSeverity,
@@ -83,7 +81,7 @@ func testUserCreate(t *testing.T, z Context, ugCreatedIDs []int) []int {
 	return uCreatedIDs
 }
 
-func testUserDelete(t *testing.T, z Context, uCreatedIDs []int) []int {
+func testUserDelete(t *testing.T, z Context, uCreatedIDs []string) []string {
 
 	uDeletedIDs, _, err := z.UserDelete(uCreatedIDs)
 	if err != nil {
@@ -103,7 +101,7 @@ func testUserDelete(t *testing.T, z Context, uCreatedIDs []int) []int {
 	return uDeletedIDs
 }
 
-func testUserGet(t *testing.T, z Context, uCreatedIDs []int) []UserObject {
+func testUserGet(t *testing.T, z Context, uCreatedIDs []string) []UserObject {
 
 	uObjects, _, err := z.UserGet(UserGetParams{
 		UserIDs:          uCreatedIDs,

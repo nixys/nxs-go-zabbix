@@ -16,11 +16,11 @@ const (
 type UsermacroObject struct {
 
 	// Gobal macro fields only
-	GlobalmacroID int `json:"globalmacroid,omitempty"`
+	GlobalmacroID string `json:"globalmacroid,omitempty"`
 
 	// Host macro fields only
-	HostmacroID int `json:"hostmacroid,omitempty"`
-	HostID      int `json:"hostid,omitempty"`
+	HostmacroID string `json:"hostmacroid,omitempty"`
+	HostID      string `json:"hostid,omitempty"`
 
 	// Common fields
 	Macro       string `json:"macro,omitempty"`
@@ -39,12 +39,12 @@ type UsermacroObject struct {
 type UsermacroGetParams struct {
 	GetParameters
 
-	Globalmacro    bool  `json:"globalmacro,omitempty"`
-	GlobalmacroIDs []int `json:"globalmacroids,omitempty"`
-	GroupIDs       []int `json:"groupids,omitempty"`
-	HostIDs        []int `json:"hostids,omitempty"`
-	HostmacroIDs   []int `json:"hostmacroids,omitempty"`
-	TemplateIDs    []int `json:"templateids,omitempty"`
+	Globalmacro    bool     `json:"globalmacro,omitempty"`
+	GlobalmacroIDs []string `json:"globalmacroids,omitempty"`
+	GroupIDs       []string `json:"groupids,omitempty"`
+	HostIDs        []string `json:"hostids,omitempty"`
+	HostmacroIDs   []string `json:"hostmacroids,omitempty"`
+	TemplateIDs    []string `json:"templateids,omitempty"`
 
 	SelectGroups    SelectQuery `json:"selectGroups,omitempty"`
 	SelectHosts     SelectQuery `json:"selectHosts,omitempty"`
@@ -53,17 +53,17 @@ type UsermacroGetParams struct {
 
 // Structure to store creation result
 type hostmacroCreateResult struct {
-	HostmacroIDs []int `json:"hostmacroids"`
+	HostmacroIDs []string `json:"hostmacroids"`
 }
 
 // Structure to store creation global macros result
 type globalmacroCreateResult struct {
-	GlobalmacroIDs []int `json:"globalmacroids"`
+	GlobalmacroIDs []string `json:"globalmacroids"`
 }
 
 // Structure to store deletion result
 type hostmacroDeleteResult struct {
-	HostmacroIDs []int `json:"hostmacroids"`
+	HostmacroIDs []string `json:"hostmacroids"`
 }
 
 // Structure to store deletion global macros result
@@ -85,7 +85,7 @@ func (z *Context) UsermacroGet(params UsermacroGetParams) ([]UsermacroObject, in
 }
 
 // HostmacroCreate creates new hostmacros
-func (z *Context) HostmacroCreate(params []UsermacroObject) ([]int, int, error) {
+func (z *Context) HostmacroCreate(params []UsermacroObject) ([]string, int, error) {
 
 	var result hostmacroCreateResult
 
@@ -98,7 +98,7 @@ func (z *Context) HostmacroCreate(params []UsermacroObject) ([]int, int, error) 
 }
 
 // GlobalmacroCreate creates new globalmacros
-func (z *Context) GlobalmacroCreate(params []UsermacroObject) ([]int, int, error) {
+func (z *Context) GlobalmacroCreate(params []UsermacroObject) ([]string, int, error) {
 
 	var result globalmacroCreateResult
 
@@ -111,7 +111,7 @@ func (z *Context) GlobalmacroCreate(params []UsermacroObject) ([]int, int, error
 }
 
 // HostmacroDelete deletes hostmacros
-func (z *Context) HostmacroDelete(hostmacroIDs []int) ([]int, int, error) {
+func (z *Context) HostmacroDelete(hostmacroIDs []string) ([]string, int, error) {
 
 	var result hostmacroDeleteResult
 

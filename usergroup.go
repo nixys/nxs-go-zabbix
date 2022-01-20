@@ -31,7 +31,7 @@ const (
 //
 // see: https://www.zabbix.com/documentation/5.0/manual/api/reference/usergroup/object#user_group
 type UsergroupObject struct {
-	UsrgrpID    int    `json:"usrgrpid,omitempty"`
+	UsrgrpID    string `json:"usrgrpid,omitempty"`
 	Name        string `json:"name,omitempty"`
 	DebugMode   int    `json:"debug_mode,omitempty"`   // has defined consts, see above
 	GuiAccess   int    `json:"gui_access,omitempty"`   // has defined consts, see above
@@ -68,10 +68,10 @@ type UsergroupTagBasedPermissionObject struct {
 type UsergroupGetParams struct {
 	GetParameters
 
-	Status        []int `json:"status,omitempty"`
-	UserIDs       []int `json:"userids,omitempty"`
-	UsrgrpIDs     []int `json:"usrgrpids,omitempty"`
-	WithGuiAccess []int `json:"with_gui_access,omitempty"`
+	Status        []int    `json:"status,omitempty"`
+	UserIDs       []string `json:"userids,omitempty"`
+	UsrgrpIDs     []string `json:"usrgrpids,omitempty"`
+	WithGuiAccess []int    `json:"with_gui_access,omitempty"`
 
 	SelectTagFilters SelectQuery `json:"selectTagFilters,omitempty"`
 	SelectUsers      SelectQuery `json:"selectUsers,omitempty"`
@@ -80,17 +80,17 @@ type UsergroupGetParams struct {
 
 // Structure to store creation result
 type usergroupCreateResult struct {
-	UsrgrpIDs []int `json:"usrgrpids"`
+	UsrgrpIDs []string `json:"usrgrpids"`
 }
 
 // Structure to store updation result
 type usergroupUpdateResult struct {
-	UsrgrpIDs []int `json:"usrgrpids"`
+	UsrgrpIDs []string `json:"usrgrpids"`
 }
 
 // Structure to store deletion result
 type usergroupDeleteResult struct {
-	UsrgrpIDs []int `json:"usrgrpids"`
+	UsrgrpIDs []string `json:"usrgrpids"`
 }
 
 // UsergroupGet gets usergroups
@@ -107,7 +107,7 @@ func (z *Context) UsergroupGet(params UsergroupGetParams) ([]UsergroupObject, in
 }
 
 // UsergroupCreate creates usergroups
-func (z *Context) UsergroupCreate(params []UsergroupObject) ([]int, int, error) {
+func (z *Context) UsergroupCreate(params []UsergroupObject) ([]string, int, error) {
 
 	var result usergroupCreateResult
 
@@ -120,7 +120,7 @@ func (z *Context) UsergroupCreate(params []UsergroupObject) ([]int, int, error) 
 }
 
 // UsergroupUpdate updates usergroups
-func (z *Context) UsergroupUpdate(params []UsergroupObject) ([]int, int, error) {
+func (z *Context) UsergroupUpdate(params []UsergroupObject) ([]string, int, error) {
 
 	var result usergroupUpdateResult
 
@@ -133,7 +133,7 @@ func (z *Context) UsergroupUpdate(params []UsergroupObject) ([]int, int, error) 
 }
 
 // UsergroupDelete deletes usergroups
-func (z *Context) UsergroupDelete(usergroupIDs []int) ([]int, int, error) {
+func (z *Context) UsergroupDelete(usergroupIDs []string) ([]string, int, error) {
 
 	var result usergroupDeleteResult
 
