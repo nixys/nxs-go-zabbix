@@ -25,7 +25,7 @@ const (
 
 // Context struct is used for store settings to communicate with Zabbix API
 type Context struct {
-	sessionKey string
+	SessionKey string
 	host       string
 }
 
@@ -85,7 +85,7 @@ func (z *Context) Login(host, user, password string) error {
 		Password: password,
 	}
 
-	if z.sessionKey, _, err = z.userLogin(r); err != nil {
+	if z.SessionKey, _, err = z.userLogin(r); err != nil {
 		return err
 	}
 
@@ -97,7 +97,7 @@ func (z *Context) Logout() error {
 
 	_, _, err := z.userLogout()
 
-	z.sessionKey = ""
+	z.SessionKey = ""
 
 	if err != nil {
 		return err
@@ -116,7 +116,7 @@ func (z *Context) request(method string, params interface{}, result interface{})
 		JSONRPC: "2.0",
 		Method:  method,
 		Params:  params,
-		Auth:    z.sessionKey,
+		Auth:    z.SessionKey,
 		ID:      1,
 	}
 
