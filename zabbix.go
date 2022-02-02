@@ -26,7 +26,7 @@ const (
 // Context struct is used for store settings to communicate with Zabbix API
 type Context struct {
 	SessionKey string
-	host       string
+	Host       string
 }
 
 // GetParameters struct is used as embedded struct for some other structs within package
@@ -78,7 +78,7 @@ func (z *Context) Login(host, user, password string) error {
 
 	var err error
 
-	z.host = host
+	z.Host = host
 
 	r := UserLoginParams{
 		User:     user,
@@ -138,7 +138,7 @@ func (z *Context) httpPost(in interface{}, out interface{}) (int, error) {
 	if err != nil {
 		return 0, err
 	}
-	req, err := http.NewRequest("POST", z.host, strings.NewReader(string(s)))
+	req, err := http.NewRequest("POST", z.Host, strings.NewReader(string(s)))
 	if err != nil {
 		return 0, err
 	}
