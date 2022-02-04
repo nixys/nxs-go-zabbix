@@ -103,6 +103,10 @@ const (
 const (
 	HostTagOperatorContains = 0
 	HostTagOperatorEquals   = 1
+	HostTagNotLike = 2
+	HostTagNotEqual =3
+	HostTagExists = 4
+	HostTagNotExists = 5
 )
 
 // HostObject struct is used to store host operations results
