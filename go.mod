@@ -1,4 +1,4 @@
-module github.com/nixys/nxs-go-zabbix/v5
+module github.com/padremortius/nxs-go-zabbix/v5
 
 go 1.17
 
