@@ -88,3 +88,13 @@ Run:
 ```
 ZABBIX_HOST="https://zabbix.yourdomain.com/api_jsonrpc.php" ZABBIX_USERNAME="Admin" ZABBIX_PASSWORD="PASSWORD" go run main.go
 ```
+
+## Feedback
+
+For support and feedback please contact me:
+- telegram: [@borisershov](https://t.me/borisershov)
+- e-mail: b.ershov@nixys.ru
+
+## License
+
+nxs-go-zabbix is released under the [MIT License](LICENSE).
