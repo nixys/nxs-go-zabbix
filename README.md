@@ -89,6 +89,13 @@ Run:
 ZABBIX_HOST="https://zabbix.yourdomain.com/api_jsonrpc.php" ZABBIX_USERNAME="Admin" ZABBIX_PASSWORD="PASSWORD" go run main.go
 ```
 
+Test:
+
+```
+ZABBIX_HOST="https://zabbix.yourdomain.com/api_jsonrpc.php" ZABBIX_USERNAME="Admin" ZABBIX_PASSWORD="PASSWORD" go test -v -run TestProblemGet
+```
+
+
 ## Feedback
 
 For support and feedback please contact me:
