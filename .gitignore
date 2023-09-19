@@ -1,2 +1,4 @@
-/.project
-/.vscode
+.project
+.vscode
+.idea
+.env
