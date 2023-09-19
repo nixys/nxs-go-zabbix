@@ -1,36 +1,35 @@
 package zabbix
 
 import (
-	"fmt"
-	"os"
 	"testing"
 )
 
-func TestProblemGet(t *testing.T) {
-	z := &Context{}
-	err := z.Login(os.Getenv("ZABBIX_HOST"), os.Getenv("ZABBIX_USERNAME"), os.Getenv("ZABBIX_PASSWORD"))
-	if err != nil {
-		t.Fatalf("Login failed: %s", err)
-	}
+func TestProblemCRUD(t *testing.T) {
 
-	params := ProblemGetParams{
-		ObjectIDs: []string{"20143"},
+	var z Context
+
+	// Login
+	loginTest(&z, t)
+	defer logoutTest(&z, t)
+
+	// Get
+	testProblemGet(t, z)
+}
+
+func testProblemGet(t *testing.T, z Context) {
+
+	pObjects, _, err := z.ProblemGet(ProblemGetParams{
+		//ObjectIDs: []int{20143},
 		// ... Add other fields as needed
-	}
+	})
 
-	problems, _, err := z.ProblemGet(params)
 	if err != nil {
-		t.Fatalf("ProblemGet failed: %s", err)
+		t.Error("Problem get error:", err)
+	} else {
+		if len(pObjects) == 0 {
+			t.Error("Problem get error: unable to find problems")
+		} else {
+			t.Logf("Problem get: success")
+		}
 	}
-
-	if len(problems) == 0 {
-		t.Fatalf("No problems found")
-	}
-
-	fmt.Println("Problems list:")
-	for _, p := range problems {
-		fmt.Println(p)
-	}
-
-	// ... Add more tests to validate the results
 }

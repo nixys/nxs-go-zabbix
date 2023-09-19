@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"strings"
 
@@ -155,7 +155,7 @@ func (z *Context) httpPost(in interface{}, out interface{}) (int, error) {
 	defer res.Body.Close()
 
 	if res.StatusCode != 200 {
-		if bodyBytes, err := ioutil.ReadAll(res.Body); err == nil {
+		if bodyBytes, err := io.ReadAll(res.Body); err == nil {
 			return res.StatusCode, errors.New(string(bodyBytes))
 		}
 	} else {
