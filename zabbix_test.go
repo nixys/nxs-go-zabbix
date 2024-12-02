@@ -2,6 +2,7 @@ package zabbix
 
 import (
 	"os"
+	"strconv"
 	"testing"
 )
 
@@ -22,7 +23,25 @@ func loginTest(z *Context, t *testing.T) {
 		t.Fatal("Login error: undefined env var `ZABBIX_PASSWORD`")
 	}
 
-	if err := z.Login(zbxHost, zbxUsername, zbxPassword); err != nil {
+	zbxInsecureSkipVerify := os.Getenv("ZABBIX_INSECURE_SKIP_VERIFY")
+	if zbxInsecureSkipVerify == "" {
+		t.Fatal("Login error: undefined env var `ZABBIX_INSECURE_SKIP_VERIFY`")
+	}
+
+	// Convert to bool
+	zbxInsecureSkipVerifyBool, err := strconv.ParseBool(zbxInsecureSkipVerify)
+	if err != nil {
+		t.Fatal("Login error: invalid env var `ZABBIX_INSECURE_SKIP_VERIFY`")
+	}
+
+	loginParams := LoginParams{
+		Host:               zbxHost,
+		User:               zbxUsername,
+		Password:           zbxPassword,
+		InsecureSkipVerify: zbxInsecureSkipVerifyBool,
+	}
+
+	if err := z.Login(loginParams); err != nil {
 		t.Fatal("Login error: ", err)
 	} else {
 		t.Logf("Login: success")

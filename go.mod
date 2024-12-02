@@ -1,5 +1,5 @@
-module github.com/nixys/nxs-go-zabbix/v5
+module github.com/worldtechit/nxs-go-zabbix
 
-go 1.20
+go 1.22
 
 require github.com/mitchellh/mapstructure v1.5.0

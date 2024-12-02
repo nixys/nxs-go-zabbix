@@ -1,6 +1,7 @@
 package zabbix
 
 import (
+	"crypto/tls"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -27,6 +28,7 @@ const (
 type Context struct {
 	sessionKey string
 	host       string
+	client     *http.Client
 }
 
 // GetParameters struct is used as embedded struct for some other structs within package
@@ -73,16 +75,32 @@ type responseData struct {
 	ID int `json:"id"`
 }
 
-// Login gets the Zabbix session
-func (z *Context) Login(host, user, password string) error {
+// LoginParams struct is used to configure the login process.
+type LoginParams struct {
+	Host               string
+	User               string
+	Password           string
+	InsecureSkipVerify bool
+}
 
+// Login gets the Zabbix session
+func (z *Context) Login(params LoginParams) error {
 	var err error
 
-	z.host = host
+	z.host = params.Host
+
+	// Create a custom HTTP client with TLS configuration
+	z.client = &http.Client{
+		Transport: &http.Transport{
+			TLSClientConfig: &tls.Config{
+				InsecureSkipVerify: params.InsecureSkipVerify,
+			},
+		},
+	}
 
 	r := UserLoginParams{
-		User:     user,
-		Password: password,
+		User:     params.User,
+		Password: params.Password,
 	}
 
 	if z.sessionKey, _, err = z.userLogin(r); err != nil {
@@ -133,7 +151,6 @@ func (z *Context) request(method string, params interface{}, result interface{})
 }
 
 func (z *Context) httpPost(in interface{}, out interface{}) (int, error) {
-
 	s, err := json.Marshal(in)
 	if err != nil {
 		return 0, err
@@ -146,13 +163,18 @@ func (z *Context) httpPost(in interface{}, out interface{}) (int, error) {
 	// Set headers
 	req.Header.Add("Content-Type", "application/json-rpc")
 
-	// Make request
-	res, err := http.DefaultClient.Do(req)
+	// Make request with custom HTTP client
+	res, err := z.client.Do(req)
 	if err != nil {
 		return 0, err
 	}
 
-	defer res.Body.Close()
+	defer func(Body io.ReadCloser) {
+		err := Body.Close()
+		if err != nil {
+			fmt.Println(err)
+		}
+	}(res.Body)
 
 	if res.StatusCode != 200 {
 		if bodyBytes, err := io.ReadAll(res.Body); err == nil {
