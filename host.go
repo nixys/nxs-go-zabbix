@@ -105,6 +105,14 @@ const (
 	HostTagOperatorEquals   = 1
 )
 
+// For `MonitoredBy` field: `Operator`
+const (
+	MonitoredByZabbixServer = 0
+	MonitoredByProxy        = 1
+	MonitoredByProxyGroup   = 2
+)
+
+
 // HostObject struct is used to store host operations results
 //
 // see: https://www.zabbix.com/documentation/5.0/manual/api/reference/host/object#host
@@ -135,7 +143,9 @@ type HostObject struct {
 	MaintenanceType   int    `json:"maintenance_type,omitempty"`   // has defined consts, see above
 	MaintenanceID     int    `json:"maintenanceid,omitempty"`
 	Name              string `json:"name,omitempty"`
+	MonitoredBy       int    `json:"monitored_by,omitempty"`   // has defined consts, see above
 	ProxyHostID       int    `json:"proxy_hostid,omitempty"`
+	ProxyGroupID      int    `json:"proxy_groupid,omitempty"`
 	SnmpAvailable     int    `json:"snmp_available,omitempty"` // has defined consts, see above
 	SnmpDisableUntil  int    `json:"snmp_disable_until,omitempty"`
 	SnmpError         string `json:"snmp_error,omitempty"`
