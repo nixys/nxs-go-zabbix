@@ -81,7 +81,7 @@ func (z *Context) Login(host, user, password string) error {
 	z.host = host
 
 	r := UserLoginParams{
-		User:     user,
+		UserName: user,
 		Password: password,
 	}
 
@@ -116,7 +116,8 @@ func (z *Context) request(method string, params interface{}, result interface{})
 		JSONRPC: "2.0",
 		Method:  method,
 		Params:  params,
-		Auth:    z.sessionKey,
+		// in v7 sessionKey is passed in Authorization: Bearer header
+		//Auth:    z.sessionKey,
 		ID:      1,
 	}
 
@@ -145,6 +146,10 @@ func (z *Context) httpPost(in interface{}, out interface{}) (int, error) {
 
 	// Set headers
 	req.Header.Add("Content-Type", "application/json-rpc")
+	// in v7 sessionKey is passed in Authorization: Bearer header
+	if len(z.sessionKey) > 0 {
+		req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", z.sessionKey))
+	}
 
 	// Make request
 	res, err := http.DefaultClient.Do(req)

@@ -74,7 +74,7 @@ type MediaObject struct {
 //
 // see: https://www.zabbix.com/documentation/5.0/manual/api/reference/user/login#parameters
 type UserLoginParams struct {
-	User     string `json:"user"`
+	UserName string `json:"username"`
 	Password string `json:"password"`
 	UserData string `json:"userData,omitempty"`
 }

@@ -1,3 +1,7 @@
+# yo000 Fork
+An update to v7 API, where authentication is done via Authorization header.
+Add item support
+
 # nxs-go-zabbix
 
 This Go package provides access to Zabbix API v5.0.
